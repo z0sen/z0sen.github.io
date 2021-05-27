@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="hU53TtoB3-cjkv6fG3QYh11Mpm-dWTnnWSTnv9Dn8Rs">
+  <meta name="msvalidate.01" content="8b8f5ebff3b349ea9050e33da088f3f2">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;z0sen.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown语法学习">
+<meta property="og:url" content="https://z0sen.github.io/archives/3969.html">
+<meta property="og:site_name" content="Z0SEN&#39;s Blog">
+<meta property="og:description" content="Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-08T14:34:35.000Z">
+<meta property="article:modified_time" content="2020-04-08T14:34:35.000Z">
+<meta property="article:author" content="z0sen">
+<meta property="article:tag" content="Markdown">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z0sen.github.io/archives/3969.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;z0sen.github.io&#x2F;archives&#x2F;3969.html&quot;,&quot;path&quot;:&quot;archives&#x2F;3969.html&quot;,&quot;title&quot;:&quot;Markdown语法学习&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Markdown语法学习 | Z0SEN's Blog</title><script src="/js/config.js"></script><link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-163327487-1&quot;,&quot;only_pageview&quot;:true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f8210cfb3b395e1e2655776e119d37db"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Z0SEN's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+<script type="text/javascript">
+WIDGET = {FID: 'KchzQlUa1d'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E6%A0%87%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">一.标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">我展示的是一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E5%B1%95%E7%A4%BA%E7%9A%84%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">我展示的是二级标题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.1.1.</span> <span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.1.1.1.1.</span> <span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.1.1.1.1.1.</span> <span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%88%97%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">二.列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%97%A0%E5%BA%8F"><span class="nav-number">4.1.</span> <span class="nav-text">1.无序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%89%E5%BA%8F"><span class="nav-number">4.2.</span> <span class="nav-text">2.有序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E5%8C%BA%E5%9D%97%E5%BC%95%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">三.区块引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">5.1.</span> <span class="nav-text">进阶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E5%88%86%E5%89%B2%E7%BA%BF"><span class="nav-number">6.</span> <span class="nav-text">四.分割线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E9%93%BE%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">五.链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E5%9B%BE%E7%89%87"><span class="nav-number">8.</span> <span class="nav-text">六.图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83-%E4%BB%A3%E7%A0%81%E6%A1%86"><span class="nav-number">9.</span> <span class="nav-text">七.代码框</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB-%E8%A1%A8%E6%A0%BC"><span class="nav-number">10.</span> <span class="nav-text">八.表格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D-%E5%BC%BA%E8%B0%83"><span class="nav-number">11.</span> <span class="nav-text">九.强调</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81-%E8%BD%AC%E4%B9%89"><span class="nav-number">12.</span> <span class="nav-text">十.转义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%80-%E5%88%A0%E9%99%A4%E7%BA%BF"><span class="nav-number">13.</span> <span class="nav-text">十一.删除线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C-%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="nav-number">14.</span> <span class="nav-text">十二.下划线</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="z0sen"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">z0sen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3owc2Vu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z0sen"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cDovL3FxLmNuLmhuL3d0Ng==" title="E-Mail → http:&#x2F;&#x2F;qq.cn.hn&#x2F;wt6"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z0sen.github.io/archives/3969.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="z0sen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z0SEN's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown语法学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-08 22:34:35" itemprop="dateCreated datePublished" datetime="2020-04-08T22:34:35+08:00">2020-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>786</span>
+    </span>
+</div>
+
+            <div class="post-description">Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="一-标题"><a href="#一-标题" class="headerlink" title="一.标题"></a>一.标题</h1><p>  1.使用 = 和 - 标记一级和二级标题<br>  = 和 - 标记语法格式如下：</p>
+<blockquote>
+<p>我展示的是一级标题<br>===<br>我展示的是二级标题<br>---</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="我展示的是一级标题"><a href="#我展示的是一级标题" class="headerlink" title="我展示的是一级标题"></a>我展示的是一级标题</h1><h2 id="我展示的是二级标题"><a href="#我展示的是二级标题" class="headerlink" title="我展示的是二级标题"></a>我展示的是二级标题</h2></blockquote>
+<p>  2.使用 # 号标记<br>    使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推</p>
+<blockquote>
+<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
+<h1 id="二-列表"><a href="#二-列表" class="headerlink" title="二.列表"></a>二.列表</h1><h2 id="1-无序"><a href="#1-无序" class="headerlink" title="1.无序"></a>1.无序</h2><blockquote>
+<p>用 *、+、- </p>
+<ul>
+<li>这个点就是效果</li>
+</ul>
+</blockquote>
+<h2 id="2-有序"><a href="#2-有序" class="headerlink" title="2.有序"></a>2.有序</h2><blockquote>
+<ol>
+<li>一</li>
+<li>二</li>
+<li>三</li>
+</ol>
+</blockquote>
+<h1 id="三-区块引用"><a href="#三-区块引用" class="headerlink" title="三.区块引用"></a>三.区块引用</h1><ul>
+<li>举例<br>&gt; 如此<blockquote>
+<p>如此</p>
+</blockquote>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2>&gt; 一级<br>&gt;&gt; 二级<br>&gt;&gt;&gt; 三级<br>显示效果：<blockquote>
+<p>一级</p>
+<blockquote>
+<p>二级</p>
+<blockquote>
+<p>三级</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>……</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h1 id="四-分割线"><a href="#四-分割线" class="headerlink" title="四.分割线"></a>四.分割线</h1><blockquote>
+<p>***<br> ---<br> ___<br> 显示效果：</p>
+<hr>
+</blockquote>
+<h1 id="五-链接"><a href="#五-链接" class="headerlink" title="五.链接"></a>五.链接</h1><p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记记</p>
+<blockquote>
+<p>[百度一下](<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">https://www.baidu.com<i class="fa fa-external-link-alt"></i></span>)<br>显示效果：<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">百度一下<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h1 id="六-图片"><a href="#六-图片" class="headerlink" title="六.图片"></a>六.图片</h1><ul>
+<li>用法跟链接的基本一样，也是行内式和参数式，唯一的不同就是图片链接前面要写一个<code>!</code></li>
+</ul>
+<h1 id="七-代码框"><a href="#七-代码框" class="headerlink" title="七.代码框"></a>七.代码框</h1><ul>
+<li><p>单行用 单反引号 </p>
+<blockquote>
+<p>`apt-get upgrade`<br>显示效果<br><code>apt-get upgrade</code></p>
+</blockquote>
+</li>
+<li><p>多行用三个单反引号</p>
+<blockquote>
+<p>```<br>  apt-get upgrade<br>  ls<br>  cd<br>  ```<br>显示效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get upgrade</span><br><span class="line">ls</span><br><span class="line">cd</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h1 id="八-表格"><a href="#八-表格" class="headerlink" title="八.表格"></a>八.表格</h1><blockquote>
+<p>表头1|表头2|表头3<br>-|-|-<br>内容1|内容2|内容3</p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>表头1</th>
+<th>表头2</th>
+<th>表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容1</td>
+<td>内容2</td>
+<td>内容3</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h1 id="九-强调"><a href="#九-强调" class="headerlink" title="九.强调"></a>九.强调</h1><blockquote>
+<p>*字体倾斜*<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>_字体倾斜_<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>**字体加粗**<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>__字体加粗__<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>***粗斜体文本***<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<blockquote>
+<p>___粗斜体文本___<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<h1 id="十-转义"><a href="#十-转义" class="headerlink" title="十.转义"></a>十.转义</h1><p>  在需要转义的符号前加上\即可</p>
+<blockquote>
+<p>如：\*<br>显示效果 *</p>
+</blockquote>
+<h1 id="十一-删除线"><a href="#十一-删除线" class="headerlink" title="十一.删除线"></a>十一.删除线</h1><p>~~再见~~</p>
+<blockquote>
+<p>显示效果：<br><del>再见</del></p>
+</blockquote>
+<h1 id="十二-下划线"><a href="#十二-下划线" class="headerlink" title="十二.下划线"></a>十二.下划线</h1><p>&lt;u&gt;带下划线文本&lt;/u&gt;</p>
+<blockquote>
+<p>显示效果：<br><u>带下划线文本</u></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-flag"></i>　感谢阅读　　　　-------------</div>
+    
+</div>
+
+
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/Markdown/" rel="tag"><i class="fa fa-tag"></i> Markdown</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/archives/29244.html" rel="prev" title="Linux基础知识">
+                  <i class="fa fa-chevron-left"></i> Linux基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/archives/20469.html" rel="next" title="信息搜集总结篇">
+                  信息搜集总结篇 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div><script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">z0sen</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;z0sen&quot;,&quot;repo&quot;:&quot;z0sen.github.io&quot;,&quot;client_id&quot;:&quot;3d51393b98f882e3e640&quot;,&quot;client_secret&quot;:&quot;4cfd4a1d87c61ec41d9e663be6ac52fe891ee1c4&quot;,&quot;admin_user&quot;:&quot;z0sen&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:&quot;zh-CN&quot;,&quot;js&quot;:&quot;&#x2F;&#x2F;cdn.bootcdn.net&#x2F;ajax&#x2F;libs&#x2F;gitalk&#x2F;1.7.2&#x2F;gitalk.js&quot;,&quot;path_md5&quot;:&quot;2121661b9e77c3b6b834dd907d26680e&quot;}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  console.log('今日诗词 - 开始加载...');
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    if (jrsc) {
+      console.log('今日诗词 - 标签获取成功.');
+    } else {
+      console.log('今日诗词 - 标签获取失败!');
+      return;
+    }
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+    console.log('今日诗词 - 载入完毕.');
+    if (data.origin.author == '李白') {
+      let audio = document.createElement("audio");
+      audio.src = "/ding.mp3";
+      audio.play();
+    }
+  });
+</script><div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

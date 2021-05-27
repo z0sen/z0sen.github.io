@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="hU53TtoB3-cjkv6fG3QYh11Mpm-dWTnnWSTnv9Dn8Rs">
+  <meta name="msvalidate.01" content="8b8f5ebff3b349ea9050e33da088f3f2">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;z0sen.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="常用的shell命令以及目录结构等基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础知识">
+<meta property="og:url" content="https://z0sen.github.io/archives/29244.html">
+<meta property="og:site_name" content="Z0SEN&#39;s Blog">
+<meta property="og:description" content="常用的shell命令以及目录结构等基础知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-08T10:16:14.000Z">
+<meta property="article:modified_time" content="2020-04-08T10:16:14.000Z">
+<meta property="article:author" content="z0sen">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z0sen.github.io/archives/29244.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;z0sen.github.io&#x2F;archives&#x2F;29244.html&quot;,&quot;path&quot;:&quot;archives&#x2F;29244.html&quot;,&quot;title&quot;:&quot;Linux基础知识&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Linux基础知识 | Z0SEN's Blog</title><script src="/js/config.js"></script><link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-163327487-1&quot;,&quot;only_pageview&quot;:true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f8210cfb3b395e1e2655776e119d37db"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Z0SEN's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+<script type="text/javascript">
+WIDGET = {FID: 'KchzQlUa1d'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-%E5%B8%B8%E8%A7%81shell%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">0x01 常见shell命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-chroot%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">0x02 chroot命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-Linux%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">0x03 Linux的目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-Linux%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">0x04 Linux忘记密码的解决办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x05-ssh%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">0x05 ssh服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x06-IP%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">0x06 IP命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="z0sen"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">z0sen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3owc2Vu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z0sen"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cDovL3FxLmNuLmhuL3d0Ng==" title="E-Mail → http:&#x2F;&#x2F;qq.cn.hn&#x2F;wt6"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z0sen.github.io/archives/29244.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="z0sen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z0SEN's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-08 18:16:14" itemprop="dateCreated datePublished" datetime="2020-04-08T18:16:14+08:00">2020-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">嵌入式开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+</div>
+
+            <div class="post-description">常用的shell命令以及目录结构等基础知识</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="0x01-常见shell命令"><a href="#0x01-常见shell命令" class="headerlink" title="0x01 常见shell命令"></a>0x01 常见shell命令</h1><ul>
+<li><code>ls</code>：显示文件的目录和信息（ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行）<br><code>cd</code>：进入目录，改名目录<br><code>pwd</code>：创建删除目录<br><code>cp</code>：copy文件<br><code>rm</code>：删除文件或者目录<br><code>mv</code>：移动文件或目录<br><code>cat</code>：显示文件的内容，和DOS的type相同<br><code>touch</code>：创建一个新文件<br><code>ln</code>:用于将一个文件创建链接,链接分为软链接(类似于windows系统中的快捷方式)和硬链接(相当于对源文件copy,程序或命令对该文件block的另一个访问路口)，命令默认使用硬链接。</li>
+<li>关机命令：<br>  shutdown命令<br>  语法格式：<code>shutdown [选项] [时间] [警告信息]</code><br>  该命令中各选项的含义说明：<blockquote>
+<p>-k：只发出警告信息给用户<br>  -r：关闭系统后重启系统<br>  -h：关闭系统后不重启系统<br>  -f：快速关闭系统，重启系统时不进行磁盘检测<br>  -n：快速关闭系统，但是不经过init程序关闭<br>  -c：中断关闭系统</p>
+</blockquote>
+</li>
+<li>Linux文件的基本属性<code>ls -Linux</code></li>
+<li>tty1-7快捷键切换<code>ctrl+alt+（f1-f7）</code>（f7为图形化界面)</li>
+</ul>
+<h1 id="0x02-chroot命令"><a href="#0x02-chroot命令" class="headerlink" title="0x02 chroot命令"></a>0x02 chroot命令</h1><p>语法<code>chroot [选项] [参数]</code></p>
+<blockquote>
+<p>好处</p>
+<ul>
+<li>增加了系统的安全性限制了用户的权力：<br>在经过chroot之后，在新根下将访问不到旧系统的根目录和文件，这样就增强了系统的安全性。这个一般是在登陆前使用chroot，以此达到用户不能访问一些特定的文件。</li>
+<li>建立一个与原系统隔离的系统目录结构，方便用户的开发：<br>这一个与原系统根下文件不相关的目录结构。在这个新环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。</li>
+<li>切换系统的根目录的位置，引导Linux系统启动以及急救系统等：<br>chroot的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始RAM磁盘（initrd）切换系统的根位置并执行真正的init。另外，当系统出现一些问题时，我们也可以使用chroot来切换到一个临时的系统。</li>
+</ul>
+</blockquote>
+<h1 id="0x03-Linux的目录结构"><a href="#0x03-Linux的目录结构" class="headerlink" title="0x03 Linux的目录结构"></a>0x03 Linux的目录结构</h1><ul>
+<li>/<br>根目录，一般根目录下只存放目录，不要存放文件。/etc、/bin、/dev、/lib、/sbin应该和根目录放置在一个分区中</li>
+<li>/bin<br>存放系统中最常用的二进制可执行文件（二进制文件）。基础系统所需要的那些命令位于此目录，也是最小系统所需要的命令；例如ls、cp、mkdir等命令。功能和/usr/bin类似，这个目录中的文件都是可执行的，普通用户都可以使用命令</li>
+<li>/boot<br>存放Linux内核和系统启动文件，包括Grub、lilo启动程序</li>
+<li>/dev<br>存放所有设备文件，包括硬盘、分区、键盘、鼠标、USB等</li>
+<li>/etc<br>存放系统所有配置文件，例如passwd存放用户账户信息，hostname存放主机名等。/etc/fstab是开机自动挂载一些分区的，在里面写入一些分区信息，就能实现开机挂载分区</li>
+<li>/home<br>用户目录的默认位置</li>
+<li>/initrd<br>存放启动时挂载initrd.img映像文件的目录，以及载入所需设备模块的目录</li>
+<li>/lib<br>存放共享的库文件，包含许多被/bin和/sbin中程序使用的库文件</li>
+<li>/lost+found<br>在ext2或者ext3文件系统中，当系统意外崩溃或者计算机意外关机，而产生一些文件碎片存放在这里。当系统启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。有时系统发生问题，有很多的文件被移动到这个目录中，可能会用手工的方式来修复或移动到文件的原位置上</li>
+<li>/media<br>即插即用型设备的挂载点自动在这个目录下创建。例如USB自动挂载后会在这个目录下产生一个目录；CDROM/DVD自动挂载后，也会在这个目录中创建一个目录，存放临时读入的文件</li>
+<li>/mnt<br>此目录通常用于作为被挂载的文件系统的挂载点</li>
+<li>/proc<br>存放所有标志为文件的进程，它们是通过进程号或其他的系统动态信息进行标识。例如CPU、硬盘分区、内存信息等存放在这里</li>
+<li>/opt<br>作为可选文件和程序的存放目录。有些软件包也会被安装在这里，也就是自定义软件包；有些用户自己编译的软件包，就可以安装在这个目录中</li>
+<li>/root<br>根用户（超级用户）的主目录</li>
+<li>/sbin<br>大多是涉及系统管理的命令的存放地，也是超级权限用户root的可执行命令存放地。普通用户无权限执行这个目录下的命令，这个目录和/usr/sbin; /usr/X11R6/sbin或/usr/local/sbin目录是相似的。注意，凡是目录sbin中包含的都是root权限才能执行的</li>
+<li>/srv<br>存放系统所提供的服务数据</li>
+<li>/sys<br>该目录用于将系统设备组织或层次结构，并向用户提供详细的内核数据信息</li>
+<li>/tmp<br>临时文件目录，有时用户运行程序的时候，会产生临时文件。/var/tmp目录和这个目录相似</li>
+<li>/usr<br>用于存放与系统用户直接有关的文件和目录，如应用程序及支出系统的库文件</li>
+</ul>
+<h1 id="0x04-Linux忘记密码的解决办法"><a href="#0x04-Linux忘记密码的解决办法" class="headerlink" title="0x04 Linux忘记密码的解决办法"></a>0x04 Linux忘记密码的解决办法</h1><ol>
+<li>进入“恢复模式”并编辑</li>
+<li>更改代码（ro-&gt;rw,添加init=/bin/bash）</li>
+<li>重置密码</li>
+<li>重启系统<br>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlbGVnZXIvYXJ0aWNsZS9kZXRhaWxzLzEwNDQwODQ3NQ==">Ubuntu忘记密码的解决方法<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h1 id="0x05-ssh服务"><a href="#0x05-ssh服务" class="headerlink" title="0x05 ssh服务"></a>0x05 ssh服务</h1><p><strong>ssh远程登录</strong></p>
+<ol>
+<li>口令登录：ssh user@host（以用户名user，登录远程主机host）<br>如果本地用户名和远程的用户名一致，用户名可以省略。<br>ssh的默认端口是22，可以使用p参数来修改这个端口。（如：ssh -p 44 user@host）</li>
+<li>公钥登录：<br>ssh公钥登录可以省去输入密码的步骤<br>原理：将自己的公钥储存在远程主机上登陆的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。（用户必须提供自己的公钥。若没有直接用ssh-keygen生成一个）</li>
+</ol>
+<h1 id="0x06-IP命令"><a href="#0x06-IP命令" class="headerlink" title="0x06 IP命令"></a>0x06 IP命令</h1><p>对于网络管理员们和所有的Linux使用者们，ip命令是必备工具，是时候抛弃ifconfig命令了，特别是当你写脚本时。</p>
+<ul>
+<li>查看本机IP<br>ip a</li>
+<li>给机器设置及删除一个IP地址<br>ip addr add（del） （IP地址）</li>
+<li>监控netlink消息<br>ip monitor all<br>[ip命令参考文章]<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN1d2FuZ3FpYW5nL3AvMTE1Mjc2MTkuaHRtbA==">https://www.cnblogs.com/ysuwangqiang/p/11527619.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC8=">Linux命令大全<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\574.html" rel="bookmark">VMware安装Ubuntu 20.04 LTS图解</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53339.html" rel="bookmark">vim基础</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-flag"></i>　感谢阅读　　　　-------------</div>
+    
+</div>
+
+
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/archives/53339.html" rel="prev" title="vim基础">
+                  <i class="fa fa-chevron-left"></i> vim基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/archives/3969.html" rel="next" title="Markdown语法学习">
+                  Markdown语法学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div><script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">z0sen</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;z0sen&quot;,&quot;repo&quot;:&quot;z0sen.github.io&quot;,&quot;client_id&quot;:&quot;3d51393b98f882e3e640&quot;,&quot;client_secret&quot;:&quot;4cfd4a1d87c61ec41d9e663be6ac52fe891ee1c4&quot;,&quot;admin_user&quot;:&quot;z0sen&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:&quot;zh-CN&quot;,&quot;js&quot;:&quot;&#x2F;&#x2F;cdn.bootcdn.net&#x2F;ajax&#x2F;libs&#x2F;gitalk&#x2F;1.7.2&#x2F;gitalk.js&quot;,&quot;path_md5&quot;:&quot;b2903c5762a55e46957ba2a6eadd5165&quot;}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  console.log('今日诗词 - 开始加载...');
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    if (jrsc) {
+      console.log('今日诗词 - 标签获取成功.');
+    } else {
+      console.log('今日诗词 - 标签获取失败!');
+      return;
+    }
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+    console.log('今日诗词 - 载入完毕.');
+    if (data.origin.author == '李白') {
+      let audio = document.createElement("audio");
+      audio.src = "/ding.mp3";
+      audio.play();
+    }
+  });
+</script><div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

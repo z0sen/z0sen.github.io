@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="hU53TtoB3-cjkv6fG3QYh11Mpm-dWTnnWSTnv9Dn8Rs">
+  <meta name="msvalidate.01" content="8b8f5ebff3b349ea9050e33da088f3f2">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;z0sen.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="Kali Linux是基于Debian的Linux发行版，设计用于数字取证操作系统，由Offensive Security公司开发和维护。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali-2020.1b安装那些事儿">
+<meta property="og:url" content="https://z0sen.github.io/archives/46925.html">
+<meta property="og:site_name" content="Z0SEN&#39;s Blog">
+<meta property="og:description" content="Kali Linux是基于Debian的Linux发行版，设计用于数字取证操作系统，由Offensive Security公司开发和维护。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-15T02:07:52.000Z">
+<meta property="article:modified_time" content="2020-04-15T02:07:52.000Z">
+<meta property="article:author" content="z0sen">
+<meta property="article:tag" content="Kali Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z0sen.github.io/archives/46925.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;z0sen.github.io&#x2F;archives&#x2F;46925.html&quot;,&quot;path&quot;:&quot;archives&#x2F;46925.html&quot;,&quot;title&quot;:&quot;Kali-2020.1b安装那些事儿&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Kali-2020.1b安装那些事儿 | Z0SEN's Blog</title><script src="/js/config.js"></script><link href="https://fonts.loli.net/css?family=Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-163327487-1&quot;,&quot;only_pageview&quot;:true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f8210cfb3b395e1e2655776e119d37db"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Z0SEN's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+<script type="text/javascript">
+WIDGET = {FID: 'KchzQlUa1d'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%BC%80%E5%A4%B4"><span class="nav-number">1.</span> <span class="nav-text">写在开头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">1. 镜像下载及相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 镜像下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-kali%E5%90%84%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 kali各版本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E7%A1%AC%E7%9B%98%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 硬盘安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">2. 虚拟机配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-VMware-Workstation-Pro%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 VMware Workstation Pro下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%88%9B%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 虚拟机创建及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%85%B8%E5%9E%8B-%E9%80%89%E6%8B%A9%E4%B8%8B%E8%BD%BD%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.2.</span> <span class="nav-text">② 虚拟机配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">3. 系统安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%BF%9B%E5%85%A5%E5%AE%89%E8%A3%85%E7%95%8C%E9%9D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 进入安装界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%A7%8B%E5%86%99%E5%85%A5"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 系统开始写入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 系统配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0-%E5%AE%89%E8%A3%85VMware-Tools"><span class="nav-number">4.4.1.</span> <span class="nav-text">① 安装VMware Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1-%E9%85%8D%E7%BD%AE%E8%BD%AF%E4%BB%B6%E6%BA%90"><span class="nav-number">4.4.2.</span> <span class="nav-text">② 配置软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2-%E7%B3%BB%E7%BB%9F%E6%9B%B4%E6%96%B0"><span class="nav-number">4.4.3.</span> <span class="nav-text">③ 系统更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">4. 常用软件安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%AE%89%E8%A3%85Google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 安装Google拼音输入法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-FireFox%E5%88%87%E6%8D%A2%E4%B8%AD%E6%96%87"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 FireFox切换中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%AE%89%E8%A3%85Gdebi"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 安装Gdebi</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="z0sen"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">z0sen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3owc2Vu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z0sen"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cDovL3FxLmNuLmhuL3d0Ng==" title="E-Mail → http:&#x2F;&#x2F;qq.cn.hn&#x2F;wt6"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z0sen.github.io/archives/46925.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="z0sen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z0SEN's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kali-2020.1b安装那些事儿
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-15 10:07:52" itemprop="dateCreated datePublished" datetime="2020-04-15T10:07:52+08:00">2020-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+</div>
+
+            <div class="post-description">Kali Linux是基于Debian的Linux发行版，设计用于数字取证操作系统，由Offensive Security公司开发和维护。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Kali Linux 是许多优秀的安全工具的集合，它的目标就是为了简单：在一个实用的工具包里尽可能多的包含渗透和审计工具<br>对于专业用户来说，它有难以置信的好处，但是对于一些不怀好意的人来说，也可以产生很多大麻烦<br>小心地使用 Kali，充分利用它的巨大优势，否则，你将在某个地方（你懂的）度过你的余生<br>建议先看一下这篇文章<span class="exturl" data-url="aHR0cHM6Ly9saW51eC5jbi9hcnRpY2xlLTEwMTk4LTEuaHRtbA==">在你开始使用kali linux前必须要知道的事情<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+
+<hr>
+<h1 id="1-镜像下载及相关知识"><a href="#1-镜像下载及相关知识" class="headerlink" title="1. 镜像下载及相关知识"></a>1. 镜像下载及相关知识</h1><h2 id="1-1-镜像下载地址"><a href="#1-1-镜像下载地址" class="headerlink" title="1.1 镜像下载地址"></a>1.1 镜像下载地址</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG93bmxvYWRzLw==">Kali官网下载地址<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20va2FsaS1pbWFnZXMv">阿里云镜像站<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="1-2-kali各版本介绍"><a href="#1-2-kali各版本介绍" class="headerlink" title="1.2 kali各版本介绍"></a>1.2 kali各版本介绍</h2><p>当前官网kali版本是2020.1b，有以下几种类型的文件</p>
+<div class="note info no-icon"><p>Installer：仅用于安装<br>Live：可直接使用，也用于安装<br>NetInstaller：联网安装包<br>VMware | VirtualBox：虚拟机专版</p>
+</div>
+
+<p>博主下载的的是Live版本来做的安装教程，如果使用Installer版本安装，安装过程中会让你自定义下载哪些组件，涉及到下载那就没的说了，各种问题扑面而来：</p>
+<blockquote>
+<p>第一，你不会选<br>第二，网络波动的原因也导致一些稀奇古怪的问题</p>
+</blockquote>
+<p>猛男就应该一步到位，爷都下了2.1g了你还要我下东西，我何必不直接下个2.7g的Live版本<br>另外，中文乱码的问题也是Installer版本安装的毛病，使用Live版本安装暂未出现乱码问题</p>
+<h2 id="1-3-硬盘安装"><a href="#1-3-硬盘安装" class="headerlink" title="1.3 硬盘安装"></a>1.3 硬盘安装</h2><p>扯点题外话，总有些人喜欢装实体机，拦不住，所以这里提一下<br>硬盘安装和虚拟机安装其实基本都一样，可以参考官方安装文档，不同的一步只是要制作U盘启动盘，制作工具上官方推荐Win32 Disk Imager。<br>制作U盘启动盘都是同win一样的傻瓜式操作，选择镜像文件 - 选择U盘 - 点击写入 - 等待完成即可。</p>
+<div class="note danger no-icon"><p>Win32 SDK Imanger默认只认.img文件，.img是.iso的超集，支持.img也就支持.iso所以在选择镜像文件时将过滤后辍改成*.*再选.iso即可</p>
+</div>
+
+<h1 id="2-虚拟机配置"><a href="#2-虚拟机配置" class="headerlink" title="2. 虚拟机配置"></a>2. 虚拟机配置</h1><h2 id="2-1-VMware-Workstation-Pro下载"><a href="#2-1-VMware-Workstation-Pro下载" class="headerlink" title="2.1 VMware Workstation Pro下载"></a>2.1 VMware Workstation Pro下载</h2><div class="note info no-icon"><p>官网下载的15.5.0版本，外加上不记得哪儿撸的许可证生成工具<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMUJkVnBLNlpNajkzd0ktVkdCUkVlTWc=">百度网盘<i class="fa fa-external-link-alt"></i></span> 提取码：3vpv</p>
+</div>
+
+<h2 id="2-2-虚拟机创建及配置"><a href="#2-2-虚拟机创建及配置" class="headerlink" title="2.2 虚拟机创建及配置"></a>2.2 虚拟机创建及配置</h2><h3 id="①-创建新的虚拟机-典型-选择下载好的镜像文件"><a href="#①-创建新的虚拟机-典型-选择下载好的镜像文件" class="headerlink" title="① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件"></a>① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件</h3>
+
+<h3 id="②-虚拟机配置"><a href="#②-虚拟机配置" class="headerlink" title="② 虚拟机配置"></a>② 虚拟机配置</h3><p>指定系统版本这里选择Linux Debian 10.x 64位（因为Kali是基于最新版的Debian制作的，<span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG9jcy92aXJ0dWFsaXphdGlvbi9pbnN0YWxsLXZtd2FyZS13b3Jrc3RhdGlvbi1wbGF5ZXIta2FsaS1ndWVzdC12bS8=">官方文档<i class="fa fa-external-link-alt"></i></span>有写）</p>
+
+
+<p>接下来自定义虚拟机名称和虚拟机存放位置</p>
+
+
+<p>再然后来到磁盘容量分配，这里做演示只分配60g，根据个人需求自定，官方文档建议80g</p>
+
+
+<p>最后看一下自定义硬件，可以将无用硬件移除以提升系统运行效率，例如打印机等，运行内存至少分配2g，处理器核心数自定</p>
+
+
+<h1 id="3-系统安装及配置"><a href="#3-系统安装及配置" class="headerlink" title="3. 系统安装及配置"></a>3. 系统安装及配置</h1><div class="note info no-icon"><p>安装过程基本就是下一步下一步，这里只提几点需要注意的地方，其他的就不赘述了</p>
+</div>
+<h2 id="3-1-进入安装界面"><a href="#3-1-进入安装界面" class="headerlink" title="3.1 进入安装界面"></a>3.1 进入安装界面</h2><p>开启虚拟机并选择Graphical install（即图形化安装界面）</p>
+
+
+<p>首先是语言选择，直接简体中文下一步下一步就ok，然后自定义主机名，之后域名不要填直接下一步<br>新版本Kali更改默认用户为非根用户，所以这里要求我们自定义一个新用户名和密码</p>
+
+
+<h2 id="3-2-磁盘分区"><a href="#3-2-磁盘分区" class="headerlink" title="3.2 磁盘分区"></a>3.2 磁盘分区</h2><p>分区方法就用默认的，使用整个磁盘 ↓</p>
+
+
+<p>选定分区方案 ↓</p>
+
+
+<p>将改动写入磁盘 ↓</p>
+
+
+<h2 id="3-3-系统开始写入"><a href="#3-3-系统开始写入" class="headerlink" title="3.3 系统开始写入"></a>3.3 系统开始写入</h2><p>这里可以抽根烟喝口茶静待安装进程结束↓</p>
+
+
+<p>不使用网络镜像 ↓</p>
+
+
+<p>安装GRUB引导器 ↓</p>
+
+
+<p>选择引导安装设备/dev/sda ↓</p>
+
+
+<p>系统安装完成后结束安装进程，点一下继续会自动重启进入登录界面↓</p>
+
+
+<h2 id="3-4-系统配置"><a href="#3-4-系统配置" class="headerlink" title="3.4 系统配置"></a>3.4 系统配置</h2><h3 id="①-安装VMware-Tools"><a href="#①-安装VMware-Tools" class="headerlink" title="① 安装VMware Tools"></a>① 安装VMware Tools</h3><p>有了它你才能将主机文件直接复制粘贴到虚拟机上，同时窗口尺寸也可以自适应了</p>
+<ul>
+<li><p>菜单栏 虚拟机 - 安装VMware Tools↓</p>
+</li>
+<li><p>将挂载的VMware Tools中的压缩包拷贝到kali本地，比如桌面，并解压</p>
+</li>
+<li><p>打开解压出来的文件夹，右键空白处选择在此处打开终端</p>
+</li>
+<li><p>开始安装VMware Tools，键入命令后一路回车，出现 <code>Enjoy</code> 字样即安装成功，重启生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./vmware-install.pl</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="②-配置软件源"><a href="#②-配置软件源" class="headerlink" title="② 配置软件源"></a>② 配置软件源</h3><p>早期国内访问kali官方源简直是龟速，所以需要更换国内源达到提速效果，但现在使用官方源不知道为啥会自动引流到东软大学的镜像站，总之速度飞起，如果你非要更换其他源参照以下步骤<br>打开终端输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mousepad /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>以下是阿里源和官方源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#阿里云</span><br><span class="line">#deb https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">#官方源</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+<p>在不用的源前面加上’#’注释掉，修改后ctrl+s保存，地球人都知道的保存快捷键</p>
+
+
+<h3 id="③-系统更新"><a href="#③-系统更新" class="headerlink" title="③ 系统更新"></a>③ 系统更新</h3><p>修改完成后执行以下命令（初次更新过程较长，可以去抽根烟喝口茶）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade -y</span><br><span class="line">sudo apt-get dist-upgrade -y</span><br><span class="line">sudo apt-get clean</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p><code>apt-get</code>常用命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>update</td>
+<td>取回更新的软件包列表信息</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td>进行一次升级</td>
+</tr>
+<tr>
+<td>install</td>
+<td>安装新的软件包(注：软件包名称是 libc6 而非 libc6.deb)</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>卸载软件包</td>
+</tr>
+<tr>
+<td>purge</td>
+<td>卸载并清除软件包的配置</td>
+</tr>
+<tr>
+<td>autoremove</td>
+<td>卸载所有自动安装且不再使用的软件包</td>
+</tr>
+<tr>
+<td>dist-upgrade</td>
+<td>发布版升级，见 apt-get(8)</td>
+</tr>
+<tr>
+<td>dselect-upgrade</td>
+<td>根据 dselect 的选择来进行升级</td>
+</tr>
+<tr>
+<td>build-dep</td>
+<td>为源码包配置所需的编译依赖关系</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>删除所有已下载的包文件</td>
+</tr>
+<tr>
+<td>autoclean</td>
+<td>删除已下载的旧包文件</td>
+</tr>
+<tr>
+<td>check</td>
+<td>核对以确认系统的依赖关系的完整性</td>
+</tr>
+<tr>
+<td>source</td>
+<td>下载源码包文件</td>
+</tr>
+<tr>
+<td>download</td>
+<td>下载指定的二进制包到当前目录</td>
+</tr>
+<tr>
+<td>changelog</td>
+<td>下载指定软件包，并显示其changelog</td>
+</tr>
+</tbody></table>
+<h1 id="4-常用软件安装及配置"><a href="#4-常用软件安装及配置" class="headerlink" title="4. 常用软件安装及配置"></a>4. 常用软件安装及配置</h1><h2 id="4-1-安装Google拼音输入法"><a href="#4-1-安装Google拼音输入法" class="headerlink" title="4.1 安装Google拼音输入法"></a>4.1 安装Google拼音输入法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install fcitx -y</span><br><span class="line">sudo apt-get install fcitx-googlepinyin -y</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>重启之后按<code>ctrl+空格</code>即可切换为拼音输入法</p>
+<h2 id="4-2-FireFox切换中文"><a href="#4-2-FireFox切换中文" class="headerlink" title="4.2 FireFox切换中文"></a>4.2 FireFox切换中文</h2><p>设置中直接添加中文字体之后应用并重启Firefox就行了<br>如图：</p>
+
+
+
+
+<h2 id="4-3-安装Gdebi"><a href="#4-3-安装Gdebi" class="headerlink" title="4.3 安装Gdebi"></a>4.3 安装Gdebi</h2><p>这个软件可以自动解决软件安装的依赖问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdebi -y</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>整个系统安装的话就这些东西，博主目前使用的是2019.4的gnome版本，然后用更新命令更新到的最新版，主要还是习惯了gnome，虽然新版本也可以装gnome但是配置太麻烦。最近很多人安装2020.1b出现问题，所以写此文供各位师傅参考。</p>
+<p>最后附图一张博主使用的kali（日常upgrade）</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\9111.html" rel="bookmark">Kali更新jdk-8u251</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\60505.html" rel="bookmark">kali安装Docker并配置Vulhub</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53005.html" rel="bookmark">Kali配置问题汇总</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-flag"></i>　感谢阅读　　　　-------------</div>
+    
+</div>
+
+
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/Kali-Linux/" rel="tag"><i class="fa fa-tag"></i> Kali Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/archives/20469.html" rel="prev" title="信息搜集总结篇">
+                  <i class="fa fa-chevron-left"></i> 信息搜集总结篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/archives/574.html" rel="next" title="VMware安装Ubuntu 20.04 LTS图解">
+                  VMware安装Ubuntu 20.04 LTS图解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div><script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">z0sen</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;z0sen&quot;,&quot;repo&quot;:&quot;z0sen.github.io&quot;,&quot;client_id&quot;:&quot;3d51393b98f882e3e640&quot;,&quot;client_secret&quot;:&quot;4cfd4a1d87c61ec41d9e663be6ac52fe891ee1c4&quot;,&quot;admin_user&quot;:&quot;z0sen&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:&quot;zh-CN&quot;,&quot;js&quot;:&quot;&#x2F;&#x2F;cdn.bootcdn.net&#x2F;ajax&#x2F;libs&#x2F;gitalk&#x2F;1.7.2&#x2F;gitalk.js&quot;,&quot;path_md5&quot;:&quot;a4c9c100216367f1d01c29ad621c269d&quot;}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  console.log('今日诗词 - 开始加载...');
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    if (jrsc) {
+      console.log('今日诗词 - 标签获取成功.');
+    } else {
+      console.log('今日诗词 - 标签获取失败!');
+      return;
+    }
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+    console.log('今日诗词 - 载入完毕.');
+    if (data.origin.author == '李白') {
+      let audio = document.createElement("audio");
+      audio.src = "/ding.mp3";
+      audio.play();
+    }
+  });
+</script><div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
