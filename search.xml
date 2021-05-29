@@ -645,6 +645,59 @@
       </tags>
   </entry>
   <entry>
+    <title>Kali配置问题汇总</title>
+    <url>/archives/53005.html</url>
+    <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1>
+<p>解决方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /var/lib/dpkg/status</span><br></pre></td></tr></table></figure>
+<p>删除发生错误的包即可</p>
+
+
+<h1 id="Q2：缺少工具"><a href="#Q2：缺少工具" class="headerlink" title="Q2：缺少工具"></a>Q2：缺少工具</h1><p>解决方法：</p>
+<ol>
+<li>直接使用<code>apt-get</code>进行安装</li>
+<li>安装工具集<br>Kali Linux 2019.03开始对默认工具集进行重大更改，默认工具集将分为三个主要类别<br>kali-linux-default，渗透测试人员必不可少的工具<br>kali-linux-large，面对一系列更广泛又不寻常的情况的渗透测试<br>kali-linux-everything，所有黑客工具<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y kali-linux-everything</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Q3：如何在kali上使用破解版burpsuite"><a href="#Q3：如何在kali上使用破解版burpsuite" class="headerlink" title="Q3：如何在kali上使用破解版burpsuite"></a>Q3：如何在kali上使用破解版burpsuite</h1><div class="note info no-icon"><p>准备工作：<br><span class="exturl" data-url="aHR0cHM6Ly96MHNlbi54eXovYXJjaGl2ZXMvOTExMS5odG1s">配置好jdk<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXdvUWJmYUdrUjdJQnc5OFVCc2ppa3c=">Burpsuite<i class="fa fa-external-link-alt"></i></span> 提取码:gm3i</p>
+</div>
+<h2 id="1-将burpsuite移动到-usr-bin-文件夹下"><a href="#1-将burpsuite移动到-usr-bin-文件夹下" class="headerlink" title="1. 将burpsuite移动到/usr/bin/文件夹下"></a>1. 将burpsuite移动到/usr/bin/文件夹下</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv burp-loader-keygen.jar burpsuite_pro_v1.7.37.jar -t /usr/bin/</span><br></pre></td></tr></table></figure>
+<h2 id="2-编写运行脚本"><a href="#2-编写运行脚本" class="headerlink" title="2. 编写运行脚本"></a>2. 编写运行脚本</h2><ul>
+<li>先删除自带的免费burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf burpsuite</span><br></pre></td></tr></table></figure></li>
+<li>编写脚本<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad burpsuite</span><br><span class="line">#写入如下脚本并保存</span><br><span class="line">#!/bin/sh</span><br><span class="line">java -Xbootclasspath/p:/usr/bin/burp-loader-keygen.jar -jar /usr/bin/burpsuite_pro_v1.7.37.jar</span><br></pre></td></tr></table></figure>
+
+保存退出后赋予权限<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo chmod +x burpsuite</span><br></pre></td></tr></table></figure></li>
+<li>先运行一次loader激活burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo burp-loader-keygen.jar</span><br></pre></td></tr></table></figure>
+ps:如果是xfce桌面环境需要在编辑完快捷方式之后在菜单栏中打开burpsuite然后复制loader中的字段去激活，而不是直接用loader去run<h2 id="3-编辑快捷方式"><a href="#3-编辑快捷方式" class="headerlink" title="3. 编辑快捷方式"></a>3. 编辑快捷方式</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">sudo mousepad kali-burpsuite.desktop</span><br><span class="line">将Exec=sh -c &quot;java -jar /usr/bin/burpsuite&quot;改为Exec=sh -c &quot;/usr/bin/burpsuite&quot;</span><br></pre></td></tr></table></figure>
+之后就可以通过快捷方式运行了</li>
+</ul>
+<h1 id="Q4：kali修改DNS"><a href="#Q4：kali修改DNS" class="headerlink" title="Q4：kali修改DNS"></a>Q4：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q5：kali怎么使用ssr"><a href="#Q5：kali怎么使用ssr" class="headerlink" title="Q5：kali怎么使用ssr"></a>Q5：kali怎么使用ssr</h1><p>这里直接pass掉图形化的electron-ssr，我就没成功运行过<br>下面来介绍一下通过脚本运行ssr实现科学上网</p>
+<h2 id="1-下载安装脚本并赋予权限"><a href="#1-下载安装脚本并赋予权限" class="headerlink" title="1. 下载安装脚本并赋予权限"></a>1. 下载安装脚本并赋予权限</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://onlyless.github.io/ssr</span><br><span class="line">sudo mv ssr /usr/local/bin</span><br><span class="line">sudo chmod 766 /usr/local/bin/ssr</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-安装ssr"><a href="#2-安装ssr" class="headerlink" title="2. 安装ssr"></a>2. 安装ssr</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ssr install</span><br></pre></td></tr></table></figure>
+<p>这里安装有点慢，添加<code>8.8.8.8</code>的DNS会快点</p>
+<h2 id="3-ssr配置"><a href="#3-ssr配置" class="headerlink" title="3. ssr配置"></a>3. ssr配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/local/share/shadowsocksr/</span><br><span class="line">sudo mousepad config.json</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;: &quot;0.0.0.0&quot;,	//服务器IP地址</span><br><span class="line">    &quot;server_ipv6&quot;: &quot;::&quot;,</span><br><span class="line">    &quot;server_port&quot;: 8388,	//服务器端口</span><br><span class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;, </span><br><span class="line">    &quot;local_port&quot;: 1080,</span><br><span class="line"></span><br><span class="line">    &quot;password&quot;: &quot;m&quot;,		//密码</span><br><span class="line">    &quot;method&quot;: &quot;aes-128-ctr&quot;,	//加密</span><br><span class="line">    &quot;protocol&quot;: &quot;auth_aes128_md5&quot;,	//协议</span><br><span class="line">    &quot;protocol_param&quot;: &quot;&quot;,			//协议参数</span><br><span class="line">    &quot;obfs&quot;: &quot;plain&quot;,	//混淆</span><br><span class="line">    &quot;obfs_param&quot;: &quot;&quot;,	//混淆参数</span><br><span class="line">    &quot;speed_limit_per_con&quot;: 0,</span><br><span class="line">    &quot;speed_limit_per_user&quot;: 0,</span><br><span class="line"></span><br><span class="line">    &quot;additional_ports&quot; : &#123;&#125;, </span><br><span class="line">    &quot;additional_ports_only&quot; : false, </span><br><span class="line">    &quot;timeout&quot;: 120,</span><br><span class="line">    &quot;udp_timeout&quot;: 60,</span><br><span class="line">    &quot;dns_ipv6&quot;: false,</span><br><span class="line">    &quot;connect_verbose_info&quot;: 0,</span><br><span class="line">    &quot;redirect&quot;: &quot;&quot;,</span><br><span class="line">    &quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据自己的节点信息进行修改之后保存</p>
+<h2 id="4-浏览器安装代理插件Proxy-SwitchyOmega"><a href="#4-浏览器安装代理插件Proxy-SwitchyOmega" class="headerlink" title="4. 浏览器安装代理插件Proxy SwitchyOmega"></a>4. 浏览器安装代理插件Proxy SwitchyOmega</h2><p>火狐浏览器-附加组件中搜索安装即可<br>配置如图</p>
+
+<p>之后在终端键入<code>ssr start</code>，浏览器切换代理为proxy即可使用</p>
+
+
+<h1 id="Q6-给git设置代理"><a href="#Q6-给git设置代理" class="headerlink" title="Q6:给git设置代理"></a>Q6:给git设置代理</h1><h2 id="1-设置全局代理"><a href="#1-设置全局代理" class="headerlink" title="1.设置全局代理"></a>1.设置全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br><span class="line">git config --global https.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="2-设置针对github-com的全局代理"><a href="#2-设置针对github-com的全局代理" class="headerlink" title="2.设置针对github.com的全局代理"></a>2.设置针对github.com的全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#只对github.com</span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line">#取消代理</span><br><span class="line">git config --global --unset http.https://github.com.proxy</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vim基础</title>
     <url>/archives/53339.html</url>
     <content><![CDATA[<h2 id="一、基本语法"><a href="#一、基本语法" class="headerlink" title="一、基本语法"></a>一、基本语法</h2><ol>
@@ -700,59 +753,6 @@
       <tags>
         <tag>Ubuntu</tag>
         <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali配置问题汇总</title>
-    <url>/archives/53005.html</url>
-    <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1>
-<p>解决方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /var/lib/dpkg/status</span><br></pre></td></tr></table></figure>
-<p>删除发生错误的包即可</p>
-
-
-<h1 id="Q2：缺少工具"><a href="#Q2：缺少工具" class="headerlink" title="Q2：缺少工具"></a>Q2：缺少工具</h1><p>解决方法：</p>
-<ol>
-<li>直接使用<code>apt-get</code>进行安装</li>
-<li>安装工具集<br>Kali Linux 2019.03开始对默认工具集进行重大更改，默认工具集将分为三个主要类别<br>kali-linux-default，渗透测试人员必不可少的工具<br>kali-linux-large，面对一系列更广泛又不寻常的情况的渗透测试<br>kali-linux-everything，所有黑客工具<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y kali-linux-everything</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Q3：如何在kali上使用破解版burpsuite"><a href="#Q3：如何在kali上使用破解版burpsuite" class="headerlink" title="Q3：如何在kali上使用破解版burpsuite"></a>Q3：如何在kali上使用破解版burpsuite</h1><div class="note info no-icon"><p>准备工作：<br><span class="exturl" data-url="aHR0cHM6Ly96MHNlbi54eXovYXJjaGl2ZXMvOTExMS5odG1s">配置好jdk<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXdvUWJmYUdrUjdJQnc5OFVCc2ppa3c=">Burpsuite<i class="fa fa-external-link-alt"></i></span> 提取码:gm3i</p>
-</div>
-<h2 id="1-将burpsuite移动到-usr-bin-文件夹下"><a href="#1-将burpsuite移动到-usr-bin-文件夹下" class="headerlink" title="1. 将burpsuite移动到/usr/bin/文件夹下"></a>1. 将burpsuite移动到/usr/bin/文件夹下</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv burp-loader-keygen.jar burpsuite_pro_v1.7.37.jar -t /usr/bin/</span><br></pre></td></tr></table></figure>
-<h2 id="2-编写运行脚本"><a href="#2-编写运行脚本" class="headerlink" title="2. 编写运行脚本"></a>2. 编写运行脚本</h2><ul>
-<li>先删除自带的免费burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf burpsuite</span><br></pre></td></tr></table></figure></li>
-<li>编写脚本<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad burpsuite</span><br><span class="line">#写入如下脚本并保存</span><br><span class="line">#!/bin/sh</span><br><span class="line">java -Xbootclasspath/p:/usr/bin/burp-loader-keygen.jar -jar /usr/bin/burpsuite_pro_v1.7.37.jar</span><br></pre></td></tr></table></figure>
-
-保存退出后赋予权限<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo chmod +x burpsuite</span><br></pre></td></tr></table></figure></li>
-<li>先运行一次loader激活burpsuite<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo burp-loader-keygen.jar</span><br></pre></td></tr></table></figure>
-ps:如果是xfce桌面环境需要在编辑完快捷方式之后在菜单栏中打开burpsuite然后复制loader中的字段去激活，而不是直接用loader去run<h2 id="3-编辑快捷方式"><a href="#3-编辑快捷方式" class="headerlink" title="3. 编辑快捷方式"></a>3. 编辑快捷方式</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">sudo mousepad kali-burpsuite.desktop</span><br><span class="line">将Exec=sh -c &quot;java -jar /usr/bin/burpsuite&quot;改为Exec=sh -c &quot;/usr/bin/burpsuite&quot;</span><br></pre></td></tr></table></figure>
-之后就可以通过快捷方式运行了</li>
-</ul>
-<h1 id="Q4：kali修改DNS"><a href="#Q4：kali修改DNS" class="headerlink" title="Q4：kali修改DNS"></a>Q4：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q5：kali怎么使用ssr"><a href="#Q5：kali怎么使用ssr" class="headerlink" title="Q5：kali怎么使用ssr"></a>Q5：kali怎么使用ssr</h1><p>这里直接pass掉图形化的electron-ssr，我就没成功运行过<br>下面来介绍一下通过脚本运行ssr实现科学上网</p>
-<h2 id="1-下载安装脚本并赋予权限"><a href="#1-下载安装脚本并赋予权限" class="headerlink" title="1. 下载安装脚本并赋予权限"></a>1. 下载安装脚本并赋予权限</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://onlyless.github.io/ssr</span><br><span class="line">sudo mv ssr /usr/local/bin</span><br><span class="line">sudo chmod 766 /usr/local/bin/ssr</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="2-安装ssr"><a href="#2-安装ssr" class="headerlink" title="2. 安装ssr"></a>2. 安装ssr</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ssr install</span><br></pre></td></tr></table></figure>
-<p>这里安装有点慢，添加<code>8.8.8.8</code>的DNS会快点</p>
-<h2 id="3-ssr配置"><a href="#3-ssr配置" class="headerlink" title="3. ssr配置"></a>3. ssr配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/local/share/shadowsocksr/</span><br><span class="line">sudo mousepad config.json</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;: &quot;0.0.0.0&quot;,	//服务器IP地址</span><br><span class="line">    &quot;server_ipv6&quot;: &quot;::&quot;,</span><br><span class="line">    &quot;server_port&quot;: 8388,	//服务器端口</span><br><span class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;, </span><br><span class="line">    &quot;local_port&quot;: 1080,</span><br><span class="line"></span><br><span class="line">    &quot;password&quot;: &quot;m&quot;,		//密码</span><br><span class="line">    &quot;method&quot;: &quot;aes-128-ctr&quot;,	//加密</span><br><span class="line">    &quot;protocol&quot;: &quot;auth_aes128_md5&quot;,	//协议</span><br><span class="line">    &quot;protocol_param&quot;: &quot;&quot;,			//协议参数</span><br><span class="line">    &quot;obfs&quot;: &quot;plain&quot;,	//混淆</span><br><span class="line">    &quot;obfs_param&quot;: &quot;&quot;,	//混淆参数</span><br><span class="line">    &quot;speed_limit_per_con&quot;: 0,</span><br><span class="line">    &quot;speed_limit_per_user&quot;: 0,</span><br><span class="line"></span><br><span class="line">    &quot;additional_ports&quot; : &#123;&#125;, </span><br><span class="line">    &quot;additional_ports_only&quot; : false, </span><br><span class="line">    &quot;timeout&quot;: 120,</span><br><span class="line">    &quot;udp_timeout&quot;: 60,</span><br><span class="line">    &quot;dns_ipv6&quot;: false,</span><br><span class="line">    &quot;connect_verbose_info&quot;: 0,</span><br><span class="line">    &quot;redirect&quot;: &quot;&quot;,</span><br><span class="line">    &quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据自己的节点信息进行修改之后保存</p>
-<h2 id="4-浏览器安装代理插件Proxy-SwitchyOmega"><a href="#4-浏览器安装代理插件Proxy-SwitchyOmega" class="headerlink" title="4. 浏览器安装代理插件Proxy SwitchyOmega"></a>4. 浏览器安装代理插件Proxy SwitchyOmega</h2><p>火狐浏览器-附加组件中搜索安装即可<br>配置如图</p>
-
-<p>之后在终端键入<code>ssr start</code>，浏览器切换代理为proxy即可使用</p>
-
-
-<h1 id="Q6-给git设置代理"><a href="#Q6-给git设置代理" class="headerlink" title="Q6:给git设置代理"></a>Q6:给git设置代理</h1><h2 id="1-设置全局代理"><a href="#1-设置全局代理" class="headerlink" title="1.设置全局代理"></a>1.设置全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br><span class="line">git config --global https.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br></pre></td></tr></table></figure>
-<h2 id="2-设置针对github-com的全局代理"><a href="#2-设置针对github-com的全局代理" class="headerlink" title="2.设置针对github.com的全局代理"></a>2.设置针对github.com的全局代理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#只对github.com</span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line">#取消代理</span><br><span class="line">git config --global --unset http.https://github.com.proxy</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>web安全</category>
-      </categories>
-      <tags>
-        <tag>Kali Linux</tag>
       </tags>
   </entry>
   <entry>
