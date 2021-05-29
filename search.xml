@@ -79,210 +79,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux基础知识</title>
-    <url>/archives/29244.html</url>
-    <content><![CDATA[<h1 id="0x01-常见shell命令"><a href="#0x01-常见shell命令" class="headerlink" title="0x01 常见shell命令"></a>0x01 常见shell命令</h1><ul>
-<li><code>ls</code>：显示文件的目录和信息（ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行）<br><code>cd</code>：进入目录，改名目录<br><code>pwd</code>：创建删除目录<br><code>cp</code>：copy文件<br><code>rm</code>：删除文件或者目录<br><code>mv</code>：移动文件或目录<br><code>cat</code>：显示文件的内容，和DOS的type相同<br><code>touch</code>：创建一个新文件<br><code>ln</code>:用于将一个文件创建链接,链接分为软链接(类似于windows系统中的快捷方式)和硬链接(相当于对源文件copy,程序或命令对该文件block的另一个访问路口)，命令默认使用硬链接。</li>
-<li>关机命令：<br>  shutdown命令<br>  语法格式：<code>shutdown [选项] [时间] [警告信息]</code><br>  该命令中各选项的含义说明：<blockquote>
-<p>-k：只发出警告信息给用户<br>  -r：关闭系统后重启系统<br>  -h：关闭系统后不重启系统<br>  -f：快速关闭系统，重启系统时不进行磁盘检测<br>  -n：快速关闭系统，但是不经过init程序关闭<br>  -c：中断关闭系统</p>
-</blockquote>
-</li>
-<li>Linux文件的基本属性<code>ls -Linux</code></li>
-<li>tty1-7快捷键切换<code>ctrl+alt+（f1-f7）</code>（f7为图形化界面)</li>
-</ul>
-<h1 id="0x02-chroot命令"><a href="#0x02-chroot命令" class="headerlink" title="0x02 chroot命令"></a>0x02 chroot命令</h1><p>语法<code>chroot [选项] [参数]</code></p>
-<blockquote>
-<p>好处</p>
-<ul>
-<li>增加了系统的安全性限制了用户的权力：<br>在经过chroot之后，在新根下将访问不到旧系统的根目录和文件，这样就增强了系统的安全性。这个一般是在登陆前使用chroot，以此达到用户不能访问一些特定的文件。</li>
-<li>建立一个与原系统隔离的系统目录结构，方便用户的开发：<br>这一个与原系统根下文件不相关的目录结构。在这个新环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。</li>
-<li>切换系统的根目录的位置，引导Linux系统启动以及急救系统等：<br>chroot的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始RAM磁盘（initrd）切换系统的根位置并执行真正的init。另外，当系统出现一些问题时，我们也可以使用chroot来切换到一个临时的系统。</li>
-</ul>
-</blockquote>
-<h1 id="0x03-Linux的目录结构"><a href="#0x03-Linux的目录结构" class="headerlink" title="0x03 Linux的目录结构"></a>0x03 Linux的目录结构</h1><ul>
-<li>/<br>根目录，一般根目录下只存放目录，不要存放文件。/etc、/bin、/dev、/lib、/sbin应该和根目录放置在一个分区中</li>
-<li>/bin<br>存放系统中最常用的二进制可执行文件（二进制文件）。基础系统所需要的那些命令位于此目录，也是最小系统所需要的命令；例如ls、cp、mkdir等命令。功能和/usr/bin类似，这个目录中的文件都是可执行的，普通用户都可以使用命令</li>
-<li>/boot<br>存放Linux内核和系统启动文件，包括Grub、lilo启动程序</li>
-<li>/dev<br>存放所有设备文件，包括硬盘、分区、键盘、鼠标、USB等</li>
-<li>/etc<br>存放系统所有配置文件，例如passwd存放用户账户信息，hostname存放主机名等。/etc/fstab是开机自动挂载一些分区的，在里面写入一些分区信息，就能实现开机挂载分区</li>
-<li>/home<br>用户目录的默认位置</li>
-<li>/initrd<br>存放启动时挂载initrd.img映像文件的目录，以及载入所需设备模块的目录</li>
-<li>/lib<br>存放共享的库文件，包含许多被/bin和/sbin中程序使用的库文件</li>
-<li>/lost+found<br>在ext2或者ext3文件系统中，当系统意外崩溃或者计算机意外关机，而产生一些文件碎片存放在这里。当系统启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。有时系统发生问题，有很多的文件被移动到这个目录中，可能会用手工的方式来修复或移动到文件的原位置上</li>
-<li>/media<br>即插即用型设备的挂载点自动在这个目录下创建。例如USB自动挂载后会在这个目录下产生一个目录；CDROM/DVD自动挂载后，也会在这个目录中创建一个目录，存放临时读入的文件</li>
-<li>/mnt<br>此目录通常用于作为被挂载的文件系统的挂载点</li>
-<li>/proc<br>存放所有标志为文件的进程，它们是通过进程号或其他的系统动态信息进行标识。例如CPU、硬盘分区、内存信息等存放在这里</li>
-<li>/opt<br>作为可选文件和程序的存放目录。有些软件包也会被安装在这里，也就是自定义软件包；有些用户自己编译的软件包，就可以安装在这个目录中</li>
-<li>/root<br>根用户（超级用户）的主目录</li>
-<li>/sbin<br>大多是涉及系统管理的命令的存放地，也是超级权限用户root的可执行命令存放地。普通用户无权限执行这个目录下的命令，这个目录和/usr/sbin; /usr/X11R6/sbin或/usr/local/sbin目录是相似的。注意，凡是目录sbin中包含的都是root权限才能执行的</li>
-<li>/srv<br>存放系统所提供的服务数据</li>
-<li>/sys<br>该目录用于将系统设备组织或层次结构，并向用户提供详细的内核数据信息</li>
-<li>/tmp<br>临时文件目录，有时用户运行程序的时候，会产生临时文件。/var/tmp目录和这个目录相似</li>
-<li>/usr<br>用于存放与系统用户直接有关的文件和目录，如应用程序及支出系统的库文件</li>
-</ul>
-<h1 id="0x04-Linux忘记密码的解决办法"><a href="#0x04-Linux忘记密码的解决办法" class="headerlink" title="0x04 Linux忘记密码的解决办法"></a>0x04 Linux忘记密码的解决办法</h1><ol>
-<li>进入“恢复模式”并编辑</li>
-<li>更改代码（ro-&gt;rw,添加init=/bin/bash）</li>
-<li>重置密码</li>
-<li>重启系统<br>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlbGVnZXIvYXJ0aWNsZS9kZXRhaWxzLzEwNDQwODQ3NQ==">Ubuntu忘记密码的解决方法<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-<h1 id="0x05-ssh服务"><a href="#0x05-ssh服务" class="headerlink" title="0x05 ssh服务"></a>0x05 ssh服务</h1><p><strong>ssh远程登录</strong></p>
-<ol>
-<li>口令登录：ssh user@host（以用户名user，登录远程主机host）<br>如果本地用户名和远程的用户名一致，用户名可以省略。<br>ssh的默认端口是22，可以使用p参数来修改这个端口。（如：ssh -p 44 user@host）</li>
-<li>公钥登录：<br>ssh公钥登录可以省去输入密码的步骤<br>原理：将自己的公钥储存在远程主机上登陆的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。（用户必须提供自己的公钥。若没有直接用ssh-keygen生成一个）</li>
-</ol>
-<h1 id="0x06-IP命令"><a href="#0x06-IP命令" class="headerlink" title="0x06 IP命令"></a>0x06 IP命令</h1><p>对于网络管理员们和所有的Linux使用者们，ip命令是必备工具，是时候抛弃ifconfig命令了，特别是当你写脚本时。</p>
-<ul>
-<li>查看本机IP<br>ip a</li>
-<li>给机器设置及删除一个IP地址<br>ip addr add（del） （IP地址）</li>
-<li>监控netlink消息<br>ip monitor all<br>[ip命令参考文章]<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN1d2FuZ3FpYW5nL3AvMTE1Mjc2MTkuaHRtbA==">https://www.cnblogs.com/ysuwangqiang/p/11527619.html<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC8=">Linux命令大全<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
-      <categories>
-        <category>嵌入式开发</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown语法学习</title>
-    <url>/archives/3969.html</url>
-    <content><![CDATA[<h1 id="一-标题"><a href="#一-标题" class="headerlink" title="一.标题"></a>一.标题</h1><p>  1.使用 = 和 - 标记一级和二级标题<br>  = 和 - 标记语法格式如下：</p>
-<blockquote>
-<p>我展示的是一级标题<br>===<br>我展示的是二级标题<br>---</p>
-</blockquote>
-<blockquote>
-<p>显示效果：</p>
-<h1 id="我展示的是一级标题"><a href="#我展示的是一级标题" class="headerlink" title="我展示的是一级标题"></a>我展示的是一级标题</h1><h2 id="我展示的是二级标题"><a href="#我展示的是二级标题" class="headerlink" title="我展示的是二级标题"></a>我展示的是二级标题</h2></blockquote>
-<p>  2.使用 # 号标记<br>    使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推</p>
-<blockquote>
-<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
-</blockquote>
-<blockquote>
-<p>显示效果：</p>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<h1 id="二-列表"><a href="#二-列表" class="headerlink" title="二.列表"></a>二.列表</h1><h2 id="1-无序"><a href="#1-无序" class="headerlink" title="1.无序"></a>1.无序</h2><blockquote>
-<p>用 *、+、- </p>
-<ul>
-<li>这个点就是效果</li>
-</ul>
-</blockquote>
-<h2 id="2-有序"><a href="#2-有序" class="headerlink" title="2.有序"></a>2.有序</h2><blockquote>
-<ol>
-<li>一</li>
-<li>二</li>
-<li>三</li>
-</ol>
-</blockquote>
-<h1 id="三-区块引用"><a href="#三-区块引用" class="headerlink" title="三.区块引用"></a>三.区块引用</h1><ul>
-<li>举例<br>&gt; 如此<blockquote>
-<p>如此</p>
-</blockquote>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2>&gt; 一级<br>&gt;&gt; 二级<br>&gt;&gt;&gt; 三级<br>显示效果：<blockquote>
-<p>一级</p>
-<blockquote>
-<p>二级</p>
-<blockquote>
-<p>三级</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>……</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
-<h1 id="四-分割线"><a href="#四-分割线" class="headerlink" title="四.分割线"></a>四.分割线</h1><blockquote>
-<p>***<br> ---<br> ___<br> 显示效果：</p>
-<hr>
-</blockquote>
-<h1 id="五-链接"><a href="#五-链接" class="headerlink" title="五.链接"></a>五.链接</h1><p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记记</p>
-<blockquote>
-<p>[百度一下](<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">https://www.baidu.com<i class="fa fa-external-link-alt"></i></span>)<br>显示效果：<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">百度一下<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<h1 id="六-图片"><a href="#六-图片" class="headerlink" title="六.图片"></a>六.图片</h1><ul>
-<li>用法跟链接的基本一样，也是行内式和参数式，唯一的不同就是图片链接前面要写一个<code>!</code></li>
-</ul>
-<h1 id="七-代码框"><a href="#七-代码框" class="headerlink" title="七.代码框"></a>七.代码框</h1><ul>
-<li><p>单行用 单反引号 </p>
-<blockquote>
-<p>`apt-get upgrade`<br>显示效果<br><code>apt-get upgrade</code></p>
-</blockquote>
-</li>
-<li><p>多行用三个单反引号</p>
-<blockquote>
-<p>```<br>  apt-get upgrade<br>  ls<br>  cd<br>  ```<br>显示效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get upgrade</span><br><span class="line">ls</span><br><span class="line">cd</span><br></pre></td></tr></table></figure></blockquote>
-</li>
-</ul>
-<h1 id="八-表格"><a href="#八-表格" class="headerlink" title="八.表格"></a>八.表格</h1><blockquote>
-<p>表头1|表头2|表头3<br>-|-|-<br>内容1|内容2|内容3</p>
-</blockquote>
-<blockquote>
-<table>
-<thead>
-<tr>
-<th>表头1</th>
-<th>表头2</th>
-<th>表头3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>内容1</td>
-<td>内容2</td>
-<td>内容3</td>
-</tr>
-</tbody></table>
-</blockquote>
-<h1 id="九-强调"><a href="#九-强调" class="headerlink" title="九.强调"></a>九.强调</h1><blockquote>
-<p>*字体倾斜*<br>显示效果：<br><em>字体倾斜</em></p>
-</blockquote>
-<blockquote>
-<p>_字体倾斜_<br>显示效果：<br><em>字体倾斜</em></p>
-</blockquote>
-<blockquote>
-<p>**字体加粗**<br>显示效果：<br><strong>字体加粗</strong></p>
-</blockquote>
-<blockquote>
-<p>__字体加粗__<br>显示效果：<br><strong>字体加粗</strong></p>
-</blockquote>
-<blockquote>
-<p>***粗斜体文本***<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
-</blockquote>
-<blockquote>
-<p>___粗斜体文本___<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
-</blockquote>
-<h1 id="十-转义"><a href="#十-转义" class="headerlink" title="十.转义"></a>十.转义</h1><p>  在需要转义的符号前加上\即可</p>
-<blockquote>
-<p>如：\*<br>显示效果 *</p>
-</blockquote>
-<h1 id="十一-删除线"><a href="#十一-删除线" class="headerlink" title="十一.删除线"></a>十一.删除线</h1><p>~~再见~~</p>
-<blockquote>
-<p>显示效果：<br><del>再见</del></p>
-</blockquote>
-<h1 id="十二-下划线"><a href="#十二-下划线" class="headerlink" title="十二.下划线"></a>十二.下划线</h1><p>&lt;u&gt;带下划线文本&lt;/u&gt;</p>
-<blockquote>
-<p>显示效果：<br><u>带下划线文本</u></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kali-2020.1b安装那些事儿</title>
     <url>/archives/46925.html</url>
     <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Kali Linux 是许多优秀的安全工具的集合，它的目标就是为了简单：在一个实用的工具包里尽可能多的包含渗透和审计工具<br>对于专业用户来说，它有难以置信的好处，但是对于一些不怀好意的人来说，也可以产生很多大麻烦<br>小心地使用 Kali，充分利用它的巨大优势，否则，你将在某个地方（你懂的）度过你的余生<br>建议先看一下这篇文章<span class="exturl" data-url="aHR0cHM6Ly9saW51eC5jbi9hcnRpY2xlLTEwMTk4LTEuaHRtbA==">在你开始使用kali linux前必须要知道的事情<i class="fa fa-external-link-alt"></i></span></p>
@@ -466,6 +262,210 @@
       </tags>
   </entry>
   <entry>
+    <title>Markdown语法学习</title>
+    <url>/archives/3969.html</url>
+    <content><![CDATA[<h1 id="一-标题"><a href="#一-标题" class="headerlink" title="一.标题"></a>一.标题</h1><p>  1.使用 = 和 - 标记一级和二级标题<br>  = 和 - 标记语法格式如下：</p>
+<blockquote>
+<p>我展示的是一级标题<br>===<br>我展示的是二级标题<br>---</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="我展示的是一级标题"><a href="#我展示的是一级标题" class="headerlink" title="我展示的是一级标题"></a>我展示的是一级标题</h1><h2 id="我展示的是二级标题"><a href="#我展示的是二级标题" class="headerlink" title="我展示的是二级标题"></a>我展示的是二级标题</h2></blockquote>
+<p>  2.使用 # 号标记<br>    使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推</p>
+<blockquote>
+<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
+</blockquote>
+<blockquote>
+<p>显示效果：</p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
+<h1 id="二-列表"><a href="#二-列表" class="headerlink" title="二.列表"></a>二.列表</h1><h2 id="1-无序"><a href="#1-无序" class="headerlink" title="1.无序"></a>1.无序</h2><blockquote>
+<p>用 *、+、- </p>
+<ul>
+<li>这个点就是效果</li>
+</ul>
+</blockquote>
+<h2 id="2-有序"><a href="#2-有序" class="headerlink" title="2.有序"></a>2.有序</h2><blockquote>
+<ol>
+<li>一</li>
+<li>二</li>
+<li>三</li>
+</ol>
+</blockquote>
+<h1 id="三-区块引用"><a href="#三-区块引用" class="headerlink" title="三.区块引用"></a>三.区块引用</h1><ul>
+<li>举例<br>&gt; 如此<blockquote>
+<p>如此</p>
+</blockquote>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2>&gt; 一级<br>&gt;&gt; 二级<br>&gt;&gt;&gt; 三级<br>显示效果：<blockquote>
+<p>一级</p>
+<blockquote>
+<p>二级</p>
+<blockquote>
+<p>三级</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>……</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h1 id="四-分割线"><a href="#四-分割线" class="headerlink" title="四.分割线"></a>四.分割线</h1><blockquote>
+<p>***<br> ---<br> ___<br> 显示效果：</p>
+<hr>
+</blockquote>
+<h1 id="五-链接"><a href="#五-链接" class="headerlink" title="五.链接"></a>五.链接</h1><p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记记</p>
+<blockquote>
+<p>[百度一下](<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">https://www.baidu.com<i class="fa fa-external-link-alt"></i></span>)<br>显示效果：<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==">百度一下<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h1 id="六-图片"><a href="#六-图片" class="headerlink" title="六.图片"></a>六.图片</h1><ul>
+<li>用法跟链接的基本一样，也是行内式和参数式，唯一的不同就是图片链接前面要写一个<code>!</code></li>
+</ul>
+<h1 id="七-代码框"><a href="#七-代码框" class="headerlink" title="七.代码框"></a>七.代码框</h1><ul>
+<li><p>单行用 单反引号 </p>
+<blockquote>
+<p>`apt-get upgrade`<br>显示效果<br><code>apt-get upgrade</code></p>
+</blockquote>
+</li>
+<li><p>多行用三个单反引号</p>
+<blockquote>
+<p>```<br>  apt-get upgrade<br>  ls<br>  cd<br>  ```<br>显示效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get upgrade</span><br><span class="line">ls</span><br><span class="line">cd</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h1 id="八-表格"><a href="#八-表格" class="headerlink" title="八.表格"></a>八.表格</h1><blockquote>
+<p>表头1|表头2|表头3<br>-|-|-<br>内容1|内容2|内容3</p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>表头1</th>
+<th>表头2</th>
+<th>表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容1</td>
+<td>内容2</td>
+<td>内容3</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h1 id="九-强调"><a href="#九-强调" class="headerlink" title="九.强调"></a>九.强调</h1><blockquote>
+<p>*字体倾斜*<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>_字体倾斜_<br>显示效果：<br><em>字体倾斜</em></p>
+</blockquote>
+<blockquote>
+<p>**字体加粗**<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>__字体加粗__<br>显示效果：<br><strong>字体加粗</strong></p>
+</blockquote>
+<blockquote>
+<p>***粗斜体文本***<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<blockquote>
+<p>___粗斜体文本___<br>显示效果：<br><em><strong>粗斜体文本</strong></em></p>
+</blockquote>
+<h1 id="十-转义"><a href="#十-转义" class="headerlink" title="十.转义"></a>十.转义</h1><p>  在需要转义的符号前加上\即可</p>
+<blockquote>
+<p>如：\*<br>显示效果 *</p>
+</blockquote>
+<h1 id="十一-删除线"><a href="#十一-删除线" class="headerlink" title="十一.删除线"></a>十一.删除线</h1><p>~~再见~~</p>
+<blockquote>
+<p>显示效果：<br><del>再见</del></p>
+</blockquote>
+<h1 id="十二-下划线"><a href="#十二-下划线" class="headerlink" title="十二.下划线"></a>十二.下划线</h1><p>&lt;u&gt;带下划线文本&lt;/u&gt;</p>
+<blockquote>
+<p>显示效果：<br><u>带下划线文本</u></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux基础知识</title>
+    <url>/archives/29244.html</url>
+    <content><![CDATA[<h1 id="0x01-常见shell命令"><a href="#0x01-常见shell命令" class="headerlink" title="0x01 常见shell命令"></a>0x01 常见shell命令</h1><ul>
+<li><code>ls</code>：显示文件的目录和信息（ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行）<br><code>cd</code>：进入目录，改名目录<br><code>pwd</code>：创建删除目录<br><code>cp</code>：copy文件<br><code>rm</code>：删除文件或者目录<br><code>mv</code>：移动文件或目录<br><code>cat</code>：显示文件的内容，和DOS的type相同<br><code>touch</code>：创建一个新文件<br><code>ln</code>:用于将一个文件创建链接,链接分为软链接(类似于windows系统中的快捷方式)和硬链接(相当于对源文件copy,程序或命令对该文件block的另一个访问路口)，命令默认使用硬链接。</li>
+<li>关机命令：<br>  shutdown命令<br>  语法格式：<code>shutdown [选项] [时间] [警告信息]</code><br>  该命令中各选项的含义说明：<blockquote>
+<p>-k：只发出警告信息给用户<br>  -r：关闭系统后重启系统<br>  -h：关闭系统后不重启系统<br>  -f：快速关闭系统，重启系统时不进行磁盘检测<br>  -n：快速关闭系统，但是不经过init程序关闭<br>  -c：中断关闭系统</p>
+</blockquote>
+</li>
+<li>Linux文件的基本属性<code>ls -Linux</code></li>
+<li>tty1-7快捷键切换<code>ctrl+alt+（f1-f7）</code>（f7为图形化界面)</li>
+</ul>
+<h1 id="0x02-chroot命令"><a href="#0x02-chroot命令" class="headerlink" title="0x02 chroot命令"></a>0x02 chroot命令</h1><p>语法<code>chroot [选项] [参数]</code></p>
+<blockquote>
+<p>好处</p>
+<ul>
+<li>增加了系统的安全性限制了用户的权力：<br>在经过chroot之后，在新根下将访问不到旧系统的根目录和文件，这样就增强了系统的安全性。这个一般是在登陆前使用chroot，以此达到用户不能访问一些特定的文件。</li>
+<li>建立一个与原系统隔离的系统目录结构，方便用户的开发：<br>这一个与原系统根下文件不相关的目录结构。在这个新环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。</li>
+<li>切换系统的根目录的位置，引导Linux系统启动以及急救系统等：<br>chroot的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始RAM磁盘（initrd）切换系统的根位置并执行真正的init。另外，当系统出现一些问题时，我们也可以使用chroot来切换到一个临时的系统。</li>
+</ul>
+</blockquote>
+<h1 id="0x03-Linux的目录结构"><a href="#0x03-Linux的目录结构" class="headerlink" title="0x03 Linux的目录结构"></a>0x03 Linux的目录结构</h1><ul>
+<li>/<br>根目录，一般根目录下只存放目录，不要存放文件。/etc、/bin、/dev、/lib、/sbin应该和根目录放置在一个分区中</li>
+<li>/bin<br>存放系统中最常用的二进制可执行文件（二进制文件）。基础系统所需要的那些命令位于此目录，也是最小系统所需要的命令；例如ls、cp、mkdir等命令。功能和/usr/bin类似，这个目录中的文件都是可执行的，普通用户都可以使用命令</li>
+<li>/boot<br>存放Linux内核和系统启动文件，包括Grub、lilo启动程序</li>
+<li>/dev<br>存放所有设备文件，包括硬盘、分区、键盘、鼠标、USB等</li>
+<li>/etc<br>存放系统所有配置文件，例如passwd存放用户账户信息，hostname存放主机名等。/etc/fstab是开机自动挂载一些分区的，在里面写入一些分区信息，就能实现开机挂载分区</li>
+<li>/home<br>用户目录的默认位置</li>
+<li>/initrd<br>存放启动时挂载initrd.img映像文件的目录，以及载入所需设备模块的目录</li>
+<li>/lib<br>存放共享的库文件，包含许多被/bin和/sbin中程序使用的库文件</li>
+<li>/lost+found<br>在ext2或者ext3文件系统中，当系统意外崩溃或者计算机意外关机，而产生一些文件碎片存放在这里。当系统启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。有时系统发生问题，有很多的文件被移动到这个目录中，可能会用手工的方式来修复或移动到文件的原位置上</li>
+<li>/media<br>即插即用型设备的挂载点自动在这个目录下创建。例如USB自动挂载后会在这个目录下产生一个目录；CDROM/DVD自动挂载后，也会在这个目录中创建一个目录，存放临时读入的文件</li>
+<li>/mnt<br>此目录通常用于作为被挂载的文件系统的挂载点</li>
+<li>/proc<br>存放所有标志为文件的进程，它们是通过进程号或其他的系统动态信息进行标识。例如CPU、硬盘分区、内存信息等存放在这里</li>
+<li>/opt<br>作为可选文件和程序的存放目录。有些软件包也会被安装在这里，也就是自定义软件包；有些用户自己编译的软件包，就可以安装在这个目录中</li>
+<li>/root<br>根用户（超级用户）的主目录</li>
+<li>/sbin<br>大多是涉及系统管理的命令的存放地，也是超级权限用户root的可执行命令存放地。普通用户无权限执行这个目录下的命令，这个目录和/usr/sbin; /usr/X11R6/sbin或/usr/local/sbin目录是相似的。注意，凡是目录sbin中包含的都是root权限才能执行的</li>
+<li>/srv<br>存放系统所提供的服务数据</li>
+<li>/sys<br>该目录用于将系统设备组织或层次结构，并向用户提供详细的内核数据信息</li>
+<li>/tmp<br>临时文件目录，有时用户运行程序的时候，会产生临时文件。/var/tmp目录和这个目录相似</li>
+<li>/usr<br>用于存放与系统用户直接有关的文件和目录，如应用程序及支出系统的库文件</li>
+</ul>
+<h1 id="0x04-Linux忘记密码的解决办法"><a href="#0x04-Linux忘记密码的解决办法" class="headerlink" title="0x04 Linux忘记密码的解决办法"></a>0x04 Linux忘记密码的解决办法</h1><ol>
+<li>进入“恢复模式”并编辑</li>
+<li>更改代码（ro-&gt;rw,添加init=/bin/bash）</li>
+<li>重置密码</li>
+<li>重启系统<br>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlbGVnZXIvYXJ0aWNsZS9kZXRhaWxzLzEwNDQwODQ3NQ==">Ubuntu忘记密码的解决方法<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h1 id="0x05-ssh服务"><a href="#0x05-ssh服务" class="headerlink" title="0x05 ssh服务"></a>0x05 ssh服务</h1><p><strong>ssh远程登录</strong></p>
+<ol>
+<li>口令登录：ssh user@host（以用户名user，登录远程主机host）<br>如果本地用户名和远程的用户名一致，用户名可以省略。<br>ssh的默认端口是22，可以使用p参数来修改这个端口。（如：ssh -p 44 user@host）</li>
+<li>公钥登录：<br>ssh公钥登录可以省去输入密码的步骤<br>原理：将自己的公钥储存在远程主机上登陆的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。（用户必须提供自己的公钥。若没有直接用ssh-keygen生成一个）</li>
+</ol>
+<h1 id="0x06-IP命令"><a href="#0x06-IP命令" class="headerlink" title="0x06 IP命令"></a>0x06 IP命令</h1><p>对于网络管理员们和所有的Linux使用者们，ip命令是必备工具，是时候抛弃ifconfig命令了，特别是当你写脚本时。</p>
+<ul>
+<li>查看本机IP<br>ip a</li>
+<li>给机器设置及删除一个IP地址<br>ip addr add（del） （IP地址）</li>
+<li>监控netlink消息<br>ip monitor all<br>[ip命令参考文章]<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN1d2FuZ3FpYW5nL3AvMTE1Mjc2MTkuaHRtbA==">https://www.cnblogs.com/ysuwangqiang/p/11527619.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC8=">Linux命令大全<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>嵌入式开发</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>VMware安装Ubuntu 20.04 LTS图解</title>
     <url>/archives/574.html</url>
     <content><![CDATA[<div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Ubuntu 和 Windows 有何不同？<br>从大的方面讲，它们的设计理念不同，借用一位前辈的话：“Windows为不知道自己正在做什么的人设计，Linux为知道自己要做什么，正在做什么的人设计”。<br>从小的方面讲，用户体验不同。Windows 将机器置于一个和人对等的位置，它会对你提出要求，让你跟着它去做。Linux将机器置于服务于人的位置，它是一台服务于你的机器，听你指挥，接受你的配置，适当时候会提示你，但绝不会命令你。<br>刚开始从Windows到Ubuntu，肯定会不习惯，但是当你熟悉了这些操作，你会发现这是更高效的方法，这是另一种体验，你发号施令，让机器为你而运转，你会体验到机器服务于人的设计理念。在熟悉Ubuntu之后，我相信，你也会喜欢上这个简洁而优雅的开源世界。</p>
@@ -602,6 +602,49 @@
       </tags>
   </entry>
   <entry>
+    <title>Kali更新jdk-8u251</title>
+    <url>/archives/9111.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图</p>
+<p>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
+</div>
+<p>第一时间当然是查看当前的java版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>然后发现丫的我就没见过这版本号</p>
+
+<p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
+<p>话不多说，上正题</p>
+<h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-下载JDK"><a href="#2-下载JDK" class="headerlink" title="2. 下载JDK"></a>2. 下载JDK</h1><ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UtamRrOC1kb3dubG9hZHMuaHRtbA==">Oracle官方下载地址<i class="fa fa-external-link-alt"></i></span><br>ps: 下载<code>Linux x64 Compressed Archive</code>这个版本，好像需要注册帐号，登录才能下载</p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXBLZXVVV1Rjb1dPWEJTOHUwVXhfUkE=">百度网盘<i class="fa fa-external-link-alt"></i></span><br>提取码：iouq<br>我也想用蓝奏云，无奈这个包186m，上传超过100m的文件要充钱，我的钱拿去百度网盘自动续费了。。。</p>
+</li>
+</ul>
+<h1 id="3-建立目录并解压文件"><a href="#3-建立目录并解压文件" class="headerlink" title="3. 建立目录并解压文件"></a>3. 建立目录并解压文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /usr/local/java</span><br><span class="line">sudo cp jdk-8u251-linux-x64.tar.gz /usr/local/java</span><br><span class="line">cd /usr/local/java</span><br><span class="line">sudo tar xzvf jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/profile</span><br><span class="line"># 复制以下代码到文件结尾</span><br><span class="line">JAVA_HOME=/usr/local/java/jdk1.8.0_251</span><br><span class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-告诉系统Java的位置"><a href="#5-告诉系统Java的位置" class="headerlink" title="5. 告诉系统Java的位置"></a>5. 告诉系统Java的位置</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/java&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javac&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javaws&quot; &quot;javaws&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javaws&quot; 1</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-设置为默认JDK"><a href="#6-设置为默认JDK" class="headerlink" title="6. 设置为默认JDK"></a>6. 设置为默认JDK</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --set java /usr/local/java/jdk1.8.0_251/bin/java</span><br><span class="line">sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_251/bin/javac</span><br><span class="line">sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_251/bin/javaws</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+
+<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+        <tag>jdk</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kali配置问题汇总</title>
     <url>/archives/53005.html</url>
     <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1>
@@ -652,49 +695,6 @@ ps:如果是xfce桌面环境需要在编辑完快捷方式之后在菜单栏中�
       </categories>
       <tags>
         <tag>Kali Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali更新jdk-8u251</title>
-    <url>/archives/9111.html</url>
-    <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图</p>
-<p>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
-</div>
-<p>第一时间当然是查看当前的java版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>然后发现丫的我就没见过这版本号</p>
-
-<p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
-<p>话不多说，上正题</p>
-<h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-下载JDK"><a href="#2-下载JDK" class="headerlink" title="2. 下载JDK"></a>2. 下载JDK</h1><ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UtamRrOC1kb3dubG9hZHMuaHRtbA==">Oracle官方下载地址<i class="fa fa-external-link-alt"></i></span><br>ps: 下载<code>Linux x64 Compressed Archive</code>这个版本，好像需要注册帐号，登录才能下载</p>
-</li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXBLZXVVV1Rjb1dPWEJTOHUwVXhfUkE=">百度网盘<i class="fa fa-external-link-alt"></i></span><br>提取码：iouq<br>我也想用蓝奏云，无奈这个包186m，上传超过100m的文件要充钱，我的钱拿去百度网盘自动续费了。。。</p>
-</li>
-</ul>
-<h1 id="3-建立目录并解压文件"><a href="#3-建立目录并解压文件" class="headerlink" title="3. 建立目录并解压文件"></a>3. 建立目录并解压文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /usr/local/java</span><br><span class="line">sudo cp jdk-8u251-linux-x64.tar.gz /usr/local/java</span><br><span class="line">cd /usr/local/java</span><br><span class="line">sudo tar xzvf jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/profile</span><br><span class="line"># 复制以下代码到文件结尾</span><br><span class="line">JAVA_HOME=/usr/local/java/jdk1.8.0_251</span><br><span class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-告诉系统Java的位置"><a href="#5-告诉系统Java的位置" class="headerlink" title="5. 告诉系统Java的位置"></a>5. 告诉系统Java的位置</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/java&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javac&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javaws&quot; &quot;javaws&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javaws&quot; 1</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-设置为默认JDK"><a href="#6-设置为默认JDK" class="headerlink" title="6. 设置为默认JDK"></a>6. 设置为默认JDK</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --set java /usr/local/java/jdk1.8.0_251/bin/java</span><br><span class="line">sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_251/bin/javac</span><br><span class="line">sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_251/bin/javaws</span><br></pre></td></tr></table></figure>
-
-<h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
-
-
-<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
-      <categories>
-        <category>web安全</category>
-      </categories>
-      <tags>
-        <tag>Kali Linux</tag>
-        <tag>jdk</tag>
       </tags>
   </entry>
   <entry>
