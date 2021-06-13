@@ -30,11 +30,17 @@
 <meta property="og:site_name" content="Z0SEN&#39;s Blog">
 <meta property="og:description" content="CSRF（Cross-site request forery，跨站请求伪造）也被称为One Click Attack或者Session Riding，通常缩写为CSRF或者XSRF。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z0sen.github.io/archives/24515/csrf-post-burp.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/24515/csrf-postpoc.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/24515/csrf-defense.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/24515/csrf-defense-mod.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/24515/php-data.png">
 <meta property="article:published_time" content="2020-10-22T09:30:17.000Z">
 <meta property="article:modified_time" content="2020-10-22T09:30:17.000Z">
 <meta property="article:author" content="z0sen">
 <meta property="article:tag" content="CSRF">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z0sen.github.io/archives/24515/csrf-post-burp.png">
 
 
 <link rel="canonical" href="https://z0sen.github.io/archives/24515.html">
@@ -334,25 +340,25 @@
 <h2 id="0x02-POST型CSRF利用"><a href="#0x02-POST型CSRF利用" class="headerlink" title="0x02 POST型CSRF利用"></a>0x02 POST型CSRF利用</h2><p>设置表单用于提交，例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=”hidden” name=”username” value=”1111” /&gt;</span><br></pre></td></tr></table></figure>
 <p>使用burpsuite拦截POST包并生成CSRF PoC</p>
-
+<img src="/archives/24515/csrf-post-burp.png" class>
 
 <p>在burpsuite生成的PoC中可以看到已经使用hidden参数隐藏表单数据</p>
-
+<img src="/archives/24515/csrf-postpoc.png" class>
 <p>点击Test in browser会生成访问链接，实际攻击时诱使目标访问即可实现攻击</p>
 <h1 id="二、CSRF漏洞探测"><a href="#二、CSRF漏洞探测" class="headerlink" title="二、CSRF漏洞探测"></a>二、CSRF漏洞探测</h1><h2 id="0x01-手工探测"><a href="#0x01-手工探测" class="headerlink" title="0x01 手工探测"></a>0x01 手工探测</h2><p>手工探测原理就在于探测web应用程序是否具有CSRF漏洞的防御措施。</p>
-
+<img src="/archives/24515/csrf-defense.png" class>
 <p>如果Web应用程序的HTTP请求中没有对应的预防措施，那么很大程度上就确定存在CSRF漏洞。</p>
 <h2 id="0x02-自动化探测"><a href="#0x02-自动化探测" class="headerlink" title="0x02 自动化探测"></a>0x02 自动化探测</h2><p>利用自动化探测工具CSRFTester或者burpsuite自带的Generate CSRF PoC</p>
 <p>CSRFTester工具的测试原理：使用代理抓取我们在浏览器中访问过的所有的连接以及所有的表单等信息，通过在CSRFTester中修改相应的表单等信息，重新提交，相当于一次伪造客户端请求，如果修测试的请求成功被网站服务器接受，则说明存在CSRF漏洞，当然此款工具也可以被用来进行CSRF攻击。</p>
 <p>1.CSRFTester设置浏览器代理:127.0.0.1:8008，burp是8080<br>2.登录web应用程序，提交表单，在CSRF工具中修改表单内容，查看是否更改，如果更改就存在CSRF漏洞<br>3.生成PoC</p>
 <h1 id="三、Token防御机制"><a href="#三、Token防御机制" class="headerlink" title="三、Token防御机制"></a>三、Token防御机制</h1><h2 id="0x01-漏洞修补逻辑分析"><a href="#0x01-漏洞修补逻辑分析" class="headerlink" title="0x01 漏洞修补逻辑分析"></a>0x01 漏洞修补逻辑分析</h2><p>CSRF漏洞实质：服务器无法准确判断当前请求是否是合法用户的自定义操作<br>漏洞修补逻辑分析:如果服务器在用户登录之后给予用户一个唯一合法令牌，每一次操作过程中，服务器都会验证令牌是否正确，如果正确那么执行操作，不正确不执行操作。<br>一般情况下，给予的令牌写入表单隐藏域的value中，随着表单内容进行提交</p>
 <h2 id="0x02-简单代码模型分析"><a href="#0x02-简单代码模型分析" class="headerlink" title="0x02 简单代码模型分析"></a>0x02 简单代码模型分析</h2><p>如果没有令牌，远程构造CSRF利用POC则直接中招。如果利用在增删改中设置唯一令牌，执行操作时只有提交令牌才能操作的话，就可以有效防止CSRF，若令牌不正确，则不执行操作，并给出提示内容。</p>
-
+<img src="/archives/24515/csrf-defense-mod.png" class>
 
 <h2 id="0x03-使用Token进行CSRF防御"><a href="#0x03-使用Token进行CSRF防御" class="headerlink" title="0x03 使用Token进行CSRF防御"></a>0x03 使用Token进行CSRF防御</h2><p>Token作为识别操作是否是当前用户自己操作的唯一凭证，需要设置为复杂<strong>难以破解</strong>的内容。</p>
 <p>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">date_default_timezone_set(&quot;Asia/Shanghai&quot;);</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">	$salt = &quot;hello&quot;.date(&quot;h/i/s&quot;);</span><br><span class="line">	$token = md5($salt);</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br><span class="line">$token = generateToken();</span><br><span class="line">echo $token;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
+<img src="/archives/24515/php-data.png" class>
 
 <p>1.登陆验证成功之后，在会话<code>SESSION[&quot;user_token&quot;]</code>中保存Token<br>2.在后台操作中，增删改表单中添加隐藏域hidden，设置value为Token<br>3.提交之后验证Token是否正确</p>
 <p>实例：<br>token_generate.php</p>

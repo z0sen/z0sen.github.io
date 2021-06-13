@@ -30,11 +30,37 @@
 <meta property="og:site_name" content="Z0SEN&#39;s Blog">
 <meta property="og:description" content="信息收集对于渗透测试可以说是重中之重，正所谓“知己知彼，百战不殆”。所以我们的信息收集也是一样，收集的信息自然也是越多越好。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/browsing-process.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/whois.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/Whois-chinaz.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/whois-kali.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/layer.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/subdomin-sina.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/censys.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/bugscaner.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/seebug-search.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/yvjianzc.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/wpscan.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/netstat.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/github-qqmail.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/cdn.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/ping-baidu.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/ping-chinaz-baidu.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/viewdns.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-city.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-install.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-init.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-h.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-download.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-parse.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-fields.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/20469/shodan-host.png">
 <meta property="article:published_time" content="2020-04-12T06:37:00.000Z">
 <meta property="article:modified_time" content="2020-04-12T06:37:00.000Z">
 <meta property="article:author" content="z0sen">
 <meta property="article:tag" content="信息搜集">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z0sen.github.io/archives/20469/browsing-process.png">
 
 
 <link rel="canonical" href="https://z0sen.github.io/archives/20469.html">
@@ -325,20 +351,20 @@
 </div>
 
 <h1 id="一、Whois信息"><a href="#一、Whois信息" class="headerlink" title="一、Whois信息"></a>一、Whois信息</h1><h2 id="0x01-域名（Domain-Name）"><a href="#0x01-域名（Domain-Name）" class="headerlink" title="0x01 域名（Domain Name）"></a>0x01 域名（Domain Name）</h2><p>由一串用点分隔的名字组成的Internet上某一台计算机或计算机组的名称，用于在数据传输时标识计算机的电子方位。<br>例如：51cto.com<br>对于 edu.51cto.com 以及 <span class="exturl" data-url="aHR0cDovL3d3dy41MWN0by5jb20v">www.51cto.com<i class="fa fa-external-link-alt"></i></span> 是该域名对应的子域名，而edu和www都是对应的主机头<br>浏览网站过程：（从DNS服务器获得指定域名对应的IP地址）</p>
-
+<img src="/archives/20469/browsing-process.png" class>
 
 <h2 id="0x02-Whois"><a href="#0x02-Whois" class="headerlink" title="0x02 Whois"></a>0x02 Whois</h2><p>用来查询域名的IP以及所有者等信息的传输协议。简单说，Whois就是一个用来查询域名是否已经被注册，以及注册域名的详细信息的数据库（如域名所有人、域名注册商）<br>不同域名后缀的Whois信息需要到不同的Whois数据库查询。如.com的Whois数据库和.edu的就不同。每个域名或IP的Whois信息由对应的管理机构保存，例如，以.com结尾的域名的Whois信息由.com域名运营商VeriSign管理，中国国家顶级域名.cn域名由CNNIC(中国互联网络信息中心)管理<br>Whois协议。其基本内容是，先向服务器的TCP端口43建立一个连接，发送查询关键字并加上回车换行，然后接收服务器的查询结果。</p>
-
+<img src="/archives/20469/whois.png" class>
 
 <h2 id="0x03-Whois查询"><a href="#0x03-Whois查询" class="headerlink" title="0x03 Whois查询"></a>0x03 Whois查询</h2><p>Whois查询的重要性：通过Whois查询可以获得域名注册者邮箱地址等信息。一般情况下对于中小型网站域名注册者就是网站管理员。利用搜索引擎对Whois查询到的信息进行搜索，获取更多域名注册者的个人信息。</p>
 <p>Whois查询方法：</p>
 <h3 id="1-Web接口查询"><a href="#1-Web接口查询" class="headerlink" title="1. Web接口查询"></a>1. Web接口查询</h3><div class="note info no-icon"><p><span class="exturl" data-url="aHR0cHM6Ly93aG9pcy5hbGl5dW4uY29tLw==">阿里云Whois查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3dob2lzLmNoaW5hei5jb20v">站长之家Whois查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cud2hvaXMzNjUuY29tL2NuLw==">全球WHOIS查询<i class="fa fa-external-link-alt"></i></span></p>
 </div>
 
-
+<img src="/archives/20469/Whois-chinaz.png" class>
 
 <h3 id="2-通过Whois命令行查询"><a href="#2-通过Whois命令行查询" class="headerlink" title="2. 通过Whois命令行查询"></a>2. 通过Whois命令行查询</h3><p>在Kali linux下自带了Whois查询工具，通过命令 <code>whois [域名]</code> 进行查询</p>
-
+<img src="/archives/20469/whois-kali.png" class>
 
 <h2 id="0x04-备案信息查询"><a href="#0x04-备案信息查询" class="headerlink" title="0x04 备案信息查询"></a>0x04 备案信息查询</h2><p>ICP备案介绍：Internet Content Provider网络内容提供商。<br>《互联网信息服务管理办法》指出互联网信息服务分为经营性和非经营性两类。国家对经营性互联网信息服务实行许可制度；对非经营性互联网信息服务实行备案制度。未取得许可或者未履行备案手续的，不得从事互联网信息服务。在中华人民共和国境内提供非经营性互联网信息服务，应当依法履行备案手续。未经国家机关单位许可备案，不得在中华人民共和国境内从事非经营性互联网信息服务。</p>
 <div class="note info"><p>为毛要备案？<br>为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播，如果网站不备案的话，很有可能被查处以后关停<br>（博主是境外域名商购买的域名，所以不需要备案）</p>
@@ -357,36 +383,36 @@
 </div>
 
 <h2 id="0x03-子域名挖掘方法"><a href="#0x03-子域名挖掘方法" class="headerlink" title="0x03 子域名挖掘方法"></a>0x03 子域名挖掘方法</h2><h3 id="1-子域名挖掘工具"><a href="#1-子域名挖掘工具" class="headerlink" title="1. 子域名挖掘工具"></a>1. 子域名挖掘工具</h3><p>如：Maltego CE、wydomain、subDomainsBrute、dnsmaper、Layer子域名挖掘机</p>
-
+<img src="/archives/20469/layer.png" class>
 
 <h3 id="2-搜索引擎挖掘"><a href="#2-搜索引擎挖掘" class="headerlink" title="2. 搜索引擎挖掘"></a>2. 搜索引擎挖掘</h3><p>Google Hacking语法<br>如：在Google中输入 site:sina.com</p>
-
+<img src="/archives/20469/subdomin-sina.png" class>
 
 <h3 id="3-第三方网站查询"><a href="#3-第三方网站查询" class="headerlink" title="3. 第三方网站查询"></a>3. 第三方网站查询</h3><p><span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbS9zdWJkb21haW4=">站长之家<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9kbnNkdW1wc3Rlci5jb20v">DNSdumpster<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="4-证书透明度公开日志枚举"><a href="#4-证书透明度公开日志枚举" class="headerlink" title="4. 证书透明度公开日志枚举"></a>4. 证书透明度公开日志枚举</h3><p><span class="exturl" data-url="aHR0cDovL2NlbnN5cy5pby8=">Censys<i class="fa fa-external-link-alt"></i></span></p>
-
+<img src="/archives/20469/censys.png" class>
 
 <h3 id="5-其他途径"><a href="#5-其他途径" class="headerlink" title="5. 其他途径"></a>5. 其他途径</h3><p><span class="exturl" data-url="aHR0cHM6Ly9waHBpbmZvLm1lL2RvbWFpbg==">在线子域名查询<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL2Rucy5haXpoYW4uY29tLw==">爱站网查询<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="三、web站点信息"><a href="#三、web站点信息" class="headerlink" title="三、web站点信息"></a>三、web站点信息</h1><h2 id="0x01-CMS指纹识别"><a href="#0x01-CMS指纹识别" class="headerlink" title="0x01 CMS指纹识别"></a>0x01 CMS指纹识别</h2><p>CMS（内容管理系统），又称整站系统或文章系统。用于网站内容管理。用户只需要下载对应的CMS软件包，部署搭建，就可以直接利用CMS，简单方便。但是各种CMS都具有其独特的结构命名规则和特定的文件内容，因此可以利用这些内容来获取CMS站点的具体软件CMS与版本。<br>常见CMS：dedecms（织梦）、Discuz、Phpcms等<br>CMS识别工具：</p>
 <ol>
 <li>在线工具<br><span class="exturl" data-url="aHR0cDovL3doYXR3ZWIuYnVnc2NhbmVyLmNvbS9sb29rLw==">whatweb<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy55dW5zZWUuY24vZmluZ2VyLmh0bWw=">云悉<i class="fa fa-external-link-alt"></i></span></li>
-<li>本地工具<br>whatweb<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3NoYXJlL2xpbms/c2hhcmVpZD00MzczNzYmdWs9MzUyNjgzMjM3NA==">御剑web指纹识别程序<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01zMHgwL0RheXU=">大禹CMS识别程序<i class="fa fa-external-link-alt"></i></span></li>
+<li>本地工具<br>whatweb<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3NoYXJlL2xpbms/c2hhcmVpZD00MzczNzYmdWs9MzUyNjgzMjM3NA==">御剑web指纹识别程序<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01zMHgwL0RheXU=">大禹CMS识别程序<i class="fa fa-external-link-alt"></i></span><img src="/archives/20469/bugscaner.png" class></li>
 </ol>
 <h2 id="0x02-针对CMS查询漏洞"><a href="#0x02-针对CMS查询漏洞" class="headerlink" title="0x02 针对CMS查询漏洞"></a>0x02 针对CMS查询漏洞</h2><p>对于查询到的CMS可以利用 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VlYnVnLm9yZy9zZWFyY2gv">Seebug<i class="fa fa-external-link-alt"></i></span> 查询指定CMS的漏洞</p>
-
+<img src="/archives/20469/seebug-search.png" class>
 
 <h2 id="0x03-敏感目录信息"><a href="#0x03-敏感目录信息" class="headerlink" title="0x03 敏感目录信息"></a>0x03 敏感目录信息</h2><p>针对目标Web目录结构和敏感隐藏文件探测是非常重要的，在探测过程中很有可能会探测出后台页面、上传页面、数据库文件、甚至是网站源代码文件压缩包等<br>探测工具：</p>
 <ol>
-<li>御剑后台扫描工具</li>
+<li>御剑后台扫描工具<img src="/archives/20469/yvjianzc.png" class></li>
 <li>wwwscan命令行工具</li>
 <li>dirb命令行工具</li>
 <li>dirbuster扫描工具</li>
 </ol>
 <h2 id="0x04-针对WordPress的站点测试"><a href="#0x04-针对WordPress的站点测试" class="headerlink" title="0x04 针对WordPress的站点测试"></a>0x04 针对WordPress的站点测试</h2><p>WordPress是使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站，也可以把 WordPress当作一个内容管理系统（CMS）来使用<br>针对WordPress测试，可以使用wpscan工具进行对应安全测试</p>
-
+<img src="/archives/20469/wpscan.png" class>
 
 <h1 id="四、端口信息"><a href="#四、端口信息" class="headerlink" title="四、端口信息"></a>四、端口信息</h1><h2 id="0x01-端口-port"><a href="#0x01-端口-port" class="headerlink" title="0x01 端口 (port)"></a>0x01 端口 (port)</h2><p>如果把IP地址比作一间房子 ，端口就是出入这间房子的门。真正的房子只有几个门，但是一个IP地址的端口可以有65536（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从0到65535（2^16-1）<br>例如计算机中的80端口、21端口、23端口等<br>在计算机中每一个端口代表一个服务。在Windows命令行中使用 netstat -anbo 显示开放端口</p>
-
+<img src="/archives/20469/netstat.png" class>
 
 <h2 id="0x02-端口信息收集"><a href="#0x02-端口信息收集" class="headerlink" title="0x02 端口信息收集"></a>0x02 端口信息收集</h2><p>对于收集目标机器端口状态可以使用工具来进行测试。工具原理：使用TCP或者UDP等协议向目标端口发送指定标志位等的数据包，等待目标返回数据包，以此来判断端口状态。</p>
 <h3 id="1-使用-nmap-探测"><a href="#1-使用-nmap-探测" class="headerlink" title="1. 使用 nmap 探测"></a>1. 使用 nmap 探测</h3><p>-A选项用于使用进攻性（Aggressive）方式扫描；-T4指定扫描过程使用的时序（Timing），总有6个级别（0-5），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况良好的情况推荐使用T4；-v表示显示冗余（verbosity）信息，在扫描过程中显示扫描的细节，从而让用户了解当前的扫描状态。</p>
@@ -487,7 +513,7 @@
 
 <h2 id="0x04-Github信息泄露"><a href="#0x04-Github信息泄露" class="headerlink" title="0x04 Github信息泄露"></a>0x04 Github信息泄露</h2><p>Github是一个分布式的版本控制系统，目前拥有140多万开发者用户。随着越来越多的应用程序转移到了云上，Github已经成为了管理软件开发以及发现已有代码的首选方法。众所周知，当今是大数据时代，大规模数据泄露事情一直在发生，从未停止过，但有些人不知道的是很多时候一些敏感信息的泄露其实是我们自己无意中造成的，然而一个小疏忽，往往却造成一系列连锁反应。github上敏感信息的泄露，就是一个典型的例子,github虽然方便开发者，但其中也埋藏着一些安全隐患。</p>
 <h3 id="①-github之邮件配置信息泄露："><a href="#①-github之邮件配置信息泄露：" class="headerlink" title="① github之邮件配置信息泄露："></a>① github之邮件配置信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">site:github.com smtp</span><br><span class="line">site:github.com smtp @qq.com</span><br></pre></td></tr></table></figure>
-
+<img src="/archives/20469/github-qqmail.png" class>
 
 <h3 id="②-github之数据库信息泄露："><a href="#②-github之数据库信息泄露：" class="headerlink" title="② github之数据库信息泄露："></a>② github之数据库信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">site:github.com sa password</span><br><span class="line">site:github.com root password</span><br><span class="line">site:github.com User ID=’sa’;Password</span><br></pre></td></tr></table></figure>
 
@@ -496,13 +522,13 @@
 <h3 id="④-github之综合信息泄露："><a href="#④-github之综合信息泄露：" class="headerlink" title="④ github之综合信息泄露："></a>④ github之综合信息泄露：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">site:github.com password</span><br><span class="line">site:github.com ftp ftppassword</span><br><span class="line">site:github.com 密码</span><br><span class="line">site:github.com 内部</span><br></pre></td></tr></table></figure>
 
 <h1 id="六、真实IP"><a href="#六、真实IP" class="headerlink" title="六、真实IP"></a>六、真实IP</h1><h2 id="0x01-CDN"><a href="#0x01-CDN" class="headerlink" title="0x01 CDN"></a>0x01 CDN</h2><p>Content Delivery Network 即内容分发网络</p>
-
+<img src="/archives/20469/cdn.png" class>
 
 <h2 id="0x02-判断CDN是否存在"><a href="#0x02-判断CDN是否存在" class="headerlink" title="0x02 判断CDN是否存在"></a>0x02 判断CDN是否存在</h2><ol>
 <li><p>通过Ping判断是否存在CDN</p>
-</li>
+<img src="/archives/20469/ping-baidu.png" class></li>
 <li><p>通过设置代理或者利用在线ping网站来使用不同地区的Ping服务器来测试目标<br><span class="exturl" data-url="aHR0cDovL3BpbmcuY2hpbmF6LmNvbS8=">站长之家<i class="fa fa-external-link-alt"></i></span></p>
-</li>
+<img src="/archives/20469/ping-chinaz-baidu.png" class></li>
 </ol>
 <h2 id="0x03-绕过CDN"><a href="#0x03-绕过CDN" class="headerlink" title="0x03 绕过CDN"></a>0x03 绕过CDN</h2><ul>
 <li><p>如果目标没有使用CDN，可以直接利用ping获得IP地址<br>或者利用在线网站： <span class="exturl" data-url="aHR0cDovL3d3dy5pcDEzOC5jb20v">http://www.ip138.com/<i class="fa fa-external-link-alt"></i></span></p>
@@ -513,14 +539,14 @@
 <li>网站phpinfo文件</li>
 <li>分站IP地址，查询子域名(CDN很贵，很有可能分站就不再使用CDN)</li>
 <li>国外访问<span class="exturl" data-url="aHR0cHM6Ly9hc20uY2EuY29tL2VuL3BpbmcucGhw">CA App Synthetic Monitor<i class="fa fa-external-link-alt"></i></span></li>
-<li>查询域名解析记录<span class="exturl" data-url="aHR0cHM6Ly92aWV3ZG5zLmluZm8v">Viewdns<i class="fa fa-external-link-alt"></i></span></li>
+<li>查询域名解析记录<span class="exturl" data-url="aHR0cHM6Ly92aWV3ZG5zLmluZm8v">Viewdns<i class="fa fa-external-link-alt"></i></span><img src="/archives/20469/viewdns.png" class></li>
 </ol>
 </li>
 </ul>
 <h2 id="0x04-验证IP地址"><a href="#0x04-验证IP地址" class="headerlink" title="0x04 验证IP地址"></a>0x04 验证IP地址</h2><p>利用IP地址对Web站点进行访问，如果正常访问则是真实IP地址，否则不为真</p>
 <h1 id="七、shodan"><a href="#七、shodan" class="headerlink" title="七、shodan"></a>七、shodan</h1><h2 id="0x01-什么是shodan"><a href="#0x01-什么是shodan" class="headerlink" title="0x01 什么是shodan"></a>0x01 什么是shodan</h2><p>首先，Shodan 是一个搜索引擎，但它与 Google 这种搜索网址的搜索引擎不同，Shodan 是用来搜索网络空间中在线设备的，你可以通过 Shodan 搜索指定的设备，或者搜索特定类型的设备，其中 Shodan 上最受欢迎的搜索内容是：webcam，linksys，cisco，netgear，SCADA等等。</p>
 <p>那么 Shodan 是怎么工作的呢？Shodan 通过扫描全网设备并抓取解析各个设备返回的 banner 信息，通过了解这些信息 Shodan 就能得知网络中哪一种 Web 服务器是最受欢迎的，或是网络中到底存在多少可匿名登录的 FTP 服务器。</p>
-<h2 id="0x02-网页搜索常用过滤命令"><a href="#0x02-网页搜索常用过滤命令" class="headerlink" title="0x02 网页搜索常用过滤命令"></a>0x02 网页搜索常用过滤命令</h2>
+<h2 id="0x02-网页搜索常用过滤命令"><a href="#0x02-网页搜索常用过滤命令" class="headerlink" title="0x02 网页搜索常用过滤命令"></a>0x02 网页搜索常用过滤命令</h2><img src="/archives/20469/shodan-city.png" class>
 
 <table>
 <thead>
@@ -575,12 +601,12 @@
 </tr>
 </tbody></table>
 <h2 id="0x03-shodan命令行"><a href="#0x03-shodan命令行" class="headerlink" title="0x03 shodan命令行"></a>0x03 shodan命令行</h2><h3 id="1-shodan命令行安装"><a href="#1-shodan命令行安装" class="headerlink" title="1. shodan命令行安装"></a>1. shodan命令行安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install shodan</span><br></pre></td></tr></table></figure>
-
+<img src="/archives/20469/shodan-install.png" class>
 
 <h3 id="2-绑定shodan-API-KEY"><a href="#2-绑定shodan-API-KEY" class="headerlink" title="2.绑定shodan API KEY"></a>2.绑定shodan API KEY</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shodan init [API_KEY]</span><br></pre></td></tr></table></figure>
+<img src="/archives/20469/shodan-init.png" class>
 
-
-<h3 id="3-命令帮助"><a href="#3-命令帮助" class="headerlink" title="3. 命令帮助"></a>3. 命令帮助</h3>
+<h3 id="3-命令帮助"><a href="#3-命令帮助" class="headerlink" title="3. 命令帮助"></a>3. 命令帮助</h3><img src="/archives/20469/shodan-h.png" class>
 
 <table>
 <thead>
@@ -669,18 +695,18 @@
 <h3 id="4-常用命令"><a href="#4-常用命令" class="headerlink" title="4. 常用命令"></a>4. 常用命令</h3><p>① 将搜索结果下载到 ssh-data 文件中</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shodan  download  microsoft-data microsoft iis 6.0</span><br></pre></td></tr></table></figure>
 <p>文件中的每一行都是 JSON 格式存储的目标 banner 信息<br>默认情况下，该命令只会下载 100 条结果<br>如果想获取更多的结果，需要充钱，然后下载的时候指定 –limit 参数</p>
-
+<img src="/archives/20469/shodan-download.png" class>
 
 <p>② 解析下载的数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shodan parse --fields ip_str,port,org  microsoft-data.json.gz</span><br></pre></td></tr></table></figure>
-
+<img src="/archives/20469/shodan-parse.png" class>
 
 <ul>
 <li>通过使用 –fields 来自定义显示内容<br>例如，只显示IP、端口号、组织名称：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shodan search --fields ip_str,port,org microsoft iis 6.0</span><br></pre></td></tr></table></figure>
-</li>
+<img src="/archives/20469/shodan-fields.png" class></li>
 </ul>
 <p>③ 获取指定IP信息<br>  如地理位置信息，开放端口，甚至是否存在某些漏洞等信息</p>
-
+<img src="/archives/20469/shodan-host.png" class>
     </div>
 
     

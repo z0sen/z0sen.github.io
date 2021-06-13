@@ -30,12 +30,16 @@
 <meta property="og:site_name" content="Z0SEN&#39;s Blog">
 <meta property="og:description" content="JDK全称Java SE Development kit(JDK)，即Java标准版开发包，是Oracle提供的一套用于开发Java应用程序的开发包，它提供编译，运行Java程序所需要的各种工具和资源，包括Java编译器，Java运行时环境，以及常用的Java类库等。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z0sen.github.io/archives/9111/1.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/9111/2.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/9111/3.png">
 <meta property="article:published_time" content="2020-04-24T08:45:53.000Z">
 <meta property="article:modified_time" content="2020-04-24T08:45:53.000Z">
 <meta property="article:author" content="z0sen">
 <meta property="article:tag" content="Kali Linux">
 <meta property="article:tag" content="jdk">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z0sen.github.io/archives/9111/1.png">
 
 
 <link rel="canonical" href="https://z0sen.github.io/archives/9111.html">
@@ -315,13 +319,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图</p>
-<p>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
+        <div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图<br><img src="/archives/9111/1.png" class><br>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
 </div>
 <p>第一时间当然是查看当前的java版本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 <p>然后发现丫的我就没见过这版本号</p>
-
+<img src="/archives/9111/2.png" class>
 <p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
 <p>话不多说，上正题</p>
 <h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
@@ -343,7 +346,7 @@
 <h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
 
 <h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
-
+<img src="/archives/9111/3.png" class>
 
 <p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
 

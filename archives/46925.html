@@ -30,11 +30,37 @@
 <meta property="og:site_name" content="Z0SEN&#39;s Blog">
 <meta property="og:description" content="Kali Linux是基于Debian的Linux发行版，设计用于数字取证操作系统，由Offensive Security公司开发和维护。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/kali-logo.jpg">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/xiangdao.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/banben.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/named.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/diskspace.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/banben.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/install.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/username.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/diskpart1.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/diskpart2.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/diskpart3.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/systeminstall.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/nonetwork.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/grub.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/dev-sda.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/lockscreen.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/vmwaretools1.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/vmwaretools2.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/vmwaretools3.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/vmwaretools4.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/sources-list.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/firefox1.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/firefox2.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/firefox3.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/46925/mykali.png">
 <meta property="article:published_time" content="2020-04-15T02:07:52.000Z">
 <meta property="article:modified_time" content="2020-04-15T02:07:52.000Z">
 <meta property="article:author" content="z0sen">
 <meta property="article:tag" content="Kali Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z0sen.github.io/archives/46925/kali-logo.jpg">
 
 
 <link rel="canonical" href="https://z0sen.github.io/archives/46925.html">
@@ -316,7 +342,7 @@
     <div class="post-body" itemprop="articleBody">
         <div class="note info no-icon"><h1 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h1><p>Kali Linux 是许多优秀的安全工具的集合，它的目标就是为了简单：在一个实用的工具包里尽可能多的包含渗透和审计工具<br>对于专业用户来说，它有难以置信的好处，但是对于一些不怀好意的人来说，也可以产生很多大麻烦<br>小心地使用 Kali，充分利用它的巨大优势，否则，你将在某个地方（你懂的）度过你的余生<br>建议先看一下这篇文章<span class="exturl" data-url="aHR0cHM6Ly9saW51eC5jbi9hcnRpY2xlLTEwMTk4LTEuaHRtbA==">在你开始使用kali linux前必须要知道的事情<i class="fa fa-external-link-alt"></i></span></p>
 </div>
-
+<img src="/archives/46925/kali-logo.jpg" class>
 
 <hr>
 <h1 id="1-镜像下载及相关知识"><a href="#1-镜像下载及相关知识" class="headerlink" title="1. 镜像下载及相关知识"></a>1. 镜像下载及相关知识</h1><h2 id="1-1-镜像下载地址"><a href="#1-1-镜像下载地址" class="headerlink" title="1.1 镜像下载地址"></a>1.1 镜像下载地址</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG93bmxvYWRzLw==">Kali官网下载地址<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20va2FsaS1pbWFnZXMv">阿里云镜像站<i class="fa fa-external-link-alt"></i></span></p>
@@ -336,70 +362,70 @@
 <h1 id="2-虚拟机配置"><a href="#2-虚拟机配置" class="headerlink" title="2. 虚拟机配置"></a>2. 虚拟机配置</h1><h2 id="2-1-VMware-Workstation-Pro下载"><a href="#2-1-VMware-Workstation-Pro下载" class="headerlink" title="2.1 VMware Workstation Pro下载"></a>2.1 VMware Workstation Pro下载</h2><div class="note info no-icon"><p>官网下载的15.5.0版本，外加上不记得哪儿撸的许可证生成工具<br><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMUJkVnBLNlpNajkzd0ktVkdCUkVlTWc=">百度网盘<i class="fa fa-external-link-alt"></i></span> 提取码：3vpv</p>
 </div>
 
-<h2 id="2-2-虚拟机创建及配置"><a href="#2-2-虚拟机创建及配置" class="headerlink" title="2.2 虚拟机创建及配置"></a>2.2 虚拟机创建及配置</h2><h3 id="①-创建新的虚拟机-典型-选择下载好的镜像文件"><a href="#①-创建新的虚拟机-典型-选择下载好的镜像文件" class="headerlink" title="① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件"></a>① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件</h3>
+<h2 id="2-2-虚拟机创建及配置"><a href="#2-2-虚拟机创建及配置" class="headerlink" title="2.2 虚拟机创建及配置"></a>2.2 虚拟机创建及配置</h2><h3 id="①-创建新的虚拟机-典型-选择下载好的镜像文件"><a href="#①-创建新的虚拟机-典型-选择下载好的镜像文件" class="headerlink" title="① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件"></a>① 创建新的虚拟机 - 典型 - 选择下载好的镜像文件</h3><img src="/archives/46925/xiangdao.png" class>
 
 <h3 id="②-虚拟机配置"><a href="#②-虚拟机配置" class="headerlink" title="② 虚拟机配置"></a>② 虚拟机配置</h3><p>指定系统版本这里选择Linux Debian 10.x 64位（因为Kali是基于最新版的Debian制作的，<span class="exturl" data-url="aHR0cHM6Ly93d3cua2FsaS5vcmcvZG9jcy92aXJ0dWFsaXphdGlvbi9pbnN0YWxsLXZtd2FyZS13b3Jrc3RhdGlvbi1wbGF5ZXIta2FsaS1ndWVzdC12bS8=">官方文档<i class="fa fa-external-link-alt"></i></span>有写）</p>
-
+<img src="/archives/46925/banben.png" class>
 
 <p>接下来自定义虚拟机名称和虚拟机存放位置</p>
-
+<img src="/archives/46925/named.png" class>
 
 <p>再然后来到磁盘容量分配，这里做演示只分配60g，根据个人需求自定，官方文档建议80g</p>
-
+<img src="/archives/46925/diskspace.png" class>
 
 <p>最后看一下自定义硬件，可以将无用硬件移除以提升系统运行效率，例如打印机等，运行内存至少分配2g，处理器核心数自定</p>
-
+<img src="/archives/46925/banben.png" class>
 
 <h1 id="3-系统安装及配置"><a href="#3-系统安装及配置" class="headerlink" title="3. 系统安装及配置"></a>3. 系统安装及配置</h1><div class="note info no-icon"><p>安装过程基本就是下一步下一步，这里只提几点需要注意的地方，其他的就不赘述了</p>
 </div>
 <h2 id="3-1-进入安装界面"><a href="#3-1-进入安装界面" class="headerlink" title="3.1 进入安装界面"></a>3.1 进入安装界面</h2><p>开启虚拟机并选择Graphical install（即图形化安装界面）</p>
-
+<img src="/archives/46925/install.png" class>
 
 <p>首先是语言选择，直接简体中文下一步下一步就ok，然后自定义主机名，之后域名不要填直接下一步<br>新版本Kali更改默认用户为非根用户，所以这里要求我们自定义一个新用户名和密码</p>
-
+<img src="/archives/46925/username.png" class>
 
 <h2 id="3-2-磁盘分区"><a href="#3-2-磁盘分区" class="headerlink" title="3.2 磁盘分区"></a>3.2 磁盘分区</h2><p>分区方法就用默认的，使用整个磁盘 ↓</p>
-
+<img src="/archives/46925/diskpart1.png" class>
 
 <p>选定分区方案 ↓</p>
-
+<img src="/archives/46925/diskpart2.png" class>
 
 <p>将改动写入磁盘 ↓</p>
-
+<img src="/archives/46925/diskpart3.png" class>
 
 <h2 id="3-3-系统开始写入"><a href="#3-3-系统开始写入" class="headerlink" title="3.3 系统开始写入"></a>3.3 系统开始写入</h2><p>这里可以抽根烟喝口茶静待安装进程结束↓</p>
-
+<img src="/archives/46925/systeminstall.png" class>
 
 <p>不使用网络镜像 ↓</p>
-
+<img src="/archives/46925/nonetwork.png" class>
 
 <p>安装GRUB引导器 ↓</p>
-
+<img src="/archives/46925/grub.png" class>
 
 <p>选择引导安装设备/dev/sda ↓</p>
-
+<img src="/archives/46925/dev-sda.png" class>
 
 <p>系统安装完成后结束安装进程，点一下继续会自动重启进入登录界面↓</p>
-
+<img src="/archives/46925/lockscreen.png" class>
 
 <h2 id="3-4-系统配置"><a href="#3-4-系统配置" class="headerlink" title="3.4 系统配置"></a>3.4 系统配置</h2><h3 id="①-安装VMware-Tools"><a href="#①-安装VMware-Tools" class="headerlink" title="① 安装VMware Tools"></a>① 安装VMware Tools</h3><p>有了它你才能将主机文件直接复制粘贴到虚拟机上，同时窗口尺寸也可以自适应了</p>
 <ul>
 <li><p>菜单栏 虚拟机 - 安装VMware Tools↓</p>
-</li>
+<img src="/archives/46925/vmwaretools1.png" class></li>
 <li><p>将挂载的VMware Tools中的压缩包拷贝到kali本地，比如桌面，并解压</p>
-</li>
+<img src="/archives/46925/vmwaretools2.png" class></li>
 <li><p>打开解压出来的文件夹，右键空白处选择在此处打开终端</p>
-</li>
+<img src="/archives/46925/vmwaretools3.png" class></li>
 <li><p>开始安装VMware Tools，键入命令后一路回车，出现 <code>Enjoy</code> 字样即安装成功，重启生效</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./vmware-install.pl</span><br></pre></td></tr></table></figure>
-</li>
+<img src="/archives/46925/vmwaretools4.png" class></li>
 </ul>
 <h3 id="②-配置软件源"><a href="#②-配置软件源" class="headerlink" title="② 配置软件源"></a>② 配置软件源</h3><p>早期国内访问kali官方源简直是龟速，所以需要更换国内源达到提速效果，但现在使用官方源不知道为啥会自动引流到东软大学的镜像站，总之速度飞起，如果你非要更换其他源参照以下步骤<br>打开终端输入命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mousepad /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
 <p>以下是阿里源和官方源</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#阿里云</span><br><span class="line">#deb https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">#官方源</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
 <p>在不用的源前面加上’#’注释掉，修改后ctrl+s保存，地球人都知道的保存快捷键</p>
-
+<img src="/archives/46925/sources-list.png" class>
 
 <h3 id="③-系统更新"><a href="#③-系统更新" class="headerlink" title="③ 系统更新"></a>③ 系统更新</h3><p>修改完成后执行以下命令（初次更新过程较长，可以去抽根烟喝口茶）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade -y</span><br><span class="line">sudo apt-get dist-upgrade -y</span><br><span class="line">sudo apt-get clean</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
@@ -476,9 +502,9 @@
 <h1 id="4-常用软件安装及配置"><a href="#4-常用软件安装及配置" class="headerlink" title="4. 常用软件安装及配置"></a>4. 常用软件安装及配置</h1><h2 id="4-1-安装Google拼音输入法"><a href="#4-1-安装Google拼音输入法" class="headerlink" title="4.1 安装Google拼音输入法"></a>4.1 安装Google拼音输入法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install fcitx -y</span><br><span class="line">sudo apt-get install fcitx-googlepinyin -y</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
 <p>重启之后按<code>ctrl+空格</code>即可切换为拼音输入法</p>
 <h2 id="4-2-FireFox切换中文"><a href="#4-2-FireFox切换中文" class="headerlink" title="4.2 FireFox切换中文"></a>4.2 FireFox切换中文</h2><p>设置中直接添加中文字体之后应用并重启Firefox就行了<br>如图：</p>
-
-
-
+<img src="/archives/46925/firefox1.png" class>
+<img src="/archives/46925/firefox2.png" class>
+<img src="/archives/46925/firefox3.png" class>
 
 <h2 id="4-3-安装Gdebi"><a href="#4-3-安装Gdebi" class="headerlink" title="4.3 安装Gdebi"></a>4.3 安装Gdebi</h2><p>这个软件可以自动解决软件安装的依赖问题</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdebi -y</span><br></pre></td></tr></table></figure>
@@ -486,7 +512,7 @@
 <hr>
 <p>整个系统安装的话就这些东西，博主目前使用的是2019.4的gnome版本，然后用更新命令更新到的最新版，主要还是习惯了gnome，虽然新版本也可以装gnome但是配置太麻烦。最近很多人安装2020.1b出现问题，所以写此文供各位师傅参考。</p>
 <p>最后附图一张博主使用的kali（日常upgrade）</p>
-
+<img src="/archives/46925/mykali.png" class>
     </div>
 
     
