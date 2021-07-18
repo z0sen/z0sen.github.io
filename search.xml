@@ -600,6 +600,55 @@
       </tags>
   </entry>
   <entry>
+    <title>Kali配置问题汇总</title>
+    <url>/archives/53005.html</url>
+    <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1><img src="/archives/53005/firmware.png" class>
+<p>解决方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /var/lib/dpkg/status</span><br></pre></td></tr></table></figure>
+<p>删除发生错误的包即可</p>
+<img src="/archives/53005/a1.png" class>
+
+<h1 id="Q2：缺少工具"><a href="#Q2：缺少工具" class="headerlink" title="Q2：缺少工具"></a>Q2：缺少工具</h1><p>解决方法：</p>
+<ol>
+<li>直接使用<code>apt-get</code>进行安装</li>
+<li>安装工具集<br>Kali Linux 2019.03开始对默认工具集进行重大更改，默认工具集将分为三个主要类别<br>kali-linux-default，渗透测试人员必不可少的工具<br>kali-linux-large，面对一系列更广泛又不寻常的情况的渗透测试<br>kali-linux-everything，所有黑客工具<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y kali-linux-everything</span><br></pre></td></tr></table></figure>
+<img src="/archives/53005/a2.png" class></li>
+</ol>
+<h1 id="Q3：kali修改DNS"><a href="#Q3：kali修改DNS" class="headerlink" title="Q3：kali修改DNS"></a>Q3：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Q4：kali走主机Shadowsocks代理"><a href="#Q4：kali走主机Shadowsocks代理" class="headerlink" title="Q4：kali走主机Shadowsocks代理"></a>Q4：kali走主机Shadowsocks代理</h1><h2 id="1-宿主机设置"><a href="#1-宿主机设置" class="headerlink" title="1. 宿主机设置"></a>1. 宿主机设置</h2><p>若宿主机系统为Windows，则勾选允许来自局域网的连接：</p>
+<img src="/archives/53005/ssr-win.png" class>
+
+<p>若宿主机系统为MacOS，则需要设置监听地址为<code>0.0.0.0</code></p>
+<img src="/archives/53005/ssr-mac.png" class>
+
+<p>在主机上查看VMware Network Adapter VMnet1（桥接模式）或者VMware Network Adapter VMnet8（NAT模式）下的IPv4地址并记录。</p>
+<h2 id="2-kali终端代理配置"><a href="#2-kali终端代理配置" class="headerlink" title="2. kali终端代理配置"></a>2. kali终端代理配置</h2><p>在<code>~/.zshrc</code>文件中添加如下配置语句：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> proxy=<span class="string">&#x27;export all_proxy=socks5://172.16.130.1:1080&#x27;</span> //ip、端口根据实际情况修改</span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">&#x27;unset all_proxy&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>保存配置后重启终端，打开ssr在终端输入proxy命令即可启用终端代理，输入unproxy即可关闭终端代理。</p>
+<img src="/archives/53005/20210520-182047.png" class>
+
+<h2 id="3-Proxychains4-配置"><a href="#3-Proxychains4-配置" class="headerlink" title="3. Proxychains4 配置"></a>3. Proxychains4 配置</h2><p>安装 Proxychains4 并写入 socks5 配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install proxychains4 -y</span><br><span class="line">sudo nano /etc/proxychains4.conf</span><br><span class="line"></span><br><span class="line">测试命令：</span><br><span class="line">proxychains4 -q curl cip.cc</span><br></pre></td></tr></table></figure>
+
+<img src="/archives/53005/20210521-143419.png" class>
+
+<img src="/archives/53005/20210521-144149.png" class>
+
+<h2 id="4-虚拟机浏览器代理插件配置"><a href="#4-虚拟机浏览器代理插件配置" class="headerlink" title="4. 虚拟机浏览器代理插件配置"></a>4. 虚拟机浏览器代理插件配置</h2><p>在浏览器扩展商店下载安装Proxy SwitchyOmega，配置如图：</p>
+<img src="/archives/53005/20210521-144839.png" class>
+]]></content>
+      <categories>
+        <category>web安全</category>
+      </categories>
+      <tags>
+        <tag>Kali Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kali更新jdk-8u251</title>
     <url>/archives/9111.html</url>
     <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图<br><img src="/archives/9111/1.png" class><br>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
@@ -697,31 +746,6 @@
       <tags>
         <tag>Ubuntu</tag>
         <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali配置问题汇总</title>
-    <url>/archives/53005.html</url>
-    <content><![CDATA[<h1 id="Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><a href="#Q1：E-Sub-process-usr-bin-dpkg-returned-an-error-code-1" class="headerlink" title="Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)"></a>Q1：E: Sub-process /usr/bin/dpkg returned an error code (1)</h1><img src="/archives/53005/firmware.png" class>
-<p>解决方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /var/lib/dpkg/status</span><br></pre></td></tr></table></figure>
-<p>删除发生错误的包即可</p>
-<img src="/archives/53005/a1.png" class>
-
-<h1 id="Q2：缺少工具"><a href="#Q2：缺少工具" class="headerlink" title="Q2：缺少工具"></a>Q2：缺少工具</h1><p>解决方法：</p>
-<ol>
-<li>直接使用<code>apt-get</code>进行安装</li>
-<li>安装工具集<br>Kali Linux 2019.03开始对默认工具集进行重大更改，默认工具集将分为三个主要类别<br>kali-linux-default，渗透测试人员必不可少的工具<br>kali-linux-large，面对一系列更广泛又不寻常的情况的渗透测试<br>kali-linux-everything，所有黑客工具<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y kali-linux-everything</span><br></pre></td></tr></table></figure>
-<img src="/archives/53005/a2.png" class></li>
-</ol>
-<h1 id="Q3：kali修改DNS"><a href="#Q3：kali修改DNS" class="headerlink" title="Q3：kali修改DNS"></a>Q3：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q4：kali走主机代理"><a href="#Q4：kali走主机代理" class="headerlink" title="Q4：kali走主机代理"></a>Q4：kali走主机代理</h1>]]></content>
-      <categories>
-        <category>web安全</category>
-      </categories>
-      <tags>
-        <tag>Kali Linux</tag>
       </tags>
   </entry>
   <entry>

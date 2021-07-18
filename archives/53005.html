@@ -33,6 +33,12 @@
 <meta property="og:image" content="https://z0sen.github.io/archives/53005/firmware.png">
 <meta property="og:image" content="https://z0sen.github.io/archives/53005/a1.png">
 <meta property="og:image" content="https://z0sen.github.io/archives/53005/a2.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/ssr-win.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/ssr-mac.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/20210520-182047.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/20210521-143419.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/20210521-144149.png">
+<meta property="og:image" content="https://z0sen.github.io/archives/53005/20210521-144839.png">
 <meta property="article:published_time" content="2020-05-05T03:44:42.000Z">
 <meta property="article:modified_time" content="2020-05-05T03:44:42.000Z">
 <meta property="article:author" content="z0sen">
@@ -172,7 +178,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q1%EF%BC%9AE-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><span class="nav-number">1.</span> <span class="nav-text">Q1：E: Sub-process &#x2F;usr&#x2F;bin&#x2F;dpkg returned an error code (1)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2%EF%BC%9A%E7%BC%BA%E5%B0%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">Q2：缺少工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q3%EF%BC%9Akali%E4%BF%AE%E6%94%B9DNS"><span class="nav-number">3.</span> <span class="nav-text">Q3：kali修改DNS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q4%EF%BC%9Akali%E8%B5%B0%E4%B8%BB%E6%9C%BA%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Q4：kali走主机代理</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q1%EF%BC%9AE-Sub-process-usr-bin-dpkg-returned-an-error-code-1"><span class="nav-number">1.</span> <span class="nav-text">Q1：E: Sub-process &#x2F;usr&#x2F;bin&#x2F;dpkg returned an error code (1)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2%EF%BC%9A%E7%BC%BA%E5%B0%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">Q2：缺少工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q3%EF%BC%9Akali%E4%BF%AE%E6%94%B9DNS"><span class="nav-number">3.</span> <span class="nav-text">Q3：kali修改DNS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q4%EF%BC%9Akali%E8%B5%B0%E4%B8%BB%E6%9C%BAShadowsocks%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Q4：kali走主机Shadowsocks代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%BF%E4%B8%BB%E6%9C%BA%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">1. 宿主机设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kali%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">2. kali终端代理配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Proxychains4-%E9%85%8D%E7%BD%AE"><span class="nav-number">4.3.</span> <span class="nav-text">3. Proxychains4 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%A3%E7%90%86%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">4.4.</span> <span class="nav-text">4. 虚拟机浏览器代理插件配置</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -306,7 +312,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>426</span>
+      <span>982</span>
     </span>
 </div>
 
@@ -332,7 +338,31 @@
 </ol>
 <h1 id="Q3：kali修改DNS"><a href="#Q3：kali修改DNS" class="headerlink" title="Q3：kali修改DNS"></a>Q3：kali修改DNS</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#编辑文件</span><br><span class="line">sudo mousepad /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#添加DNS</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
 
-<h1 id="Q4：kali走主机代理"><a href="#Q4：kali走主机代理" class="headerlink" title="Q4：kali走主机代理"></a>Q4：kali走主机代理</h1>
+
+
+<h1 id="Q4：kali走主机Shadowsocks代理"><a href="#Q4：kali走主机Shadowsocks代理" class="headerlink" title="Q4：kali走主机Shadowsocks代理"></a>Q4：kali走主机Shadowsocks代理</h1><h2 id="1-宿主机设置"><a href="#1-宿主机设置" class="headerlink" title="1. 宿主机设置"></a>1. 宿主机设置</h2><p>若宿主机系统为Windows，则勾选允许来自局域网的连接：</p>
+<img src="/archives/53005/ssr-win.png" class>
+
+<p>若宿主机系统为MacOS，则需要设置监听地址为<code>0.0.0.0</code></p>
+<img src="/archives/53005/ssr-mac.png" class>
+
+<p>在主机上查看VMware Network Adapter VMnet1（桥接模式）或者VMware Network Adapter VMnet8（NAT模式）下的IPv4地址并记录。</p>
+<h2 id="2-kali终端代理配置"><a href="#2-kali终端代理配置" class="headerlink" title="2. kali终端代理配置"></a>2. kali终端代理配置</h2><p>在<code>~/.zshrc</code>文件中添加如下配置语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> proxy=<span class="string">&#x27;export all_proxy=socks5://172.16.130.1:1080&#x27;</span> //ip、端口根据实际情况修改</span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">&#x27;unset all_proxy&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>保存配置后重启终端，打开ssr在终端输入proxy命令即可启用终端代理，输入unproxy即可关闭终端代理。</p>
+<img src="/archives/53005/20210520-182047.png" class>
+
+<h2 id="3-Proxychains4-配置"><a href="#3-Proxychains4-配置" class="headerlink" title="3. Proxychains4 配置"></a>3. Proxychains4 配置</h2><p>安装 Proxychains4 并写入 socks5 配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install proxychains4 -y</span><br><span class="line">sudo nano /etc/proxychains4.conf</span><br><span class="line"></span><br><span class="line">测试命令：</span><br><span class="line">proxychains4 -q curl cip.cc</span><br></pre></td></tr></table></figure>
+
+<img src="/archives/53005/20210521-143419.png" class>
+
+<img src="/archives/53005/20210521-144149.png" class>
+
+<h2 id="4-虚拟机浏览器代理插件配置"><a href="#4-虚拟机浏览器代理插件配置" class="headerlink" title="4. 虚拟机浏览器代理插件配置"></a>4. 虚拟机浏览器代理插件配置</h2><p>在浏览器扩展商店下载安装Proxy SwitchyOmega，配置如图：</p>
+<img src="/archives/53005/20210521-144839.png" class>
+
     </div>
 
     
@@ -411,7 +441,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">25k</span>
   </span>
 </div>
 <div class="busuanzi-count">
