@@ -556,47 +556,45 @@
       </tags>
   </entry>
   <entry>
-    <title>kali安装Docker并配置Vulhub</title>
-    <url>/archives/60505.html</url>
-    <content><![CDATA[<h1 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h1><h2 id="1-卸载旧版本Docker"><a href="#1-卸载旧版本Docker" class="headerlink" title="1. 卸载旧版本Docker"></a>1. 卸载旧版本Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+    <title>Kali更新jdk-8u251</title>
+    <url>/archives/9111.html</url>
+    <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图<br><img src="/archives/9111/1.png" class><br>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
+</div>
+<p>第一时间当然是查看当前的java版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>然后发现丫的我就没见过这版本号</p>
+<img src="/archives/9111/2.png" class>
+<p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
+<p>话不多说，上正题</p>
+<h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-配置软件源"><a href="#2-配置软件源" class="headerlink" title="2. 配置软件源"></a>2. 配置软件源</h2><h3 id="2-1-更新软件源并安装依赖包"><a href="#2-1-更新软件源并安装依赖包" class="headerlink" title="2.1 更新软件源并安装依赖包"></a>2.1 更新软件源并安装依赖包</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-添加Docker官方软件包密钥"><a href="#2-2-添加Docker官方软件包密钥" class="headerlink" title="2.2 添加Docker官方软件包密钥"></a>2.2 添加Docker官方软件包密钥</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<h1 id="2-下载JDK"><a href="#2-下载JDK" class="headerlink" title="2. 下载JDK"></a>2. 下载JDK</h1><ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UtamRrOC1kb3dubG9hZHMuaHRtbA==">Oracle官方下载地址<i class="fa fa-external-link-alt"></i></span><br>ps: 下载<code>Linux x64 Compressed Archive</code>这个版本，好像需要注册帐号，登录才能下载</p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXBLZXVVV1Rjb1dPWEJTOHUwVXhfUkE=">百度网盘<i class="fa fa-external-link-alt"></i></span><br>提取码：iouq<br>我也想用蓝奏云，无奈这个包186m，上传超过100m的文件要充钱，我的钱拿去百度网盘自动续费了。。。</p>
+</li>
+</ul>
+<h1 id="3-建立目录并解压文件"><a href="#3-建立目录并解压文件" class="headerlink" title="3. 建立目录并解压文件"></a>3. 建立目录并解压文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /usr/local/java</span><br><span class="line">sudo cp jdk-8u251-linux-x64.tar.gz /usr/local/java</span><br><span class="line">cd /usr/local/java</span><br><span class="line">sudo tar xzvf jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
 
-<p>验证密钥是否安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo apt-key fingerprint 0EBFCD88</span><br><span class="line"></span><br><span class="line">pub   4096R/0EBFCD88 2017-02-22</span><br><span class="line">      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88</span><br><span class="line">uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;</span><br><span class="line">sub   4096R/F273FCD8 2017-02-22</span><br></pre></td></tr></table></figure>
-<h3 id="2-3-添加软件源"><a href="#2-3-添加软件源" class="headerlink" title="2.3 添加软件源"></a>2.3 添加软件源</h3><p>查询当前系统所基于的Debian版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /proc/version</span><br></pre></td></tr></table></figure>
-<p>得到如图反馈</p>
-<img src="/archives/60505/kali-version.png" class>
+<h1 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/profile</span><br><span class="line"># 复制以下代码到文件结尾</span><br><span class="line">JAVA_HOME=/usr/local/java/jdk1.8.0_251</span><br><span class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
 
-<p>通过查询得知 Debian 9 对应的代号为 stretch ，之后执行以下命令写入docker软件源（其中 stretch 根据查询得到的代号自行修改）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian buster stable&quot;</span><br></pre></td></tr></table></figure>
-<p>正常写入之后我们在 /etc/apt/sources.list 中可以看到已添加的 docker 源。</p>
-<h2 id="3-安装Docker"><a href="#3-安装Docker" class="headerlink" title="3. 安装Docker"></a>3. 安装Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io -y</span><br></pre></td></tr></table></figure>
+<h1 id="5-告诉系统Java的位置"><a href="#5-告诉系统Java的位置" class="headerlink" title="5. 告诉系统Java的位置"></a>5. 告诉系统Java的位置</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/java&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javac&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javaws&quot; &quot;javaws&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javaws&quot; 1</span><br></pre></td></tr></table></figure>
 
-<p>安装之后可以配置一下Docker镜像加速</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-<p>ps：阿里云有免费的加速服务，登录阿里云帐号-容器镜像服务-镜像加速器</p>
-<p>配置好后执行以下命令进行测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-<p>正常反馈如图</p>
-<img src="/archives/60505/hello-world.png" class>
+<h1 id="6-设置为默认JDK"><a href="#6-设置为默认JDK" class="headerlink" title="6. 设置为默认JDK"></a>6. 设置为默认JDK</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --set java /usr/local/java/jdk1.8.0_251/bin/java</span><br><span class="line">sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_251/bin/javac</span><br><span class="line">sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_251/bin/javaws</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-卸载Docker"><a href="#4-卸载Docker" class="headerlink" title="4. 卸载Docker"></a>4. 卸载Docker</h2><h3 id="4-1-卸载软件"><a href="#4-1-卸载软件" class="headerlink" title="4.1 卸载软件"></a>4.1 卸载软件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-<h3 id="4-2-删除镜像、容器、自定义配置等文件"><a href="#4-2-删除镜像、容器、自定义配置等文件" class="headerlink" title="4.2 删除镜像、容器、自定义配置等文件"></a>4.2 删除镜像、容器、自定义配置等文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+<h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
 
-<h1 id="二、安装Docker-Compose"><a href="#二、安装Docker-Compose" class="headerlink" title="二、安装Docker-Compose"></a>二、安装Docker-Compose</h1><h2 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker-Compose"></a>安装Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
-<p>回显版本号则安装成功</p>
-<h2 id="卸载Docker-Compose"><a href="#卸载Docker-Compose" class="headerlink" title="卸载Docker-Compose"></a>卸载Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<img src="/archives/9111/3.png" class>
 
-<h1 id="三、配置Vulhub"><a href="#三、配置Vulhub" class="headerlink" title="三、配置Vulhub"></a>三、配置Vulhub</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#下载靶场</span><br><span class="line">git clone https://github.com/vulhub/vulhub.git</span><br><span class="line"></span><br><span class="line">#看看都有哪些靶场</span><br><span class="line">ls vulhub</span><br><span class="line"></span><br><span class="line">#选择一个靶场，比如struts2的系列漏洞</span><br><span class="line">cd vulhub/struts2/s2-057/</span><br><span class="line"></span><br><span class="line">#启动靶场</span><br><span class="line">sudo docker-compose up -d</span><br><span class="line"></span><br><span class="line">#关闭靶场</span><br><span class="line">sudo docker-compose down</span><br><span class="line"></span><br><span class="line">#清理环境</span><br><span class="line">sudo docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>]]></content>
+<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
       <categories>
         <category>web安全</category>
       </categories>
       <tags>
         <tag>Kali Linux</tag>
-        <tag>Docker</tag>
+        <tag>jdk</tag>
       </tags>
   </entry>
   <entry>
@@ -649,45 +647,47 @@
       </tags>
   </entry>
   <entry>
-    <title>Kali更新jdk-8u251</title>
-    <url>/archives/9111.html</url>
-    <content><![CDATA[<div class="note info no-icon"><h1 id="为啥突然写这篇文章？"><a href="#为啥突然写这篇文章？" class="headerlink" title="为啥突然写这篇文章？"></a>为啥突然写这篇文章？</h1><p>今天打开尘封已久的 Burpsuite 时给我来了个弹窗，如下图<br><img src="/archives/9111/1.png" class><br>根据博主的英语水平我jio的它说的是：你的jre版本我们(burp)没有测试过，你用的时候阔能会出毛病。<br>emmm，然后事实证明确实出了毛病，使用的时候发现端口监听勾不上了</p>
-</div>
-<p>第一时间当然是查看当前的java版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>然后发现丫的我就没见过这版本号</p>
-<img src="/archives/9111/2.png" class>
-<p>后来查了一下啥是OpenJDK，得到了这篇文章：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC80NDFhYTFhOTc2YjM=">OpenJDK与JDK的区别分析<i class="fa fa-external-link-alt"></i></span></p>
-<p>话不多说，上正题</p>
-<h1 id="1-卸载原装jdk"><a href="#1-卸载原装jdk" class="headerlink" title="1. 卸载原装jdk"></a>1. 卸载原装jdk</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">which java  #查看JDK的安装路径</span><br><span class="line">sudo rm -rf /usr/bin/java   # 这里的路径即为上一条命令返回的路径，自行修改</span><br></pre></td></tr></table></figure>
+    <title>kali安装Docker并配置Vulhub</title>
+    <url>/archives/60505.html</url>
+    <content><![CDATA[<h1 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h1><h2 id="1-卸载旧版本Docker"><a href="#1-卸载旧版本Docker" class="headerlink" title="1. 卸载旧版本Docker"></a>1. 卸载旧版本Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-下载JDK"><a href="#2-下载JDK" class="headerlink" title="2. 下载JDK"></a>2. 下载JDK</h1><ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UtamRrOC1kb3dubG9hZHMuaHRtbA==">Oracle官方下载地址<i class="fa fa-external-link-alt"></i></span><br>ps: 下载<code>Linux x64 Compressed Archive</code>这个版本，好像需要注册帐号，登录才能下载</p>
-</li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMXBLZXVVV1Rjb1dPWEJTOHUwVXhfUkE=">百度网盘<i class="fa fa-external-link-alt"></i></span><br>提取码：iouq<br>我也想用蓝奏云，无奈这个包186m，上传超过100m的文件要充钱，我的钱拿去百度网盘自动续费了。。。</p>
-</li>
-</ul>
-<h1 id="3-建立目录并解压文件"><a href="#3-建立目录并解压文件" class="headerlink" title="3. 建立目录并解压文件"></a>3. 建立目录并解压文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /usr/local/java</span><br><span class="line">sudo cp jdk-8u251-linux-x64.tar.gz /usr/local/java</span><br><span class="line">cd /usr/local/java</span><br><span class="line">sudo tar xzvf jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="2-配置软件源"><a href="#2-配置软件源" class="headerlink" title="2. 配置软件源"></a>2. 配置软件源</h2><h3 id="2-1-更新软件源并安装依赖包"><a href="#2-1-更新软件源并安装依赖包" class="headerlink" title="2.1 更新软件源并安装依赖包"></a>2.1 更新软件源并安装依赖包</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-添加Docker官方软件包密钥"><a href="#2-2-添加Docker官方软件包密钥" class="headerlink" title="2.2 添加Docker官方软件包密钥"></a>2.2 添加Docker官方软件包密钥</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mousepad /etc/profile</span><br><span class="line"># 复制以下代码到文件结尾</span><br><span class="line">JAVA_HOME=/usr/local/java/jdk1.8.0_251</span><br><span class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+<p>验证密钥是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo apt-key fingerprint 0EBFCD88</span><br><span class="line"></span><br><span class="line">pub   4096R/0EBFCD88 2017-02-22</span><br><span class="line">      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88</span><br><span class="line">uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;</span><br><span class="line">sub   4096R/F273FCD8 2017-02-22</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-添加软件源"><a href="#2-3-添加软件源" class="headerlink" title="2.3 添加软件源"></a>2.3 添加软件源</h3><p>查询当前系统所基于的Debian版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /proc/version</span><br></pre></td></tr></table></figure>
+<p>得到如图反馈</p>
+<img src="/archives/60505/kali-version.png" class>
 
-<h1 id="5-告诉系统Java的位置"><a href="#5-告诉系统Java的位置" class="headerlink" title="5. 告诉系统Java的位置"></a>5. 告诉系统Java的位置</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/java&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javac&quot; 1</span><br><span class="line">sudo update-alternatives --install &quot;/usr/bin/javaws&quot; &quot;javaws&quot; &quot;/usr/local/java/jdk1.8.0_251/bin/javaws&quot; 1</span><br></pre></td></tr></table></figure>
+<p>通过查询得知 Debian 9 对应的代号为 stretch ，之后执行以下命令写入docker软件源（其中 stretch 根据查询得到的代号自行修改）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian buster stable&quot;</span><br></pre></td></tr></table></figure>
+<p>正常写入之后我们在 /etc/apt/sources.list 中可以看到已添加的 docker 源。</p>
+<h2 id="3-安装Docker"><a href="#3-安装Docker" class="headerlink" title="3. 安装Docker"></a>3. 安装Docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io -y</span><br></pre></td></tr></table></figure>
 
-<h1 id="6-设置为默认JDK"><a href="#6-设置为默认JDK" class="headerlink" title="6. 设置为默认JDK"></a>6. 设置为默认JDK</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --set java /usr/local/java/jdk1.8.0_251/bin/java</span><br><span class="line">sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_251/bin/javac</span><br><span class="line">sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_251/bin/javaws</span><br></pre></td></tr></table></figure>
+<p>安装之后可以配置一下Docker镜像加速</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>ps：阿里云有免费的加速服务，登录阿里云帐号-容器镜像服务-镜像加速器</p>
+<p>配置好后执行以下命令进行测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+<p>正常反馈如图</p>
+<img src="/archives/60505/hello-world.png" class>
 
-<h1 id="7-重新载入profile"><a href="#7-重新载入profile" class="headerlink" title="7. 重新载入profile"></a>7. 重新载入profile</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h2 id="4-卸载Docker"><a href="#4-卸载Docker" class="headerlink" title="4. 卸载Docker"></a>4. 卸载Docker</h2><h3 id="4-1-卸载软件"><a href="#4-1-卸载软件" class="headerlink" title="4.1 卸载软件"></a>4.1 卸载软件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-删除镜像、容器、自定义配置等文件"><a href="#4-2-删除镜像、容器、自定义配置等文件" class="headerlink" title="4.2 删除镜像、容器、自定义配置等文件"></a>4.2 删除镜像、容器、自定义配置等文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
 
-<h1 id="8-验证是否安装成功"><a href="#8-验证是否安装成功" class="headerlink" title="8. 验证是否安装成功"></a>8. 验证是否安装成功</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
-<img src="/archives/9111/3.png" class>
+<h1 id="二、安装Docker-Compose"><a href="#二、安装Docker-Compose" class="headerlink" title="二、安装Docker-Compose"></a>二、安装Docker-Compose</h1><h2 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker-Compose"></a>安装Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+<p>回显版本号则安装成功</p>
+<h2 id="卸载Docker-Compose"><a href="#卸载Docker-Compose" class="headerlink" title="卸载Docker-Compose"></a>卸载Docker-Compose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
 
-<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MzQzMjAxL2FydGljbGUvZGV0YWlscy81MTkyNjQzMA==">kali（ubuntu）linux Oracle jdk 8安装<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
+<h1 id="三、配置Vulhub"><a href="#三、配置Vulhub" class="headerlink" title="三、配置Vulhub"></a>三、配置Vulhub</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#下载靶场</span><br><span class="line">git clone https://github.com/vulhub/vulhub.git</span><br><span class="line"></span><br><span class="line">#看看都有哪些靶场</span><br><span class="line">ls vulhub</span><br><span class="line"></span><br><span class="line">#选择一个靶场，比如struts2的系列漏洞</span><br><span class="line">cd vulhub/struts2/s2-057/</span><br><span class="line"></span><br><span class="line">#启动靶场</span><br><span class="line">sudo docker-compose up -d</span><br><span class="line"></span><br><span class="line">#关闭靶场</span><br><span class="line">sudo docker-compose down</span><br><span class="line"></span><br><span class="line">#清理环境</span><br><span class="line">sudo docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>web安全</category>
       </categories>
       <tags>
         <tag>Kali Linux</tag>
-        <tag>jdk</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
